@@ -30,6 +30,7 @@ export class AppComponent {
         //    }
         //    RoleService.setCurrentAuthUser(this.user);
         //});
+        this.returnUrl = activeRoute.snapshot.queryParams["returnUrl"] || "/";
         this.user = RoleService.getCurrentAuthUser();
         this.guest = (this.user.role == "Guest") ? true : false;
     }
@@ -43,6 +44,7 @@ export class AppComponent {
         this.user = {id: 0, role: "Guest"};
         RoleService.setCurrentAuthUser(this.user);
         this.guest = true;
+        this.router.navigate([this.returnUrl]);
         console.log(this.user);
     }
 }
