@@ -1,0 +1,65 @@
+<nav class="navbar nav"></nav>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">KekStarter</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="active"><a href="#">Home</a></li>
+            </ul>
+            <!-- <ul class="nav navbar-nav navbar-right" style="margin-right: 10px">
+                <li class="dropdown">
+                    <a style="color: #fff;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" routerLink="profile/">Profile</a></li>
+                        <li><a asp-area="" [routerLink]="['instruction']">Projects</a></li>
+                        <li><hr style="margin-top: 3px; margin-bottom: 3px;"/></li>
+                        <li style="padding-left: 3px;">
+                            <button style="background-color: #fff; margin-left: 5px;" type="submit" class="btn"><span class="glyphicon glyphicon-log-in"></span> LogOut</button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>-->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a data-toggle="modal" data-target="#ModalView" style="cursor: pointer; color: white"><span class="glyphicon glyphicon-log-in"></span> LogIn</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade bd-example-modal-sm" id="ModalView" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body" style="background-color: #ffffff">
+                <ul class="nav nav-tabs nav-justified">
+                    <li role="presentation" class="active">
+                        <a href="#login" data-toggle="tab" aria-controls="login" role="tab" title="LogIn"><span class="glyphicon glyphicon-user"></span> LogIn</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#registration" data-toggle="tab" aria-controls="registration" role="tab" title="Registration"><span class="glyphicon glyphicon-log-in"></span> SignUp</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" role="tabpanel" id="login">
+                        <login></login>
+                    </div>
+                    <div class="tab-pane fade" role="tabpanel" id="registration">
+                        <registration></registration>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container body-content">
+
+    <router-outlet></router-outlet>
+
+    <hr />
+    <footer>
+        <p>foooter</p>
+    </footer>
+</div>
