@@ -10,13 +10,17 @@ export class RestService {
 
     constructor(private http: Http) { }
 
-    login(username: string, password: string) {
+    public login(username: string, password: string) {
         return this.http.post("", JSON.stringify({ username: username, password: password }))
             .map(result => { console.log(result.json()); });
     }
 
-    registration(name: string, email: string, username: string, password: string) {
+    public registration(name: string, email: string, username: string, password: string) {
         return this.http.post("", JSON.stringify({ name: name, email: email, username: username, password: password }))
             .map(result => { console.log(result.json()); });
+    }
+
+    public getCurrentUser() {
+        return this.http.get('api/getCurrentUser/');
     }
 }

@@ -4,11 +4,11 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">KekStarter</a>
         </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-left">
+        <div class="">
+            <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
             </ul>
-            <!-- <ul class="nav navbar-nav navbar-right" style="margin-right: 10px">
+             <ul *ngIf="checkRole()" class=" nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a style="color: #fff;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -20,8 +20,8 @@
                         </li>
                     </ul>
                 </li>
-            </ul>-->
-            <ul class="nav navbar-nav navbar-right">
+            </ul>
+            <ul *ngIf="!checkRole()" class="nav navbar-nav navbar-right">
                 <li><a data-toggle="modal" data-target="#ModalView" style="cursor: pointer; color: white"><span class="glyphicon glyphicon-log-in"></span> LogIn</a></li>
             </ul>
         </div>
