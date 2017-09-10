@@ -15,10 +15,13 @@ namespace KekStarter.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private ApplicationContext _db;
+
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _db = db;
         }
 
         [HttpPost("[action]")]
@@ -34,7 +37,10 @@ namespace KekStarter.Controllers
                 }
                 else
                 {
-                    return Ok(model);
+                    //UserProfile userProfile = new UserProfile();
+                    //userProfile = _db.UserProfile.FirstOrDefault(p => p.FirstName == model.Login);
+                    //return Ok(Json("Id: " + userProfile.Id + " Role: " + userProfile.UserRole.Role + " Language: " + userProfile.Language + " Color: " + userProfile.Color));
+                    return Ok();
                 }
             }
             return BadRequest(ModelState);
@@ -46,11 +52,16 @@ namespace KekStarter.Controllers
             if (ModelState.IsValid)
             {
                 User user = new User { Email = model.Email, UserName = model.Name };
+                UserRole role = _db.UserRole.FirstOrDefault(p => p.Role == "User");
+                UserProfile userProfile = new UserProfile { UserRole = role, User = user, Language = "En", Color = "White", FirstName = model.Login };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                    return Ok(model);
+                    role.UserProfiles.Add(userProfile);
+                    _db.UserProfile.Add(userProfile);
+                    _db.SaveChanges();
+                    return Ok("Register");
                 }
                 else
                 {
