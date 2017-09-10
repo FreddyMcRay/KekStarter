@@ -10,6 +10,7 @@ export class RestService {
 
     constructor(private http: Http) { }
     public user: User = new User();
+    public ruser: RUser = new RUser();
 
     public login(username: string, password: string) {
         this.user.login = username;
@@ -22,9 +23,17 @@ export class RestService {
             });
     }
 
-    public registration(name: string, email: string, username: string, password: string) {
-        return this.http.post("", JSON.stringify({ name: name, email: email, username: username, password: password }))
-            .map(result => { console.log(result.json()); });
+    public registration(username: string, email: string, name: string, password: string) {
+        this.ruser.login = name;
+        this.ruser.password = password;
+        this.ruser.email = email;
+        this.ruser.name = username;
+        console.log(this.ruser);
+        this.http.post("api/Register", this.ruser)
+            .subscribe(result => {
+                console.log("after");
+                console.log(result);
+            });
     }
 
     public getCurrentUser() {
@@ -33,6 +42,13 @@ export class RestService {
 }
 
 export class User {
+    login: string;
+    password: string;
+}
+
+export class RUser {
+    name: string;
+    email: string;
     login: string;
     password: string;
 }

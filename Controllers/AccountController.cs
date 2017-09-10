@@ -39,5 +39,28 @@ namespace KekStarter.Controllers
             }
             return BadRequest(ModelState);
         }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User { Email = model.Email, UserName = model.Name };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, false);
+                    return Ok(model);
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
+            return BadRequest(ModelState);
+        }
     }
 }

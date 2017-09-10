@@ -14,14 +14,6 @@ export class RegistrationComponent {
     constructor(private restService: RestService) { }
 
     registration() {
-        this.loading = true;
         this.restService.registration(this.model.name, this.model.email, this.model.username, this.model.password)
-            .subscribe(data => {
-                    this.closeBtn.nativeElement.click();
-                },
-                error => {
-                    console.log(error);
-                    this.loading = false;
-                })
     }
 }
