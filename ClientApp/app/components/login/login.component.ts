@@ -15,15 +15,6 @@ export class LoginComponent {
     constructor(private restService: RestService) {}
 
     login() {
-        this.loading = true;
         this.restService.login(this.model.username, this.model.password)
-            .subscribe(data => {
-                    this.closeBtn.nativeElement.click();
-                },
-                error => {
-                    console.log(error);
-                    this.loading = false;
-                }
-            )
     }
 }
