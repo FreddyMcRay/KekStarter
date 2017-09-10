@@ -37,10 +37,9 @@ namespace KekStarter.Controllers
                 }
                 else
                 {
-                    //UserProfile userProfile = new UserProfile();
-                    //userProfile = _db.UserProfile.FirstOrDefault(p => p.FirstName == model.Login);
-                    //return Ok(Json("Id: " + userProfile.Id + " Role: " + userProfile.UserRole.Role + " Language: " + userProfile.Language + " Color: " + userProfile.Color));
-                    return Ok();
+                    UserProfile userProfile = _db.UserProfile.FirstOrDefault(p => p.FirstName == model.Login);
+                    return Ok(Json("Id: " + userProfile.Id + " Language: " + userProfile.Language + " Color: " + userProfile.Color));
+                    //return Ok(model);
                 }
             }
             return BadRequest(ModelState);

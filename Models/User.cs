@@ -26,6 +26,7 @@ namespace KekStarter.Models
         public string City { get; set; }
         public string DataOfBirth { get; set; }
         public string AboutMySelf { get; set; }
+        public string Role { get; set; }
         public UserRole UserRole { get; set; }
         public string RegistrationDate { get; set; }
         public string LastLogInDate { get; set; }
