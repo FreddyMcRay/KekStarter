@@ -15,8 +15,8 @@ export class ProfileComponent {
     public user: UserProfile;
     private subscription: Subscription;
     public changeField: boolean = true;
-    instructionBool: boolean = true;
-    uploader: CloudinaryUploader = new CloudinaryUploader(
+    public instructionBool: boolean = true;
+    public uploader: CloudinaryUploader = new CloudinaryUploader(
         new CloudinaryOptions({ cloudName: 'dbsjugefb', uploadPreset: 'bkydfdx3' })
     );
 
@@ -33,11 +33,21 @@ export class ProfileComponent {
             aboutMySelf: "scvsd",
             achivements: []
         };
+
+        this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
+            let res: any = JSON.parse(response);
+            this.user.urlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/" + res.public_id + ".jpg";
+            return { item, response, status, headers };
+        };
     }
 
     public change() {
         this.changeField = !this.changeField;
         console.log(this.user);
+    }
+
+    onChange(event: any) {
+        this.uploader.uploadAll();
     }
 }
 

@@ -20,7 +20,7 @@
                                 <div class="hover">
                                     <label id="labelPhoto" title="Change main photo">
                                         <span class="glyphicon glyphicon-camera" style="margin-top:3%;"></span>
-                                        <input class="hidden" type="file" />
+                                        <input class="hidden" type="file" ng2FileSelect [uploader]="uploader" (change)="onChange($event)" />
                                     </label>
                                 </div>
                             </div>
