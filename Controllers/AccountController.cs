@@ -37,8 +37,9 @@ namespace KekStarter.Controllers
                 }
                 else
                 {
-                    UserProfile userProfile = _db.UserProfile.FirstOrDefault(p => p.FirstName == model.Login);
-                    return Ok(Json("Id: " + userProfile.Id + " Language: " + userProfile.Language + " Color: " + userProfile.Color));
+                    UserProfile userProfile = _db.UserProfile.FirstOrDefault(p => p.User.UserName == model.Login);
+                    ResponseUserInfo responseUserInfo = new ResponseUserInfo { Id = userProfile.Id, Login = userProfile.User.UserName, Color = userProfile.Color, Language = userProfile.Language, Role = userProfile.Role};
+                    return Ok(responseUserInfo);
                     //return Ok(model);
                 }
             }
@@ -50,14 +51,14 @@ namespace KekStarter.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Name };
-                UserRole role = _db.UserRole.FirstOrDefault(p => p.Role == "User");
-                UserProfile userProfile = new UserProfile { UserRole = role, User = user, Language = "En", Color = "White", FirstName = model.Login };
+                User user = new User { Email = model.Email, UserName = model.Login };
+                //UserRole role = _db.UserRole.FirstOrDefault(p => p.Role == "User");
+                UserProfile userProfile = new UserProfile { User = user, Language = "En", Color = "White", Role = "User" };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                    role.UserProfiles.Add(userProfile);
+                    //role.UserProfiles.Add(userProfile);
                     _db.UserProfile.Add(userProfile);
                     _db.SaveChanges();
                     return Ok("Register");
