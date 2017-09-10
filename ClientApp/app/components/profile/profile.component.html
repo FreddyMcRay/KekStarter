@@ -16,13 +16,11 @@
 
                         <div id="author">
                             <div class="imageBlock">
-                                <h3>Image block</h3>
-                                <img src="" id="mainPhoto" />
+                                <img src="https://res.cloudinary.com/dbsjugefb/image/upload/v1505042128/anonim_user_vdzhx0.png" id="mainPhoto" />
                                 <div class="hover">
                                     <label id="labelPhoto" title="Change main photo">
                                         <span class="glyphicon glyphicon-camera" style="margin-top:3%;"></span>
-                                        Change photo
-                                        <input class="hidden" type="file" "  />
+                                        <input class="hidden" type="file" />
                                     </label>
                                 </div>
                             </div>
@@ -41,7 +39,9 @@
                                 <li class=""><a href="#contact" data-toggle="tab">Achivements</a></li>
                                 <li class=""><a href="#projects" data-toggle="tab">Projects</a></li>
 
-
+                                <li class="pull-right" style="cursor: pointer;">
+                                    <a (click)="change()"> <span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                                </li>
                             </ul>
                             <div id="myTabContent" class="tab-content">
                                 <hr>
@@ -53,41 +53,41 @@
                                             <tr>
                                                 <td class="active">FirstName:</td>
                                                 <td>
-                                                    <input class="input-large" style="border: none; padding: 0;" readonly="readonly" />
-                                                    <input maxlength="20" class="inputProfile" style="width:100%" />
+                                                    <input class="input-large" style="border: none; padding: 0;" *ngIf="changeField" [(ngModel)]="user.firstName" readonly="readonly" />
+                                                    <input maxlength="20" class="inputProfile" *ngIf="!changeField" [(ngModel)]="user.firstName"  style="width:100%" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="active">LastName:</td>
                                                 <td>
-                                                    <input class="input-large readInput" readonly="readonly" />
-                                                    <input maxlength="20" class="inputProfile" />
+                                                    <input class="input-large readInput" *ngIf="changeField" [(ngModel)]="user.secondName" readonly="readonly" />
+                                                    <input maxlength="20" class="inputProfile" *ngIf="!changeField" [(ngModel)]="user.secondName" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="active">Country:</td>
                                                 <td>
-                                                    <input class="input-large readInput" style="outline: 0 ; border: 0; padding: 0;" readonly="readonly" />
-                                                    <input maxlength="20" class="inputProfile" />
+                                                    <input class="input-large readInput" style="outline: 0 ; border: 0; padding: 0;" *ngIf="changeField" [(ngModel)]="user.country" readonly="readonly" />
+                                                    <input maxlength="20" class="inputProfile" *ngIf="!changeField" [(ngModel)]="user.country" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="active">City:</td>
                                                 <td>
-                                                    <input class="input-large readInput" style="outline: 0 ; border: 0; padding: 0;" readonly="readonly" />
-                                                    <input maxlength="20" class="inputProfile" type="text" />
+                                                    <input class="input-large readInput" style="outline: 0 ; border: 0; padding: 0;" *ngIf="changeField" [(ngModel)]="user.city" readonly="readonly" />
+                                                    <input maxlength="20" class="inputProfile" type="text" *ngIf="!changeField" [(ngModel)]="user.city" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="active">DateOfBirth:</td>
                                                 <td>
-                                                    <input type="date" class="readInput" readonly="readonly" />
-                                                    <input type="date" />
+                                                    <input type="date" class="readInput" *ngIf="changeField" [(ngModel)]="user.dataOfBirth" readonly="readonly" />
+                                                    <input type="date" *ngIf="!changeField" [(ngModel)]="user.dataOfBirth"/>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="active">Rating:</td>
-                                                <td>rating</td>
+                                                <td>{{user.rating}}</td>
                                             </tr>
 
                                         </tbody>
