@@ -1,8 +1,9 @@
+
 <nav class="navbar nav"></nav>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">KekStarter</a>
+            <a class="navbar-brand" [routerLink]="['home']" >KekStarter</a>
         </div>
         <ul *ngIf="!guest" class=" nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -37,7 +38,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" role="tabpanel" id="login">
-                        <login></login>
+                        <login (myEvent)="handleEvent($event)"></login>
                     </div>
                     <div class="tab-pane fade" role="tabpanel" id="registration">
                         <registration></registration>
@@ -47,10 +48,9 @@
         </div>
     </div>
 </div>
-
+<alert></alert>
 
 <div class="container body-content">
-
     <router-outlet></router-outlet>
 
     <hr />

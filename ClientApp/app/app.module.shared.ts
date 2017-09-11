@@ -12,9 +12,11 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegistrationComponent } from "./components/registration/registration.component";
 import { LinkedProjectsComponent } from './components/linkedProjects/linkedProjects.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
+import { AlertService } from "./AlertService/alert.service";
 
 @NgModule({
     declarations: [
@@ -23,7 +25,8 @@ import { RoleService } from "./RoleService/role.service";
         ProfileComponent,
         LoginComponent,
         RegistrationComponent,
-        LinkedProjectsComponent
+        LinkedProjectsComponent,
+        AlertComponent
     ],
     imports: [
         CommonModule,
@@ -39,7 +42,7 @@ import { RoleService } from "./RoleService/role.service";
             { path: '**', redirectTo: 'home' }
         ])
     ],
-    providers: [ RestService, RoleService]
+    providers: [RestService, RoleService, AlertService]
 })
 export class AppModuleShared {
 }

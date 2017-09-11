@@ -16,23 +16,18 @@ export class AppComponent {
     text: string;
     returnUrl: string;
     guest: boolean = true;
-    user: AuthUser = new AuthUser();
-    public constructor( private titleService: Title, private router: Router, private service: RestService, private activeRoute: ActivatedRoute) {
+    user: AuthUser;
+    public constructor(private titleService: Title, private router: Router, private service: RestService, private activeRoute: ActivatedRoute) {
+        if (!(typeof localStorage === "undefined") && localStorage.getItem('currentUser')) {
+            this.user = JSON.parse(localStorage.getItem('currentUser') || "");
+            if (this.user.role !== "Guest") {
+                this.guest = false;
+            }
+        } else {
+            this.user = new AuthUser();
+        }
 
-        console.log("CheckRoleServiceInAppComponent");
-        console.log(RoleService.getCurrentAuthUser());
-        //this.service.getCurrentUser().subscribe(result => {
-        //    this.user = result.json();
-        //    if (this.user == null) {
-        //        this.user = new AuthUser();
-        //        this.user.id = 0;
-        //        this.user.role = "Guest";
-        //    }
-        //    RoleService.setCurrentAuthUser(this.user);
-        //});
         this.returnUrl = activeRoute.snapshot.queryParams["returnUrl"] || "/";
-        this.user = RoleService.getCurrentAuthUser();
-        this.guest = (this.user.role == "Guest") ? true : false;
     }
 
     public setTitle(newTitle: string) {
@@ -41,15 +36,21 @@ export class AppComponent {
     }
 
     public logOut() {
-        this.user = {id: 0, role: "Guest"};
-        RoleService.setCurrentAuthUser(this.user);
+        localStorage.removeItem('currentUser');
         this.guest = true;
+        this.user = new AuthUser();
         this.router.navigate([this.returnUrl]);
-        console.log(this.user);
+    }
+
+    handleEvent(value: boolean) {
+        this.guest = value;
     }
 }
 
 class AuthUser {
     id: number = 0;
-    role: string;
+    login: string = "";
+    color: string = "light";
+    language: string = "en";
+    role: string = "Guest";
 }

@@ -76,7 +76,7 @@ namespace KekStarter.Controllers
                     await SendEmailAsync(model.Email, "Confirm your account", $"Confirm registration by clicking on the link: <a href='{ callbackUrl}'>link</a>");
                     _db.UserProfile.Add(userProfile);
                     _db.SaveChanges();
-                    return Ok("Register and check email). goto /Home");
+                    return Ok("Check your email to confirm your account");
                 }
                 else
                 {

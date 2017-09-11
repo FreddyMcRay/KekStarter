@@ -1,6 +1,5 @@
-<a><i class="hidden" data-dismiss="modal" #closeBtn></i></a>
 <h2>Login</h2>
-<form name="form" (ngSubmit)="f.form.valid&&login()" #f="ngForm" novalidate>
+<form name="form" (ngSubmit)="f.form.valid" #f="ngForm">
     <div class="form-group" [ngClass]="{'has-error': f.submitted && !username.valid}">
         <label for="username">Username</label>
         <div class="input-group">
@@ -19,6 +18,6 @@
         <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
     </div>
     <div class="form-group">
-        <button class="btn btn-primary">Login</button>
+        <button class="btn btn-primary" (click)="login()" data-dismiss="modal">Login</button>
     </div>
 </form>

@@ -23,11 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\app\RestService\rest.service.ts" />
     <None Remove="ClientApp\app\RoleService\role.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\AlertService\alert.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\RestService\rest.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\RoleService\role.service.ts" />
   </ItemGroup>

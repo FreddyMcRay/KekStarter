@@ -1,6 +1,5 @@
-<a><i class="hidden" data-dismiss="modal" #closeBtn></i></a>
-<h2>Registration</h2>
-<form name="form" (ngSubmit)="f.form.valid&&registration()" #f="ngForm" novalidate>
+<h2>Sign Up</h2>
+<form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{'has-error': f.submitted && !username.valid}">
         <label for="username">Your Name</label>
         <div class="input-group">
@@ -42,6 +41,6 @@
         <div *ngIf="f.submitted && !password.valid" class="help-block">Password is not confirmed</div>
     </div>
     <div class="form-group">
-        <button class="btn btn-primary">Register</button>
+        <button class="btn btn-primary" (click)="registration()" data-dismiss="modal">Sign Up</button>
     </div>
 </form>

@@ -16,11 +16,14 @@ export class RestService {
         this.user.login = username;
         this.user.password = password;
         console.log(this.user);
-        this.http.post("api/Login", this.user)
-            .subscribe(result => {
-                console.log("after");
-                console.log(result);
-            });
+       return this.http.post("api/Login", this.user)
+                .map((response: Response) => {
+                    let user = response.json();
+                    if (user && user.role != 'Guest') {
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+                    }
+                    return user;
+                });
     }
 
     public registration(username: string, email: string, name: string, password: string) {
@@ -29,11 +32,8 @@ export class RestService {
         this.ruser.email = email;
         this.ruser.name = username;
         console.log(this.ruser);
-        this.http.post("api/Register", this.ruser)
-            .subscribe(result => {
-                console.log("after");
-                console.log(result);
-            });
+        return this.http.post("api/Register", this.ruser);
+            
     }
 
     public getCurrentUser() {
