@@ -7,7 +7,6 @@ import { RestService } from "../RestService/rest.service";
 
 export class RoleService {
     private static _instance: RoleService = new RoleService();
-    private static AuthUser: AuthUser;
     private static AuthUser: AuthUser = {id: 1, role: "User"};
     constructor() {
         if (RoleService._instance) {
