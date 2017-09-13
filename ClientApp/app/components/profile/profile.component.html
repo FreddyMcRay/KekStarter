@@ -3,7 +3,13 @@
     <div class="row profileMain text-center">
         <div class="col-sm-4 col-sm-offset-4 col-xs-12">
             <div class="profileImage">
-                <img src="https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/aux-head-1503076719-20170818_kurejczik_t_mkhj5d.jpg" class="round" />
+                <img src="{{imageUrl}}" class="round" />
+                <div class="hover">
+                    <label id="labelPhoto" title="Change main photo">
+                        <span class="glyphicon glyphicon-camera" style="margin-top:3%;"></span>
+                        <input class="hidden" type="file" ng2FileSelect [uploader]="uploader" (change)="onChange($event)" />
+                    </label>
+                </div>
             </div>
             <div class="info">
                 <div class="name">

@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class ProfileComponent {
     private id: number;
     public user: UserProfile;
+    public imageUrl: string = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/anonim_user_vdzhx0.jpg";
     private subscription: Subscription;
     public changeField: boolean = true;
     public instructionBool: boolean = true;
@@ -36,7 +37,7 @@ export class ProfileComponent {
 
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
             let res: any = JSON.parse(response);
-            this.user.urlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/" + res.public_id + ".jpg";
+            this.imageUrl = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/" + res.public_id + ".jpg";
             return { item, response, status, headers };
         };
     }
