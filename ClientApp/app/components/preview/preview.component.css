@@ -1,0 +1,92 @@
+.block {
+    position: relative;
+    margin-bottom: 9px;
+    border-top: 5px solid transparent;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    color: #333333;
+    font-family: 'Helvetica Neue', 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+    padding: 0px;
+    width: 100%;
+}
+
+    .block .content .title {
+        white-space: normal;
+        word-wrap: break-word;
+        padding: 20px 20px 0 20px;
+        width: 100%;
+        font-family: 'Helvetica Neue', 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .block .content .description {
+        white-space: normal;
+        word-wrap: break-word;
+        padding: 0 20px;
+        width: 100%;
+        overflow: hidden;
+        height: 150px;
+        margin: 11px 0 12px;
+        color: #666666;
+        font-size: 16px;
+        font-family: 'Helvetica Neue', 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    .block .image-preview img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .block .image-preview {
+        width: 100%;
+        height: 20%;
+        overflow: hidden;
+    }
+
+    .block .content {
+        width: 100%;
+    }
+
+.total-progress {
+    padding: 0 20px 5px 20px;
+}
+
+.progress {
+    height: 4px;
+}
+
+.project-info {
+    padding: 0 20px 5px 20px;
+}
+
+.card-res-strong {
+    color: #333333;
+    font-family: 'Helvetica Neue', 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card-res-txt {
+    font-family: 'Helvetica Neue', 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+    margin-top: 2px;
+    text-transform: uppercase;
+    color: #666666;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.card-res {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 50%;
+}
+
+.card-day {
+    position: relative;
+    left: 60%;
+    top: 0;
+    width: 50%;
+}
