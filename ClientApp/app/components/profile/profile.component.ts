@@ -55,7 +55,6 @@ class UserProfile {
     firstName: string;
     secondName: string;
     urlPhoto: string;
-    rating: number;
     registrationDate: string;
     lastLogInDate: string;
     followedProjects: UserProject[];
@@ -80,5 +79,10 @@ class AuthUser {
 }
 
 class UserProject {
-
+    id: number;
+    urlImage: string;
+    title: string;
+    description: string;
+    currentSum: string;
+    leftOver: string;
 }
