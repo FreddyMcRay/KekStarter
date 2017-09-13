@@ -12,6 +12,7 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegistrationComponent } from "./components/registration/registration.component";
 import { AlertComponent } from './components/alert/alert.component';
+import { PreviewComponent } from './components/preview/preview.component';
 
 import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
@@ -24,7 +25,8 @@ import { AlertService } from "./AlertService/alert.service";
         ProfileComponent,
         LoginComponent,
         RegistrationComponent,
-        AlertComponent
+        AlertComponent,
+        PreviewComponent
     ],
     imports: [
         CommonModule,
