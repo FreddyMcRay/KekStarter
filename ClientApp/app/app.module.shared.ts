@@ -35,7 +35,7 @@ import { AlertService } from "./AlertService/alert.service";
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'profile', component: ProfileComponent },
+            { path: 'profile/:id', component: ProfileComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],

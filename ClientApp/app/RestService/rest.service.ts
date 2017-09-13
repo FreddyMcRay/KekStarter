@@ -36,8 +36,16 @@ export class RestService {
             
     }
 
-    public getCurrentUser() {
-        return this.http.get('api/getCurrentUser/');
+    public getUserById(id: string) {
+        return this.http.get('api/getUserById/' + id);
+    }
+
+    public editProfile(user: any) {
+        console.log("UserServiceRest");
+        console.log(user);
+        this.http.post("api/editProfile", user).subscribe(result => {
+            console.log(result.json());
+        });
     }
 }
 
