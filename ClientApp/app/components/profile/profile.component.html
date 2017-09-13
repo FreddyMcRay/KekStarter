@@ -5,9 +5,8 @@
             <div class="profileImage">
                 <img src="{{imageUrl}}" class="round" />
                 <div class="hover">
-                    <label id="labelPhoto" title="Change main photo">
-                        <span class="glyphicon glyphicon-camera" style="margin-top:3%;"></span>
-                        <input class="hidden" type="file" ng2FileSelect [uploader]="uploader" (change)="onChange($event)" />
+                    <label id="labelPhoto" title="Change main photo" style="line-height: 40px">
+                        <span class="glyphicon glyphicon-camera" style="margin-top:3%;"><input class="hidden" type="file" ng2FileSelect [uploader]="uploader" (change)="onChange($event)" /></span>
                     </label>
                 </div>
             </div>
@@ -17,7 +16,6 @@
                 </div>
                 <div class="otherInfo">
                     <div class="registrationDate">Registration: 13.09.2017</div>
-                    <div class="rating">Raiting: 87</div>
                 </div>
             </div>
         </div>

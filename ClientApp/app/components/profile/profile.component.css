@@ -25,6 +25,7 @@
 }
 
 .profileMain {
+    position: relative;
     margin-top: -450px;
     z-index: 40;
 }
@@ -36,18 +37,21 @@
 .info {
     box-sizing: border-box;
     height: 300px;
-    padding-top: 15%;
+    padding-top: 10%;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Helvetica Neue', 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
 .imageBG{
     margin: 0 auto;
 }
 
-.info .name {
-    font-size: 25px;
+.info .name strong {
+    font-size: 35px;
     margin-bottom: 20px;
+    font-weight: 500;
+    color: #333333;
 }
 
 .otherInfo {
@@ -57,6 +61,25 @@
 .round {
     border-radius: 50%;
     width: 250px;
+}
+
+.registrationDate {
+    color: #979797;
+}
+.hover {
+    display: none;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #dcdfe5;
+    top: 200px;
+    left: 46%;
+}
+
+.profileImage:hover .hover {
+    display: block;
 }
 
 tabbable-panel {
