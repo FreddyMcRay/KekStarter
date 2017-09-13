@@ -21,6 +21,10 @@ export class ProfileComponent {
         new CloudinaryOptions({ cloudName: 'dbsjugefb', uploadPreset: 'bkydfdx3' })
     );
 
+    project: UserProject = {
+        id: 1, urlImage: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
+        title: 'Sasay project', description: 'This is sasay project. So, you need to sasay', currentSum: '200', leftOver: '40'};
+
     constructor(private http: Http, private activateRoute: ActivatedRoute, private service: RestService) {
         this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
