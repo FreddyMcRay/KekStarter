@@ -1,69 +1,51 @@
-#main {
-    padding: 20px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
+.container-fluid {
+    position: relative;
 }
 
-#real-estates-detail #author cl-image img {
-    border: 5px solid #ecf0f1;
-    margin-bottom: 10px;
+.row.backgroundPlate {
+    box-sizing: border-box;
+    height: 650px;
+    margin-top: -3%;
+    background: #534f60;
+    z-index: -1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-#real-estates-detail .sosmed-author i.fa {
-    width: 30px;
-    height: 30px;
-    border: 2px solid #bdc3c7;
-    color: #bdc3c7;
-    padding-top: 6px;
-    margin-top: 10px;
+.container {
+    background-color: white;
+    margin-top: -200px;
+    padding-top: 230px;
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-.panel-default .panel-heading {
-    background-color: #fff;
+.profileMain {
+    margin-top: -450px;
+    z-index: 40;
 }
 
-#real-estates-detail .slides li img {
-    height: 450px;
+.profileImage {
+    margin-bottom: -10%;
 }
 
-.inputProfile {
-    border-radius: 1px;
-    padding: 5px;
-    width: 100%;
+.info {
+    box-sizing: border-box;
+    height: 300px;
+    padding-top: 15%;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.hover {
-    display: none;
+.info .name {
+    font-size: 25px;
+    margin-bottom: 20px;
 }
 
-#real-estates-detail #author .imageBlock:hover .hover {
-    display: block;
+.otherInfo {
+    display: inline-block;
 }
 
-.imageBlock {
-}
-
-#labelPhoto {
-    position: absolute;
-    top: 64%;
-    background-color: black;
-    background-color: rgba(0, 0, 0, .6);
-    color: aliceblue;
-    width: 91%;
-    cursor: pointer;
-    text-align: center;
-    height: 8%;
-}
-
-#mainPhoto {
-    width: 100%;
-    height: auto;
-    border-radius: 2px;
-}
-
-.readInput {
-    outline: 0;
-    border: 0;
-    padding: 0;
+.round {
+    border-radius: 50%;
+    width: 250px;
 }
