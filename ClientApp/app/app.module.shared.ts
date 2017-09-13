@@ -11,7 +11,6 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from "./components/profile/profile.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegistrationComponent } from "./components/registration/registration.component";
-import { LinkedProjectsComponent } from './components/linkedProjects/linkedProjects.component';
 import { AlertComponent } from './components/alert/alert.component';
 
 import { RestService } from "./RestService/rest.service";
@@ -25,7 +24,6 @@ import { AlertService } from "./AlertService/alert.service";
         ProfileComponent,
         LoginComponent,
         RegistrationComponent,
-        LinkedProjectsComponent,
         AlertComponent
     ],
     imports: [
@@ -38,7 +36,6 @@ import { AlertService } from "./AlertService/alert.service";
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'profile', component: ProfileComponent },
-            { path: 'projects', component: LinkedProjectsComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],
