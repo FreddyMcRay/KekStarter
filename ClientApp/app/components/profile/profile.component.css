@@ -173,3 +173,51 @@ tabbable-panel {
     border-bottom: 1px solid #eee;
     padding-bottom: 15px;
 }
+
+@media (min-width: 1101px) {
+    .row.backgroundPlate {
+        background-position: -90px -90px;
+    }
+}
+
+@media (min-width: 980px) and (max-width: 1100px) {
+    .row.backgroundPlate {
+        background-position: -100px -110px;
+    }
+}
+
+@media (min-width: 850px) and (max-width: 979px) {
+    .row.backgroundPlate {
+        background-position: -250px -110px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 849px) {
+    .row.backgroundPlate {
+        background-position: -310px -60px;
+    }
+}
+
+@media (min-width: 685px) and (max-width: 767px) {
+    .row.backgroundPlate {
+        background-position: -400px -90px;
+    }
+}
+
+@media (min-width: 550px) and (max-width: 684px) {
+    .row.backgroundPlate {
+        background-position: -520px -90px;
+    }
+}
+
+@media (min-width: 450px) and (max-width: 549px) {
+    .row.backgroundPlate {
+        background-position: -620px -90px;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 449px) {
+    .row.backgroundPlate {
+        background-position: -760px -90px;
+    }
+}
