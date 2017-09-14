@@ -1,0 +1,66 @@
+.container-fluid {
+    position: relative;
+}
+
+.row.backgroundPlate {
+    box-sizing: border-box;
+    height: 650px;
+    margin-top: -3%;
+    background-color: #534f60;
+    background-image: url("../../../../images/homeBG.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -110px;
+    z-index: -1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+    margin-top: -200px;
+    padding-top: 230px;
+    z-index: 10;
+    background-color: #e5e5e5;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 980px) and (max-width: 1100px) {
+    .row.backgroundPlate {
+        background-position: -100px -100px;
+    }
+}
+
+@media (min-width: 850px) and (max-width: 979px) {
+    .row.backgroundPlate {
+        background-position: -250px -100px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 849px) {
+    .row.backgroundPlate {
+        background-position: -310px -110px;
+    }
+}
+
+@media (min-width: 685px) and (max-width: 767px) {
+    .row.backgroundPlate {
+        background-position: -400px -90px;
+    }
+}
+
+@media (min-width: 550px) and (max-width: 684px) {
+    .row.backgroundPlate {
+        background-position: -520px -90px;
+    }
+}
+
+@media (min-width: 450px) and (max-width: 549px) {
+    .row.backgroundPlate {
+        background-position: -620px -90px;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 449px) {
+    .row.backgroundPlate {
+        background-position: -760px -90px;
+    }
+}
