@@ -14,6 +14,7 @@ import { RoleService } from "../../RoleService/role.service";
 export class AppComponent {
     angularClientSideData = 'Angular';
     text: string;
+    loading: boolean = false;
     returnUrl: string;
     guest: boolean = true;
     user: AuthUser;
@@ -44,6 +45,9 @@ export class AppComponent {
 
     handleEvent(value: boolean) {
         this.guest = value;
+        this.loading = false;
+        this.user = JSON.parse(localStorage.getItem('currentUser') || "");
+        console.log(this.user);
     }
 }
 

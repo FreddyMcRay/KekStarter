@@ -19,6 +19,7 @@ export class RestService {
        return this.http.post("api/Login", this.user)
                 .map((response: Response) => {
                     let user = response.json();
+                    console.log("rest " + user);
                     if (user && user.role != 'Guest') {
                         localStorage.setItem('currentUser', JSON.stringify(user));
                     }

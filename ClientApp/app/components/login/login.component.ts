@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { RestService } from "../../RestService/rest.service";
 import { AlertService } from "../../AlertService/alert.service";
@@ -12,7 +12,6 @@ import "rxjs/Rx";
 export class LoginComponent {
     @Output() myEvent = new EventEmitter();
     model: any = {};
-    loading = false;
     returnUrl: string;
 
     constructor(private restService: RestService, private alertService: AlertService, private activatedRouter: ActivatedRoute, private router: Router) {
@@ -20,7 +19,6 @@ export class LoginComponent {
     }
 
     login() {
-        this.loading = true;
         console.log("aaaaa");
         this.restService.login(this.model.username, this.model.password)
             .subscribe(
@@ -31,7 +29,6 @@ export class LoginComponent {
             },
             error => {
                 this.alertService.error(error);
-                this.loading = false;
             });
             
     }
