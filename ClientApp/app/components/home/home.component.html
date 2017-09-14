@@ -1,6 +1,38 @@
-<div class="container-fluid">
+﻿<div class="container-fluid">
     <div class="row backgroundPlate"></div>
     <div class="container">
-
+        <div class="section">
+            <div class="section-inner">
+                <div class="header"><p>Успешные проекты</p></div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let project of projects">
+                            <preview [project]="project"></preview>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="promo_divider">
+                <hr />
+                <a href="#" class="divider_btn">Все успешные проекты</a>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-inner">
+                <div class="header"><p>Новые проекты</p></div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let project of projects">
+                            <preview [project]="project"></preview>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="promo_divider">
+                <hr />
+                <a href="#" class="divider_btn">Все новые проекты</a>
+            </div>
+        </div>
     </div>
 </div>
+

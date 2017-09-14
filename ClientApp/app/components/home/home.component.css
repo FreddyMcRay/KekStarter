@@ -17,10 +17,60 @@
 
 .container {
     margin-top: -200px;
-    padding-top: 230px;
+    padding-top: 10px;
     z-index: 10;
     background-color: #e5e5e5;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.section {
+    padding: 0 50px;
+    font-family: 'Roboto Condensed', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+    .section .section-inner .header {
+        font-size: 35px;
+        font-weight: 500;
+    }
+
+    .section .section-inner .content {
+        padding: 10px 0;
+    }
+
+.promo_divider {
+    margin: 40px auto 10px;
+    text-align: center;
+}
+
+.promo {
+    z-index: 1;
+}
+
+.divider_btn {
+    z-index: 2;
+    height: 50px;
+    padding: 10px 15px;
+    background: #fbfcfd;
+    font-family: 'Roboto Condensed', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #100d0d;
+    border: 1px solid rgba(154, 145, 145, 0.24);
+    border-radius: 5px;
+    /* margin-top: -50px; */
+    position: relative;
+    top: -35px;
+    text-decoration: none;
+}
+
+.promo_divider hr {
+    border-top: 1px solid rgba(154, 145, 145, 1);
+}
+
+.divider_btn:hover {
+    color: #459BC9;
+    background: #ffffff;
+    border: 1px solid rgba(154, 145, 145, 1);
 }
 
 @media (min-width: 980px) and (max-width: 1100px) {
