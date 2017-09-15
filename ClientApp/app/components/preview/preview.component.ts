@@ -17,6 +17,8 @@ class UserProject {
     urlImage: string;
     title: string;
     description: string;
-    currentSum: string;
+    currentSum: number;
+    requiredSum: number;
     leftOver: string;
+    progress: number;
 }

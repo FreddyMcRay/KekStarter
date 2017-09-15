@@ -3,7 +3,7 @@
     <div class="row profileMain text-center">
         <div class="col-sm-4 col-sm-offset-4 col-xs-12">
             <div class="profileImage">
-                <img src="{{imageUrl}}" class="round" />
+                <img src="{{user.urlPhoto}}" class="round" />
                 <div class="hover">
                     <label id="labelPhoto" title="Change main photo" style="line-height: 40px">
                         <span class="glyphicon glyphicon-camera" style="margin-top:3%;"><input class="hidden" type="file" ng2FileSelect [uploader]="uploader" (change)="onChange($event)" /></span>
@@ -12,10 +12,11 @@
             </div>
             <div class="info">
                 <div class="name">
-                    <strong>Ivan Malich</strong>
+                    <strong>{{user.firstName}} {{user.secondName}}</strong>
                 </div>
                 <div class="otherInfo">
-                    <div class="registrationDate">Registration: 13.09.2017</div>
+                    <div class="registrationDate">Registration: {{user.registrationDate}}</div>
+                    <div class="registrationDate">Last login: {{user.lastLogInDate}}</div>
                 </div>
             </div>
         </div>
