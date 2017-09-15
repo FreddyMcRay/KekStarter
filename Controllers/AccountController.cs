@@ -21,7 +21,7 @@ namespace KekStarter.Controllers
 
         private ApplicationContext _db;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationContext db)
+        public AccountController(UserManager<User> userManager,SignInManager<User> signInManager, ApplicationContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -143,6 +143,21 @@ namespace KekStarter.Controllers
             var proj = projects.FindAll(z => z.CreateUserId == id);
             var userInfo = new getUser { FirstName = usProfile.FirstName, SecondName = usProfile.SecondName, LastLogInDate = usProfile.LastLogInDate, RegistrationDate = usProfile.RegistrationDate, UrlPhoto = usProfile.UrlPhoto, Userprojects = proj };
             return new ObjectResult(userInfo);
+        }
+
+        [HttpPost("[action]")]
+        [AllowAnonymous]
+        public IActionResult EditProfile([FromBody] EditProfile model)
+        {
+            var user = _db.UserProfile.FirstOrDefault(p => p.Id == model.Id);
+            if (user != null)
+            {
+                user.UrlPhoto = model.UrlPhoto;
+                _db.UserProfile.Update(user);
+                _db.SaveChanges();
+                return Ok(user);
+            }
+            return BadRequest("User is not found");
         }
     }
 }

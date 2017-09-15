@@ -50,7 +50,7 @@ export class ProfileComponent {
 
     OnDestroy() {
         console.log(this.user);
-        this.service.editProfile(this.user);
+        this.service.editProfile({ id: this.user.id, urlPhoto: this.user.urlPhoto });
     }
 }
 
