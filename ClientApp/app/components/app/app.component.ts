@@ -44,6 +44,7 @@ export class AppComponent {
 
     handleEvent(value: boolean) {
         this.guest = value;
+        this.user = JSON.parse(localStorage.getItem('currentUser') || "");
     }
 }
 
@@ -53,4 +54,5 @@ class AuthUser {
     color: string = "light";
     language: string = "en";
     role: string = "Guest";
+    token: string = "";
 }

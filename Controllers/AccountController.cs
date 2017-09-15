@@ -7,6 +7,9 @@ using KekStarter.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 
 namespace KekStarter.Controllers
 {
@@ -48,8 +51,11 @@ namespace KekStarter.Controllers
                 }
                 else
                 {
+                    DateTime thisDay = DateTime.Now;
                     UserProfile userProfile = _db.UserProfile.FirstOrDefault(p => p.User.UserName == model.Login);
-                    ResponseUserInfo responseUserInfo = new ResponseUserInfo { Id = userProfile.Id, Login = userProfile.User.UserName, Color = userProfile.Color, Language = userProfile.Language, Role = userProfile.Role};
+                    userProfile.LastLogInDate = thisDay.ToString();
+                    ResponseUserInfo responseUserInfo = new ResponseUserInfo { Id = userProfile.Id, Login = userProfile.User.UserName, Color = userProfile.Color, Language = userProfile.Language, Role = userProfile.Role, Token = userProfile.User.SecurityStamp};
+                    _db.SaveChanges();
                     return Ok(responseUserInfo);
                 }
             }
@@ -62,8 +68,9 @@ namespace KekStarter.Controllers
         {
             if (ModelState.IsValid)
             {
+                DateTime thisDay = DateTime.Now;
                 User user = new User { Email = model.Email, UserName = model.Login };
-                UserProfile userProfile = new UserProfile { User = user, Language = "En", Color = "White", Role = "User" };
+                UserProfile userProfile = new UserProfile { User = user, Language = "En", Color = "White", Role = "User", RegistrationDate = thisDay.ToString()  };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -125,6 +132,17 @@ namespace KekStarter.Controllers
                 await client.SendAsync(emailMessage);
                 await client.DisconnectAsync(true);
             }
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult getUserById(int id)
+        {
+            var usProfile = _db.UserProfile.FirstOrDefault(p => p.Id == id);
+            List<Project> projects = new List<Project>();
+            projects = _db.Project.ToList();
+            var proj = projects.FindAll(z => z.CreateUserId == id);
+            var userInfo = new getUser { FirstName = usProfile.FirstName, SecondName = usProfile.SecondName, LastLogInDate = usProfile.LastLogInDate, RegistrationDate = usProfile.RegistrationDate, UrlPhoto = usProfile.UrlPhoto, Userprojects = proj };
+            return new ObjectResult(userInfo);
         }
     }
 }

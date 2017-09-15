@@ -42,24 +42,13 @@ namespace KekStarter.Models
         public string Field { get; set; }
     }
 
-    public class UserLike
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public UserProfile UserProfile { get; set; }
-        [Required]
-        [JsonIgnore]
-        public Project Project { get; set; }
-    }
-
     public class Project
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string DateCreated { get; set; }
         public string DateEnd { get; set; }
         public string PreviewImageUrl { get; set; }
@@ -67,13 +56,15 @@ namespace KekStarter.Models
         public int Rating { get; set; }
         public int SumRequired { get; set; }
         public int SumCurrent { get; set; }
+        public int Sponsors { get; set; }
         public bool Status { get; set; }
+        public int CreateUserId { get; set; }
 
-        public UserProfile UserProfile { get; set; }
+        [NotMapped]
+        public ICollection<UserProfile> UserProfiles { get; set; }
 
         public ICollection<ProjectTag> Tags { get; set; }
         public ICollection<Target> Targets { get; set; }
-        public ICollection<UserLike> UsersLike { get; set; }
         public ICollection<ProjectNew> ProjectNews { get; set; }
         public ICollection<Commentary> ProjectComments { get; set; }
 
@@ -81,9 +72,9 @@ namespace KekStarter.Models
         {
             Targets = new List<Target>();
             Tags = new List<ProjectTag>();
-            UsersLike = new List<UserLike>();
             ProjectNews = new List<ProjectNew>();
             ProjectComments = new List<Commentary>();
+            UserProfiles = new List<UserProfile>();
         }
 
     }
