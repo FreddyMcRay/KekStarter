@@ -17,7 +17,7 @@ export class DraftComponent {
     invalid = false;
 
     constructor(private projectService: ProjectService, private userService: UserService) {
-        this.project = projectService.getDraft();
+        this.project = new Project();
     }
 
     deleteGoal(goal: FinansalGoal) {
@@ -33,25 +33,5 @@ export class DraftComponent {
 
     removeDraft() {
         this.projectService.removeDraft();
-    }
-
-    send() {
-        if (!this.projectService.isValid(this.project)) {
-            this.invalid = true;
-            this.saveDraft();
-            this.begin.nativeElement.click();
-        } else {
-            let currentUser: AuthUser = this.userService.getCurrentUser();
-            if (currentUser.role == "AuthUser" || currentUser.role === "Admin") {
-                this.project.userId = currentUser.id;
-                this.projectService.create(this.project).subscribe(data => {
-                    console.log("OK");
-                    console.log(data);
-                },
-                    error => console.log(error)
-                );
-            }
-
-        }
     }
 }

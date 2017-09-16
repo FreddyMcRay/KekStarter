@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Project } from "../models/draft.models";
 import { Http, Response } from "@angular/http";
-import { UserService } from '../UserService/user.service';
+import { UserService } from "../UserService/user.service";
 import 'rxjs/add/operator/map';
 
 
@@ -16,10 +16,10 @@ export class ProjectService {
         localStorage.setItem('draft', JSON.stringify(project));
     }
 
-    getDraft() {
-        let project = JSON.parse(localStorage.getItem('draft')||'');
-        return project ? project : new Project();
-    }
+    //getDraft() {
+    //    let project = JSON.parse(localStorage.getItem('draft') || '');
+    //    return project ? project : new Project();
+    //}
 
     removeDraft() {
         if (localStorage.getItem('draft')) {

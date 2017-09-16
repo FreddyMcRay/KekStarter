@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UserProject } from '../../models/project.models';
+import { Project } from '../../models/draft.models';
 
 
 @Component({
@@ -8,6 +8,6 @@ import { UserProject } from '../../models/project.models';
     styleUrls: ['./preview.component.css']
 })
 export class PreviewComponent {
-    @Input() project: UserProject;
+    @Input() project: Project;
 
 }

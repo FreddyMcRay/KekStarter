@@ -1,6 +1,6 @@
 ﻿export class UserProject {
     id: number;
-    urlImage: string;
+    image: string;
     title: string;
     description: string;
     currentSum: string;
