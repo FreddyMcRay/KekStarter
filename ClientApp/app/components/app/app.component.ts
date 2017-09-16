@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { RestService } from "../../RestService/rest.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleService } from "../../RoleService/role.service";
+import { AuthUser } from '../../models/user.models';
 
 
 @Component({
@@ -49,12 +50,4 @@ export class AppComponent {
         this.user = JSON.parse(localStorage.getItem('currentUser') || "");
         console.log(this.user);
     }
-}
-
-class AuthUser {
-    id: number = 0;
-    login: string = "";
-    color: string = "light";
-    language: string = "en";
-    role: string = "Guest";
 }

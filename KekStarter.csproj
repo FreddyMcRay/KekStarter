@@ -23,13 +23,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\models\draft.models.ts" />
+    <None Remove="ClientApp\app\models\project.models.ts" />
+    <None Remove="ClientApp\app\ProjectService\project.service.ts" />
     <None Remove="ClientApp\app\RoleService\role.service.ts" />
+    <None Remove="ClientApp\app\UserService\user.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\AlertService\alert.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\draft.models.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\project.models.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\user.models.ts" />
+    <TypeScriptCompile Include="ClientApp\app\ProjectService\project.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\RestService\rest.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\RoleService\role.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\UserService\user.service.ts" />
   </ItemGroup>
 
   <ItemGroup>

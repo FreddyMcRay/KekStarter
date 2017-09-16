@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CloudinaryOptions, CloudinaryUploader, CloudinaryImageComponent } from 'ng2-cloudinary';
 import { Subscription } from 'rxjs/Subscription';
 import { RestService } from '../../RestService/rest.service';
+import { UserProject } from '../../models/project.models';
+import { UserProfile, UserAchivment } from '../../models/user.models';
 
 
 @Component({
@@ -52,41 +54,4 @@ export class ProfileComponent {
         console.log(this.user);
         this.service.editProfile(this.user);
     }
-}
-
-class UserProfile {
-    id: number;
-    firstName: string;
-    secondName: string;
-    urlPhoto: string;
-    registrationDate: string;
-    lastLogInDate: string;
-    followedProjects: UserProject[];
-    projects: UserProject[];
-    achivments: UserAchivment[];
-}
-
-class Achivment {
-    id: number;
-    name: string;
-    urlImage: string;
-    description: string;
-}
-
-class UserAchivment {
-    id: number;
-    achivment: Achivment;
-}
-class AuthUser {
-    id: number = 0;
-    role: string;
-}
-
-class UserProject {
-    id: number;
-    urlImage: string;
-    title: string;
-    description: string;
-    currentSum: string;
-    leftOver: string;
 }
