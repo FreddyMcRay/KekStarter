@@ -48,6 +48,10 @@ export class RestService {
             console.log(result.json());
         });
     }
+
+    public getHomeInfo() {
+        return this.http.get('api/getHomeInfo');
+    }
 }
 
 export class User {
