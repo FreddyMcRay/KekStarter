@@ -4,5 +4,6 @@
     title: string;
     description: string;
     currentSum: string;
+    totalCost = 0;
     leftOver: string;
 }
