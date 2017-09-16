@@ -15,6 +15,7 @@ export class DraftComponent {
     @ViewChild('begin') begin: ElementRef;
     project: Project;
     invalid = false;
+    tags: any[] = [];
 
     constructor(private projectService: ProjectService, private userService: UserService) {
         this.project = new Project();
@@ -33,5 +34,34 @@ export class DraftComponent {
 
     removeDraft() {
         this.projectService.removeDraft();
+    }
+
+    send() {
+        this.addTags();
+        if (!this.projectService.isValid(this.project)) {
+            this.invalid = true;
+            this.saveDraft();
+            this.begin.nativeElement.click();
+        } else {
+            console.log(this.project);
+            this.projectService.create(this.project).subscribe(
+                data => {
+                    console.log("OK");
+                    console.log(data);
+                },
+                error => console.log(error)
+            );
+        }
+
+    }
+
+    addTags() {
+        this.tags = this.project.tags;
+        let ta: string[] = [];
+        for (let tag1 of this.tags) {
+            ta.push(tag1.value);
+        }
+        this.project.tags = ta;
+        console.log(this.project.tags);
     }
 }

@@ -34,7 +34,13 @@
     </div>
     <div class="block">
         <div class="create-header"><p>Дата окончания компании</p></div>
-        <p-calendar  [showIcon]="true"></p-calendar> 
+        <p-calendar [inputStyle]="{'background-color' : '#f9f9f9','width': '200px'}"
+                    [showIcon]="true"
+                    [readonlyInput]="true"
+                    [(ngModel)]="project.completionDate"
+                    [ngModelOptions]="{standalone: true}"
+                    [minDate]="timeNow">
+        </p-calendar>
         <span style="margin-left:35px">{{date3|date}}</span>
         <br>
         <i *ngIf="!project.completionDate && invalid"
