@@ -14,6 +14,9 @@ namespace KekStarter.Controllers
     {
         private ApplicationContext _db;
 
+        public TimeSpan elapsed = new TimeSpan();
+        public DateTime date = DateTime.Now;
+
         public ProjectController(ApplicationContext db)
         {
             _db = db;
@@ -70,24 +73,34 @@ namespace KekStarter.Controllers
         [HttpGet("[action]")]
         public IActionResult getProjects()
         {
-            DateTime date = DateTime.Now;
-            TimeSpan elapsed = new TimeSpan();
-            var projNew = new List<Project>();
             List<Project> projects = new List<Project>();
             projects = _db.Project.ToList();
-            var proj = projects.FindAll(z => z.Status == true);
+            var frontProjects = new ProjectList
+            {
+                NewProjects = CheckNewProjects(projects),
+                SuccessfulProjects = CheckSuccessfulProjects(projects)
+            };
+            return new ObjectResult(frontProjects);
+        }
+
+        public List<Project> CheckNewProjects(List<Project> projects)
+        {
+            var proj = new List<Project>();
             foreach (var project in projects)
             {
                 elapsed = date.Subtract(Convert.ToDateTime(project.DateCreated));
                 if (Convert.ToInt32(elapsed) < 7)
                 {
-                    projNew.Add(project);
+                    proj.Add(project);
                 }
             }
-            var frontProjects = new ProjectList();
-            frontProjects.NewProjects = projNew;
-            frontProjects.SuccessfulProjects = proj;
-            return new ObjectResult(frontProjects);
+            return proj;
+        }
+
+        public List<Project> CheckSuccessfulProjects(List<Project> projects)
+        {
+            var proj = projects.FindAll(z => z.Status == true);
+            return proj;
         }
     }
 }
