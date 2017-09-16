@@ -11,9 +11,10 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20170916100040_up3")]
+    partial class up3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,7 +120,7 @@ namespace KekStarter.Migrations
 
                     b.Property<int>("currentSum");
 
-                    b.Property<int>("leftOver");
+                    b.Property<string>("leftOver");
 
                     b.Property<int>("progress");
 

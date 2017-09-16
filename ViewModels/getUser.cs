@@ -18,6 +18,6 @@ namespace KekStarter.ViewModels
 
         public string LastLogInDate { get; set; }
 
-        public List<Project> Userprojects { get; set; }
+        public List<Project> projects { get; set; }
     }
 }

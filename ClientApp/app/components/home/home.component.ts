@@ -21,5 +21,5 @@ class UserProject {
     currentSum: number;
     requiredSum: number;
     leftOver: string;
-    progress: number;
+    progress: number;// = (this.requiredSum / this.currentSum) * 100;
 }

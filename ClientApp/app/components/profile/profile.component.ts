@@ -14,6 +14,7 @@ import { RestService } from '../../RestService/rest.service';
 export class ProfileComponent {
     private id: number;
     public user: UserProfile;
+    public projects: UserProject[];
     public achivments: UserAchivment[];
     public imageUrl: string = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/anonim_user_vdzhx0.jpg";
     private subscription: Subscription;
@@ -23,7 +24,8 @@ export class ProfileComponent {
 
     project: UserProject = {
         id: 1, urlImage: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
-        title: 'Sasay project', description: 'This is sasay project. So, you need to sasay', currentSum: '200', leftOver: '40'};
+        title: 'Sasay project', description: 'This is sasay project. So, you need to sasay', requiredSum: 1000, currentSum: 200, leftOver: '40', progress: 20
+    };
 
     constructor(private http: Http, private activateRoute: ActivatedRoute, private service: RestService) {
         this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
@@ -36,6 +38,8 @@ export class ProfileComponent {
             console.log(this.user.achivments)
             console.log("GetUserById");
             this.achivments = this.user.achivments;
+            this.projects = this.user.projects;
+         
         });
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
             let res: any = JSON.parse(response);
@@ -62,7 +66,7 @@ class UserProfile {
     registrationDate: string;
     lastLogInDate: string;
     followedProjects: UserProject[];
-    projects: UserProject[];
+    projects: UserProject[] = [];
     achivments: UserAchivment[];
 }
 
@@ -87,6 +91,8 @@ class UserProject {
     urlImage: string;
     title: string;
     description: string;
-    currentSum: string;
+    currentSum: number;
+    requiredSum: number;
     leftOver: string;
+    progress: number;// = (this.requiredSum / this.currentSum) * 100;
 }
