@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CloudinaryOptions, CloudinaryUploader, CloudinaryImageComponent } from 'ng2-cloudinary';
 import { Subscription } from 'rxjs/Subscription';
 import { RestService } from '../../RestService/rest.service';
+import { UserProject } from '../../models/project.models';
+import { UserProfile, UserAchivment } from '../../models/user.models';
 
 
 @Component({
@@ -22,21 +24,21 @@ export class ProfileComponent {
     );
 
     project: UserProject = {
-        id: 1, urlImage: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
+        id: 1, image: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
         title: 'Sasay project', description: 'This is sasay project. So, you need to sasay', currentSum: '200', leftOver: '40'};
 
     constructor(private http: Http, private activateRoute: ActivatedRoute, private service: RestService) {
         this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
-        this.service.getUserById(this.id.toString()).subscribe(result => {
-            this.user = result.json();
-            if (this.user.urlPhoto == null)
-                this.user.urlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/anonim_user_vdzhx0.jpg";
-            console.log(this.user);
-            console.log(this.user.achivments)
-            console.log("GetUserById");
-            this.achivments = this.user.achivments;
-        });
+        //this.service.getUserById(this.id.toString()).subscribe(result => {
+        //    this.user = result.json();
+        //    if (this.user.urlPhoto == null)
+        //        this.user.urlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/anonim_user_vdzhx0.jpg";
+        //    console.log(this.user);
+        //    console.log(this.user.achivments)
+        //    console.log("GetUserById");
+        //    this.achivments = this.user.achivments;
+        //});
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
             let res: any = JSON.parse(response);
             this.imageUrl = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/" + res.public_id + ".jpg";
@@ -50,43 +52,6 @@ export class ProfileComponent {
 
     OnDestroy() {
         console.log(this.user);
-        this.service.editProfile({ id: this.user.id, urlPhoto: this.user.urlPhoto });
+        this.service.editProfile(this.user);
     }
-}
-
-class UserProfile {
-    id: number;
-    firstName: string;
-    secondName: string;
-    urlPhoto: string;
-    registrationDate: string;
-    lastLogInDate: string;
-    followedProjects: UserProject[];
-    projects: UserProject[];
-    achivments: UserAchivment[];
-}
-
-class Achivment {
-    id: number;
-    name: string;
-    urlImage: string;
-    description: string;
-}
-
-class UserAchivment {
-    id: number;
-    achivment: Achivment;
-}
-class AuthUser {
-    id: number = 0;
-    role: string;
-}
-
-class UserProject {
-    id: number;
-    urlImage: string;
-    title: string;
-    description: string;
-    currentSum: string;
-    leftOver: string;
 }

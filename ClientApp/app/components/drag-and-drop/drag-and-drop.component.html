@@ -1,0 +1,9 @@
+﻿<div class="profile-picture-section">
+    <div ng2FileDrop [ng2FileDropSupportedFileTypes]="supportedFileTypes" (ng2FileDropFileAccepted)="dragFileAccepted($event)"
+         [uploader]="uploader" class="profile-picture-section-drop-zone">
+        <div class=profile-picture-section-request-image-group>
+            <p class="profile-picture-section-request-image-instructions">Drop a picture here</p>
+        </div>
+    </div>
+    <p class="profile-picture-section-limitations">Profile picture can be .png, .jpeg or .gif only</p>
+</div>
