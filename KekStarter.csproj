@@ -19,21 +19,36 @@
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Compile Remove="ClientApp\app\components\finansal-goal-component\**" />
+    <Compile Remove="Data\**" />
     <Content Remove="ClientApp\**" />
+    <Content Remove="Data\**" />
+    <EmbeddedResource Remove="ClientApp\app\components\finansal-goal-component\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <None Remove="ClientApp\app\components\finansal-goal-component\**" />
+    <None Remove="Data\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\models\draft.models.ts" />
+    <None Remove="ClientApp\app\models\project.models.ts" />
+    <None Remove="ClientApp\app\ProjectService\project.service.ts" />
     <None Remove="ClientApp\app\RoleService\role.service.ts" />
+    <None Remove="ClientApp\app\UserService\user.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\AlertService\alert.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\draft.models.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\project.models.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\user.models.ts" />
+    <TypeScriptCompile Include="ClientApp\app\ProjectService\project.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\RestService\rest.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\RoleService\role.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\UserService\user.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Models\" />
     <Folder Include="images\" />
     <Folder Include="Views\Shared\" />

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-
+import { UserProject } from '../../models/project.models';
 
 
 @Component({
@@ -10,15 +10,4 @@ import { Component, Input } from '@angular/core';
 export class PreviewComponent {
     @Input() project: UserProject;
 
-}
-
-class UserProject {
-    id: number;
-    urlImage: string;
-    title: string;
-    description: string;
-    currentSum: number;
-    requiredSum: number;
-    leftOver: string;
-    progress: number;
 }
