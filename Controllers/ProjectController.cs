@@ -66,5 +66,28 @@ namespace KekStarter.Controllers
             return Ok(followProject);
 
         }
+
+        [HttpGet("[action]")]
+        public IActionResult getProjects()
+        {
+            DateTime date = DateTime.Now;
+            TimeSpan elapsed = new TimeSpan();
+            var projNew = new List<Project>();
+            List<Project> projects = new List<Project>();
+            projects = _db.Project.ToList();
+            var proj = projects.FindAll(z => z.Status == true);
+            foreach (var project in projects)
+            {
+                elapsed = date.Subtract(Convert.ToDateTime(project.DateCreated));
+                if (Convert.ToInt32(elapsed) < 7)
+                {
+                    projNew.Add(project);
+                }
+            }
+            var frontProjects = new ProjectList();
+            frontProjects.NewProjects = projNew;
+            frontProjects.SuccessfulProjects = proj;
+            return new ObjectResult(frontProjects);
+        }
     }
 }
