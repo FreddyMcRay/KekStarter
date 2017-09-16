@@ -16,6 +16,7 @@ namespace KekStarter.Controllers
 
         public TimeSpan elapsed = new TimeSpan();
         public DateTime date = DateTime.Now;
+        public DateTime localDate = DateTime.Now;
 
         public ProjectController(ApplicationContext db)
         {
@@ -24,11 +25,25 @@ namespace KekStarter.Controllers
 
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public IActionResult CreateProject([FromBody] EditProfile model)
+        public IActionResult CreateProject([FromBody] Project model)
         {
-            var project = new Project();
-            DateTime localDate = DateTime.Now;
-            // to...
+            _db.Project.Add(FillingFields(model));
+            _db.SaveChanges();
+            return new ObjectResult(model);
+        }
+
+        [HttpPost("[action]")]
+        [AllowAnonymous]
+        public IActionResult UpdateProject([FromBody] Project model)
+        {
+            var project = _db.Project.FirstOrDefault(p => p.Id == model.Id);
+            _db.Project.Update(FillingFields(model));
+            _db.SaveChanges();
+            return new ObjectResult(project);
+        }
+
+        public Project FillingFields(Project project)
+        {
             project.Title = null;
             project.Description = null;
             project.DateCreated = localDate.ToString();
@@ -40,11 +55,8 @@ namespace KekStarter.Controllers
             project.Targets = null;
             project.Sponsors = 0;
             project.progress = (project.currentSum / project.requiredSum) * 100;
-            project.leftOver = 0;
-
-            _db.Project.Add(project);
-            _db.SaveChanges();
-            return Ok(project);
+            project.leftOver = Convert.ToInt32(date.Subtract(Convert.ToDateTime(project.DateCreated)));
+            return project;
         }
 
         [HttpPost("[action]")]
@@ -55,7 +67,7 @@ namespace KekStarter.Controllers
             followProject.UserProfiles.Add(_db.UserProfile.FirstOrDefault(p => p.Id == model.UserId));
             _db.Project.Update(followProject);
             _db.SaveChanges();
-            return Ok(followProject);
+            return new ObjectResult(followProject);
         }
 
         [HttpPost("[action]")]
@@ -66,12 +78,12 @@ namespace KekStarter.Controllers
             followProject.UserProfiles.Remove(_db.UserProfile.FirstOrDefault(p => p.Id == model.UserId));
             _db.Project.Update(followProject);
             _db.SaveChanges();
-            return Ok(followProject);
+            return new ObjectResult(followProject);
 
         }
 
         [HttpGet("[action]")]
-        public IActionResult getProjects()
+        public IActionResult GetProjects()
         {
             List<Project> projects = new List<Project>();
             projects = _db.Project.ToList();
