@@ -49,10 +49,10 @@ namespace KekStarter.Controllers
 
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public IActionResult FollowProject([FromBody] EditProfile model) //create new model
+        public IActionResult FollowProject([FromBody] FollowInfo model)
         {
-            var followProject = _db.Project.FirstOrDefault(p => p.Id == model.Id); //projectId
-            followProject.UserProfiles.Add(_db.UserProfile.FirstOrDefault(p => p.Id == model.Id)); //userId
+            var followProject = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
+            followProject.UserProfiles.Add(_db.UserProfile.FirstOrDefault(p => p.Id == model.UserId));
             _db.Project.Update(followProject);
             _db.SaveChanges();
             return Ok(followProject);
@@ -60,10 +60,10 @@ namespace KekStarter.Controllers
 
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public IActionResult DeFollowProject([FromBody] EditProfile model) //create new model
+        public IActionResult UnFollowProject([FromBody] FollowInfo model)
         {
-            var followProject = _db.Project.FirstOrDefault(p => p.Id == model.Id); //projectId
-            followProject.UserProfiles.Remove(_db.UserProfile.FirstOrDefault(p => p.Id == model.Id)); //userId
+            var followProject = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
+            followProject.UserProfiles.Remove(_db.UserProfile.FirstOrDefault(p => p.Id == model.UserId));
             _db.Project.Update(followProject);
             _db.SaveChanges();
             return Ok(followProject);
