@@ -53,11 +53,36 @@ namespace KekStarter.Controllers
             proj.requiredSum = project.totalCost;
             proj.image = project.image;
             proj.CreateUserId = project.userId;
-            //proj.Tags = project.tags;
             //proj.Targets = project.finansalGoals;
             proj.Sponsors = 0;
             //project.progress = (project.currentSum / project.requiredSum) * 100;
             //project.leftOver = Convert.ToInt32(date.Subtract(Convert.ToDateTime(project.DateCreated)));
+
+            var tag = new Tag();
+            for (int i = 0; i <= project.tags.Count - 1; i++)
+            {
+                tag = _db.Tag.FirstOrDefault(p => p.Name == project.tags[i]);
+                if (tag == null)
+                {
+                    var bufTag = new Tag();
+                    bufTag.Name = project.tags[i];
+                    bufTag.Projects.Add(proj);
+                    _db.Tag.Add(bufTag);
+                }
+                else
+                {
+                    tag.Projects.Add(proj);
+                    _db.Tag.Update(tag);
+                }
+            }
+            var bufProjectTag = new ProjectTag
+            {
+                Tag = tag,
+                Project = proj,
+            };
+            proj.Tags.Add(bufProjectTag);
+            _db.InstructionTag.Add(bufProjectTag);
+
             return proj;
         }
 

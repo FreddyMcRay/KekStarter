@@ -101,11 +101,11 @@ namespace KekStarter.Models
         public int Id { get; set; }
         public string Name { get; set; }
         [JsonIgnore]
-        public ICollection<ProjectTag> Projects { get; set; }
+        public ICollection<Project> Projects { get; set; }
 
         public Tag()
         {
-            Projects = new List<ProjectTag>();
+            Projects = new List<Project>();
         }
     }
 
@@ -115,7 +115,7 @@ namespace KekStarter.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public ProjectTag Tag { get; set; }
+        public Tag Tag { get; set; }
         [Required]
         [JsonIgnore]
         public Project Project { get; set; }
