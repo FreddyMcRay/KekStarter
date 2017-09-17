@@ -56,6 +56,22 @@ export class RestService {
     public getProjects(property: string, type: string, value: string, take: string, skip: string) {
         return this.http.get('/api/getProjects/' + take + '/' + skip + '/' + property + '/' + type + '/' + value);
     }
+
+    public getCommentsByProject(take: string, skip: string, projectId: string) {
+        return this.http.get('api/getCommentsByProjects' + '/' + projectId + '/' + skip + '/' + take);
+    }
+
+    public sendCommentsOnServer(commentary: any) {
+        this.http.post('api/addCommentInProject/', commentary).subscribe(result => {
+            console.log("hey");
+        });
+    }
+
+    public removeCommentInProject(commentary: any) {
+        return this.http.post('api/removeCommentInProject/', commentary).subscribe(result => {
+            console.log("commend is delete");
+        });
+    }
 }
 
 export class User {
