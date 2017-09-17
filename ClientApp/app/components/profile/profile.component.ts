@@ -13,7 +13,7 @@ import { UserProfile, UserAchivment } from '../../models/user.models';
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnDestroy {
     private id: number;
     public user: UserProfile;
     public achivments: UserAchivment[];
@@ -22,10 +22,6 @@ export class ProfileComponent {
     public uploader: CloudinaryUploader = new CloudinaryUploader(
         new CloudinaryOptions({ cloudName: 'dbsjugefb', uploadPreset: 'bkydfdx3' })
     );
-
-    project: UserProject = {
-        id: 1, image: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
-        title: 'Sasay project', description: 'This is sasay project. So, you need to sasay', currentSum: '200', leftOver: '40'};
 
     constructor(private http: Http, private activateRoute: ActivatedRoute, private service: RestService) {
         this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
@@ -50,7 +46,7 @@ export class ProfileComponent {
         this.uploader.uploadAll();
     }
 
-    OnDestroy() {
+    ngOnDestroy() {
         console.log(this.user);
         this.service.editProfile(this.user);
     }
