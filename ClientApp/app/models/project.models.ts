@@ -11,5 +11,5 @@
 export class HomeParseObject {
     successfulProjects: UserProject[];
     newProjects: UserProject[];
-    //tags: string[];
+    tags: string[];
 }

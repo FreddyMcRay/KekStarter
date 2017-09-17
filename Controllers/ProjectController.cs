@@ -114,12 +114,25 @@ namespace KekStarter.Controllers
         {
             List<Project> projects = new List<Project>();
             projects = _db.Project.ToList();
+            var tags = new List<Tag>();
+            tags = _db.Tag.ToList();
             var frontProjects = new ProjectList
             {
                 SuccessfulProjects = CheckSuccessfulProjects(projects),
-                NewProjects = CheckNewProjects(projects)
+                NewProjects = CheckNewProjects(projects),
+                Tags = CheckTags(tags)
             };
             return new ObjectResult(frontProjects);
+        }
+
+        public List<string> CheckTags(List<Tag> tags)
+        {
+            var tag = new List<string>();
+            foreach (var bufTag in tags)
+            {
+                tag.Add(bufTag.Name);
+            }
+            return tag;
         }
 
         public List<Project> CheckNewProjects(List<Project> projects)

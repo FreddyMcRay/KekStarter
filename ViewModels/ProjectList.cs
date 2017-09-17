@@ -11,5 +11,7 @@ namespace KekStarter.ViewModels
         public List<Project> SuccessfulProjects { get; set; }
 
         public List<Project> NewProjects { get; set; }
+
+        public List<String> Tags { get; set; }
     }
 }
