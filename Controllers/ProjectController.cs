@@ -100,9 +100,9 @@ namespace KekStarter.Controllers
         public List<Project> CheckNewProjects(List<Project> projects)
         {
             var proj = new List<Project>();
+            int i = 0;
             foreach (var project in projects)
             {
-                int i = 0;
                 elapsed = date.Subtract(Convert.ToDateTime(project.DateCreated));
                 if (elapsed.Days < 3 && i < 4)
                 {
@@ -117,9 +117,9 @@ namespace KekStarter.Controllers
         {
             var proj = projects.FindAll(z => z.Status == true);
             var reProject = new List<Project>();
+            int i = 0;
             foreach (var project in proj)
             {
-                int i = 0;
                 if (i < 4)
                 {
                     i++;
