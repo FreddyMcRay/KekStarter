@@ -1,27 +1,33 @@
 ﻿
-<nav class="navbar nav"></nav>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" [routerLink]="['home']">KekStarter</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toogle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="['home']">KekStarter</a>
         </div>
-        <ul *ngIf="!guest" class=" nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a style="color: #fff;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.login}}  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a asp-area="" routerLink="profile/{{user.id.toString()}}">Profile</a></li>
-                    <li><hr style="margin-top: 3px; margin-bottom: 3px;" /></li>
-                    <li style="padding-left: 3px;">
-                        <button style="background-color: #fff; margin-left: 5px;" (click)="logOut()" class="btn"><span class="glyphicon glyphicon-log-in"></span> LogOut</button>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul *ngIf="guest" class="nav navbar-nav navbar-right">
-            <li><a data-toggle="modal" data-target="#ModalView" style="cursor: pointer; color: white"><span class="glyphicon glyphicon-log-in"></span> LogIn</a></li>
-        </ul>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li *ngIf="!guest" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.login}}  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" routerLink="profile/{{user.id.toString()}}">Profile</a></li>
+                        <li><hr style="margin-top: 3px; margin-bottom: 3px;" /></li>
+                        <li style="padding-left: 3px;">
+                            <button style="background-color: #fff; margin-left: 5px;" (click)="logOut()" class="btn"><span class="glyphicon glyphicon-log-in"></span> LogOut</button>
+                        </li>
+                    </ul>
+                </li>
+                <li *ngIf="guest"><a data-toggle="modal" data-target="#ModalView" style="cursor: pointer; color: white"><span class="glyphicon glyphicon-log-in"></span> LogIn</a></li>
+            </ul>
+        </div>
     </div>
-</nav>
+</div>
+
 
 <div class="modal fade bd-example-modal-sm" id="ModalView" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
