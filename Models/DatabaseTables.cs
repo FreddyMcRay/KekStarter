@@ -61,6 +61,7 @@ namespace KekStarter.Models
         public int CreateUserId { get; set; }
         public int leftOver { get; set; }
         public int progress { get; set; }
+        public string image { get; set; }
 
         [NotMapped]
         public ICollection<UserProfile> UserProfiles { get; set; }

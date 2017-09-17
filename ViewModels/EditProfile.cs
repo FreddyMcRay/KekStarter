@@ -7,7 +7,7 @@ namespace KekStarter.ViewModels
 {
     public class EditProfile
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
         public string UrlPhoto { get; set; }
     }

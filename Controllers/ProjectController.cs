@@ -25,7 +25,7 @@ namespace KekStarter.Controllers
 
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public IActionResult CreateProject([FromBody] Project model)
+        public IActionResult CreateProject([FromBody] CreateProjectInfo model)
         {
             _db.Project.Add(FillingFields(model));
             _db.SaveChanges();
@@ -34,29 +34,30 @@ namespace KekStarter.Controllers
 
         [HttpPost("[action]")]
         [AllowAnonymous]
-        public IActionResult UpdateProject([FromBody] Project model)
+        public IActionResult UpdateProject([FromBody] CreateProjectInfo model)
         {
-            var project = _db.Project.FirstOrDefault(p => p.Id == model.Id);
+            var project = _db.Project.FirstOrDefault(p => p.Id == model.id);
             _db.Project.Update(FillingFields(model));
             _db.SaveChanges();
             return new ObjectResult(project);
         }
 
-        public Project FillingFields(Project project)
+        public Project FillingFields(CreateProjectInfo project)
         {
-            project.Title = null;
-            project.Description = null;
-            project.DateCreated = localDate.ToString();
-            project.DateEnd = null;
-            project.currentSum = 0;
-            project.requiredSum = 0;
-            project.urlImage = null;
-            project.Tags = null;
-            project.Targets = null;
-            project.Sponsors = 0;
-            project.progress = (project.currentSum / project.requiredSum) * 100;
-            project.leftOver = Convert.ToInt32(date.Subtract(Convert.ToDateTime(project.DateCreated)));
-            return project;
+            var proj = new Project();
+            proj.Title = project.title;
+            proj.Description = project.description;
+            proj.DateCreated = localDate.ToString();
+            proj.DateEnd = project.completionDate;
+            proj.currentSum = 0;
+            proj.requiredSum = project.totalCost;
+            proj.image = project.image;
+            //proj.Tags = project.tags;
+            //proj.Targets = project.finansalGoals;
+            proj.Sponsors = 0;
+            //project.progress = (project.currentSum / project.requiredSum) * 100;
+            //project.leftOver = Convert.ToInt32(date.Subtract(Convert.ToDateTime(project.DateCreated)));
+            return proj;
         }
 
         [HttpPost("[action]")]

@@ -149,7 +149,7 @@ namespace KekStarter.Controllers
         [AllowAnonymous]
         public IActionResult EditProfile([FromBody] EditProfile model)
         {
-            var user = _db.UserProfile.FirstOrDefault(p => p.Id == model.Id);
+            var user = _db.UserProfile.FirstOrDefault(p => p.Id == model.id);
             if (user != null)
             {
                 user.UrlPhoto = model.UrlPhoto;
