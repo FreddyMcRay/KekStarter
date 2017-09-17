@@ -1,6 +1,5 @@
 ﻿
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -12,11 +11,15 @@
             <a class="navbar-brand" routerLink="['home']">KekStarter</a>
         </div>
         <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a asp-area="" routerLink="projects/all">Profile</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li *ngIf="!guest" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.login}}  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a asp-area="" routerLink="profile/{{user.id.toString()}}">Profile</a></li>
+                        <li><a asp-area="" routerLink="draft">Create Project</a></li>
                         <li><hr style="margin-top: 3px; margin-bottom: 3px;" /></li>
                         <li style="padding-left: 3px;">
                             <button style="background-color: #fff; margin-left: 5px;" (click)="logOut()" class="btn"><span class="glyphicon glyphicon-log-in"></span> LogOut</button>

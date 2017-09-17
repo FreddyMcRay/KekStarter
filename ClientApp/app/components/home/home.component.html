@@ -14,7 +14,7 @@
             </div>
             <div class="promo_divider">
                 <hr />
-                <a [routerLink]="['/draft']" class="divider_btn">Все успешные проекты</a>
+                <a routerLink="/projects/success" class="divider_btn">Все успешные проекты</a>
             </div>
         </div>
         <div class="section">
@@ -30,14 +30,14 @@
             </div>
             <div class="promo_divider">
                 <hr />
-                <a href="#" class="divider_btn">Все новые проекты</a>
+                <a routerLink="/projects/new" class="divider_btn">Все новые проекты</a>
             </div>
         </div>
         <div class="section">
             <div class="section-inner">
                 <div class="header"><p>Тэги</p></div>
                 <div class="content">
-                    <a *ngFor="let tag of tags">#{{tag}}  </a>
+                    <a *ngFor="let tag of tags" routerLink="/projects/all/tag/{{tag}}">#{{tag}}  </a>
                 </div>
             </div>
         </div>
