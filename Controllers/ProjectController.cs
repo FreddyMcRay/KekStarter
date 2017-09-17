@@ -52,6 +52,7 @@ namespace KekStarter.Controllers
             proj.currentSum = 0;
             proj.requiredSum = project.totalCost;
             proj.image = project.image;
+            proj.CreateUserId = project.userId;
             //proj.Tags = project.tags;
             //proj.Targets = project.finansalGoals;
             proj.Sponsors = 0;
@@ -90,8 +91,8 @@ namespace KekStarter.Controllers
             projects = _db.Project.ToList();
             var frontProjects = new ProjectList
             {
-                NewProjects = CheckNewProjects(projects),
-                SuccessfulProjects = CheckSuccessfulProjects(projects)
+                SuccessfulProjects = CheckSuccessfulProjects(projects),
+                NewProjects = CheckNewProjects(projects)
             };
             return new ObjectResult(frontProjects);
         }
@@ -101,10 +102,12 @@ namespace KekStarter.Controllers
             var proj = new List<Project>();
             foreach (var project in projects)
             {
+                int i = 0;
                 elapsed = date.Subtract(Convert.ToDateTime(project.DateCreated));
-                if (Convert.ToInt32(elapsed) < 7)
+                if (elapsed.Days < 3 && i < 4)
                 {
                     proj.Add(project);
+                    i++;
                 }
             }
             return proj;
@@ -113,6 +116,16 @@ namespace KekStarter.Controllers
         public List<Project> CheckSuccessfulProjects(List<Project> projects)
         {
             var proj = projects.FindAll(z => z.Status == true);
+            var reProject = new List<Project>();
+            foreach (var project in proj)
+            {
+                int i = 0;
+                if (i < 4)
+                {
+                    i++;
+                    reProject.Add(project);
+                }
+            }
             return proj;
         }
     }
