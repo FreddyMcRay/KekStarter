@@ -49,6 +49,10 @@ export class RestService {
         });
     }
 
+    public getHomeInfo() {
+        return this.http.get('api.getHomeInfo');
+    }
+
     public getProjects(property: string, type: string, value: string, take: string, skip: string) {
         return this.http.get('/api/getProjects/' + take + '/' + skip + '/' + property + '/' + type + '/' + value);
     }

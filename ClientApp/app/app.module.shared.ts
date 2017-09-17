@@ -25,6 +25,7 @@ import { PreviewComponent } from './components/preview/preview.component';
 import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.component';
 import { FinansalGoalComponent } from './components/financial-goal/finansal-goal.component';
 import { DescriptionComponent } from './components/draft/description-component/description.component';
+import { ProjectsBlockComponent } from './components/projectsBlock/projectsBlock.component';
 
 import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
@@ -46,7 +47,8 @@ import { UserService } from "./UserService/user.service";
         GeneralInfoComponent,
         DragAndDropComponent,
         FinansalGoalComponent,
-        DescriptionComponent
+        DescriptionComponent,
+        ProjectsBlockComponent
     ],
     imports: [
         CommonModule,
@@ -64,10 +66,15 @@ import { UserService } from "./UserService/user.service";
         TagInputModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
-            { path: 'profile/:id', component: ProfileComponent },
-            { path: 'draft', component: DraftComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: 'home', component: HomeComponent, data: { title: 'Home' } },
+            { path: 'profile/:id', component: ProfileComponent, data: { title: 'Profile' } },
+            { path: 'draft', component: DraftComponent, data: {title: 'Create project'} },
+            { path: '**', redirectTo: 'home' },
+            { path: 'projects', component: ProjectsBlockComponent },
+            { path: 'projects/:property/:type/:value', component: ProjectsBlockComponent, data: { title: 'Projects' } },
+            { path: 'projects/:type/:value', component: ProjectsBlockComponent, data: { title: 'Projects' } },
+            { path: 'projects/:property', component: ProjectsBlockComponent, data: { title: 'Projects' } },
+            { path: 'projects/:property/:type', component: ProjectsBlockComponent, data: { title: 'Projects' } },
         ])
     ],
     providers: [RestService, RoleService, AlertService, ProjectService, UserService]
