@@ -4,6 +4,12 @@
     title: string;
     description: string;
     currentSum: string;
-    totalCost = 0;
+    progress: string;
     leftOver: string;
+}
+
+export class HomeParseObject {
+    successProjects: UserProject[];
+    newProjects: UserProject[];
+    tags: string[];
 }

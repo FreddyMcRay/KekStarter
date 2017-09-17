@@ -1,0 +1,13 @@
+﻿<div class="container-fluid">
+    <div class="row backgroundPlate"></div>
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let project of projects">
+                    <preview [project]="project"></preview>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
