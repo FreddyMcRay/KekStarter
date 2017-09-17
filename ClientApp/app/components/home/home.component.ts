@@ -9,20 +9,22 @@ import 'rxjs/Rx';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    parseObject: HomeParseObject;
-    successProjects: UserProject[];
-    newProjects: UserProject[];
-    tags: string[];
+    public projects: HomeParseObject;
+    public success: UserProject[];
+    public newproj: UserProject[];
+    //tags: string[];
 
     constructor(private service: RestService) {
     }
 
     ngOnInit() {
         this.service.getProjectsHome().subscribe(result => {
-            this.parseObject = result.json();
+            this.projects = result.json();
+            this.success = this.projects.successfulProjects;
+            this.newproj = this.projects.newProjects;
         });
-        this.successProjects = this.parseObject.successProjects;
-        this.newProjects = this.parseObject.newProjects;
-        this.tags = this.parseObject.tags;
+        //this.success = this.parseObject.successProjects;
+        //this.new = this.parseObject.newProjects;
+        //this.tags = this.parseObject.tags;
     }
 }
