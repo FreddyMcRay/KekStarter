@@ -29,6 +29,6 @@ export class UserProjectFull {
     percent: string;
     status: boolean;
     followed: boolean;
-    user: UserProfileMini;
-    tags: string[];
+  //  user: UserProfileMini;
+   // tags: string[];
 }

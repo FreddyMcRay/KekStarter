@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2FileDropModule } from 'ng2-file-drop';
 import { EditorModule } from 'primeng/primeng';
 import { TagInputModule } from 'ng2-tag-input';
+import { RatingModule } from "ng2-rating";
 
 import { DraftComponent } from './components/draft/draft.component';
 import { GeneralInfoComponent } from './components/draft/general-info-component/general-info.component';
@@ -26,6 +27,7 @@ import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.c
 import { FinansalGoalComponent } from './components/financial-goal/finansal-goal.component';
 import { DescriptionComponent } from './components/draft/description-component/description.component';
 import { ProjectsBlockComponent } from './components/projectsBlock/projectsBlock.component';
+import { DisplayProjectComponent } from './components/displayProject/displayProject.component';
 
 import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
@@ -48,7 +50,8 @@ import { UserService } from "./UserService/user.service";
         DragAndDropComponent,
         FinansalGoalComponent,
         DescriptionComponent,
-        ProjectsBlockComponent
+        ProjectsBlockComponent,
+        DisplayProjectComponent
     ],
     imports: [
         CommonModule,
@@ -64,6 +67,7 @@ import { UserService } from "./UserService/user.service";
         Ng2FileDropModule,
         EditorModule,
         TagInputModule,
+        RatingModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent, data: { title: 'Home' } },
@@ -75,6 +79,7 @@ import { UserService } from "./UserService/user.service";
             { path: 'projects/:type/:value', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'projects/:property', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'projects/:property/:type', component: ProjectsBlockComponent, data: { title: 'Projects' } },
+            { path: 'project', component: DisplayProjectComponent, data: {title: 'Project'} }
         ])
     ],
     providers: [RestService, RoleService, AlertService, ProjectService, UserService]
