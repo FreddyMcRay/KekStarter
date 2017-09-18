@@ -44,7 +44,7 @@ export class RestService {
     public editProfile(user: any) {
         console.log("UserServiceRest");
         console.log(user);
-        this.http.post("api/editProfile", user).subscribe(result => {
+        this.http.post("api/EditProfile", user).subscribe(result => {
             console.log(result.json());
         });
     }

@@ -77,19 +77,6 @@ namespace KekStarter.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRole",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRole", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -201,20 +188,15 @@ namespace KekStarter.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AboutMySelf = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DataOfBirth = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Language = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastLogInDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rating = table.Column<int>(type: "int", nullable: false),
                     RegistrationDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UrlPhoto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UserRoleId = table.Column<int>(type: "int", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -223,12 +205,6 @@ namespace KekStarter.Migrations
                         name: "FK_UserProfile_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserProfile_UserRole_UserRoleId",
-                        column: x => x.UserRoleId,
-                        principalTable: "UserRole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -260,27 +236,38 @@ namespace KekStarter.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Instruction",
+                name: "Project",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreateUserId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateEnd = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PreviewImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rating = table.Column<int>(type: "int", nullable: false),
+                    Sponsors = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    SumCurrent = table.Column<int>(type: "int", nullable: false),
-                    SumRequired = table.Column<int>(type: "int", nullable: false),
-                    UserProfileId = table.Column<int>(type: "int", nullable: true)
+                    TagId = table.Column<int>(type: "int", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserProfileId = table.Column<int>(type: "int", nullable: true),
+                    currentSum = table.Column<int>(type: "int", nullable: false),
+                    image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    leftOver = table.Column<int>(type: "int", nullable: false),
+                    progress = table.Column<int>(type: "int", nullable: false),
+                    requiredSum = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Instruction", x => x.Id);
+                    table.PrimaryKey("PK_Project", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Instruction_UserProfile_UserProfileId",
+                        name: "FK_Project_Tag_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tag",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Project_UserProfile_UserProfileId",
                         column: x => x.UserProfileId,
                         principalTable: "UserProfile",
                         principalColumn: "Id",
@@ -302,9 +289,9 @@ namespace KekStarter.Migrations
                 {
                     table.PrimaryKey("PK_Commentary", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Commentary_Instruction_ProjectId",
+                        name: "FK_Commentary_Project_ProjectId",
                         column: x => x.ProjectId,
-                        principalTable: "Instruction",
+                        principalTable: "Project",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -322,27 +309,20 @@ namespace KekStarter.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
-                    TagId = table.Column<int>(type: "int", nullable: true),
-                    TagId1 = table.Column<int>(type: "int", nullable: true)
+                    TagId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InstructionTag", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InstructionTag_Instruction_ProjectId",
+                        name: "FK_InstructionTag_Project_ProjectId",
                         column: x => x.ProjectId,
-                        principalTable: "Instruction",
+                        principalTable: "Project",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InstructionTag_InstructionTag_TagId",
+                        name: "FK_InstructionTag_Tag_TagId",
                         column: x => x.TagId,
-                        principalTable: "InstructionTag",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_InstructionTag_Tag_TagId1",
-                        column: x => x.TagId1,
                         principalTable: "Tag",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -362,9 +342,9 @@ namespace KekStarter.Migrations
                 {
                     table.PrimaryKey("PK_ProjectNew", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProjectNew_Instruction_ProjectId",
+                        name: "FK_ProjectNew_Project_ProjectId",
                         column: x => x.ProjectId,
-                        principalTable: "Instruction",
+                        principalTable: "Project",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -386,37 +366,11 @@ namespace KekStarter.Migrations
                 {
                     table.PrimaryKey("PK_Step", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Step_Instruction_ProjectId",
+                        name: "FK_Step_Project_ProjectId",
                         column: x => x.ProjectId,
-                        principalTable: "Instruction",
+                        principalTable: "Project",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserLike",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
-                    UserProfileId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserLike", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserLike_Instruction_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Instruction",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserLike_UserProfile_UserProfileId",
-                        column: x => x.UserProfileId,
-                        principalTable: "UserProfile",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -505,11 +459,6 @@ namespace KekStarter.Migrations
                 column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Instruction_UserProfileId",
-                table: "Instruction",
-                column: "UserProfileId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_InstructionTag_ProjectId",
                 table: "InstructionTag",
                 column: "ProjectId");
@@ -520,9 +469,14 @@ namespace KekStarter.Migrations
                 column: "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InstructionTag_TagId1",
-                table: "InstructionTag",
-                column: "TagId1");
+                name: "IX_Project_TagId",
+                table: "Project",
+                column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Project_UserProfileId",
+                table: "Project",
+                column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectNew_ProjectId",
@@ -535,24 +489,9 @@ namespace KekStarter.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserLike_ProjectId",
-                table: "UserLike",
-                column: "ProjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserLike_UserProfileId",
-                table: "UserLike",
-                column: "UserProfileId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserProfile_UserId",
                 table: "UserProfile",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserProfile_UserRoleId",
-                table: "UserProfile",
-                column: "UserRoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -588,9 +527,6 @@ namespace KekStarter.Migrations
                 name: "ProjectNew");
 
             migrationBuilder.DropTable(
-                name: "UserLike");
-
-            migrationBuilder.DropTable(
                 name: "Achivment");
 
             migrationBuilder.DropTable(
@@ -600,19 +536,16 @@ namespace KekStarter.Migrations
                 name: "Step");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                name: "Project");
 
             migrationBuilder.DropTable(
-                name: "Instruction");
+                name: "Tag");
 
             migrationBuilder.DropTable(
                 name: "UserProfile");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "UserRole");
         }
     }
 }

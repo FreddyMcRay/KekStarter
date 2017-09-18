@@ -51,7 +51,6 @@ namespace KekStarter.Models
         public string Title { get; set; }
         public string DateCreated { get; set; }
         public string DateEnd { get; set; }
-        public string urlImage { get; set; }
         public string Description { get; set; }
         public int Rating { get; set; }
         public int requiredSum { get; set; }

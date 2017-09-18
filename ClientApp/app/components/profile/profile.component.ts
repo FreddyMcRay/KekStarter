@@ -44,7 +44,8 @@ export class ProfileComponent implements OnDestroy {
         });
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
             let res: any = JSON.parse(response);
-            this.imageUrl = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/" + res.public_id + ".jpg";
+            console.log("suuuula");
+            this.user.UrlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/" + res.public_id + ".jpg";
             return { item, response, status, headers };
         };
     }
@@ -55,6 +56,6 @@ export class ProfileComponent implements OnDestroy {
 
     ngOnDestroy() {
         console.log(this.user);
-        this.service.editProfile(this.user);
+        this.service.editProfile({ id: this.user.id, UrlPhoto: this.user.UrlPhoto });
     }
 }

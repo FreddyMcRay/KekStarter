@@ -129,8 +129,6 @@ namespace KekStarter.Migrations
 
                     b.Property<int>("requiredSum");
 
-                    b.Property<string>("urlImage");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TagId");

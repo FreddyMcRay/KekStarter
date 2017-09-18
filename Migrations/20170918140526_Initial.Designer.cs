@@ -11,8 +11,8 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20170910181543_UpdateDB")]
-    partial class UpdateDB
+    [Migration("20170918140526_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,31 +100,43 @@ namespace KekStarter.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CreateUserId");
+
                     b.Property<string>("DateCreated");
 
                     b.Property<string>("DateEnd");
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Name");
-
-                    b.Property<string>("PreviewImageUrl");
-
                     b.Property<int>("Rating");
+
+                    b.Property<int>("Sponsors");
 
                     b.Property<bool>("Status");
 
-                    b.Property<int>("SumCurrent");
+                    b.Property<int?>("TagId");
 
-                    b.Property<int>("SumRequired");
+                    b.Property<string>("Title");
 
                     b.Property<int?>("UserProfileId");
 
+                    b.Property<int>("currentSum");
+
+                    b.Property<string>("image");
+
+                    b.Property<int>("leftOver");
+
+                    b.Property<int>("progress");
+
+                    b.Property<int>("requiredSum");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TagId");
 
                     b.HasIndex("UserProfileId");
 
-                    b.ToTable("Instruction");
+                    b.ToTable("Project");
                 });
 
             modelBuilder.Entity("KekStarter.Models.ProjectNew", b =>
@@ -154,15 +166,11 @@ namespace KekStarter.Migrations
 
                     b.Property<int?>("TagId");
 
-                    b.Property<int?>("TagId1");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProjectId");
 
                     b.HasIndex("TagId");
-
-                    b.HasIndex("TagId1");
 
                     b.ToTable("InstructionTag");
                 });
@@ -254,46 +262,18 @@ namespace KekStarter.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("KekStarter.Models.UserLike", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ProjectId");
-
-                    b.Property<int?>("UserProfileId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("UserProfileId");
-
-                    b.ToTable("UserLike");
-                });
-
             modelBuilder.Entity("KekStarter.Models.UserProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AboutMySelf");
-
-                    b.Property<string>("City");
-
                     b.Property<string>("Color");
-
-                    b.Property<string>("Country");
-
-                    b.Property<string>("DataOfBirth");
 
                     b.Property<string>("FirstName");
 
                     b.Property<string>("Language");
 
                     b.Property<string>("LastLogInDate");
-
-                    b.Property<int>("Rating");
 
                     b.Property<string>("RegistrationDate");
 
@@ -305,27 +285,11 @@ namespace KekStarter.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Property<int?>("UserRoleId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("UserRoleId");
-
                     b.ToTable("UserProfile");
-                });
-
-            modelBuilder.Entity("KekStarter.Models.UserRole", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Role");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -468,8 +432,12 @@ namespace KekStarter.Migrations
 
             modelBuilder.Entity("KekStarter.Models.Project", b =>
                 {
-                    b.HasOne("KekStarter.Models.UserProfile", "UserProfile")
-                        .WithMany()
+                    b.HasOne("KekStarter.Models.Tag")
+                        .WithMany("Projects")
+                        .HasForeignKey("TagId");
+
+                    b.HasOne("KekStarter.Models.UserProfile")
+                        .WithMany("Projects")
                         .HasForeignKey("UserProfileId");
                 });
 
@@ -487,13 +455,9 @@ namespace KekStarter.Migrations
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("KekStarter.Models.ProjectTag", "Tag")
+                    b.HasOne("KekStarter.Models.Tag", "Tag")
                         .WithMany()
                         .HasForeignKey("TagId");
-
-                    b.HasOne("KekStarter.Models.Tag")
-                        .WithMany("Projects")
-                        .HasForeignKey("TagId1");
                 });
 
             modelBuilder.Entity("KekStarter.Models.Target", b =>
@@ -504,27 +468,11 @@ namespace KekStarter.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("KekStarter.Models.UserLike", b =>
-                {
-                    b.HasOne("KekStarter.Models.Project", "Project")
-                        .WithMany("UsersLike")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("KekStarter.Models.UserProfile", "UserProfile")
-                        .WithMany("UsersLike")
-                        .HasForeignKey("UserProfileId");
-                });
-
             modelBuilder.Entity("KekStarter.Models.UserProfile", b =>
                 {
                     b.HasOne("KekStarter.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-
-                    b.HasOne("KekStarter.Models.UserRole", "UserRole")
-                        .WithMany("UserProfiles")
-                        .HasForeignKey("UserRoleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
