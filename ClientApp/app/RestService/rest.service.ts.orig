@@ -44,7 +44,7 @@ export class RestService {
     public editProfile(user: any) {
         console.log("UserServiceRest");
         console.log(user);
-        this.http.post("api/editProfile", user).subscribe(result => {
+        this.http.post("api/EditProfile", user).subscribe(result => {
             console.log(result.json());
         });
     }
@@ -55,6 +55,40 @@ export class RestService {
 
     public getProjects(property: string, type: string, value: string, take: string, skip: string) {
         return this.http.get('/api/getProjects/' + take + '/' + skip + '/' + property + '/' + type + '/' + value);
+    }
+
+<<<<<<< HEAD
+    public getProjectById(is: string) {
+        return this.http.get('/api/getProjectById');
+    }
+
+    public userFollowProject(userId: string, projectId: string) {
+        return this.http.get('/api/followProject/' + userId + '/' + projectId);
+    }
+
+    public userUnFollowProject(userId: string, projectId: string) {
+        return this.http.get('/api/unFollowProject/' + userId + '/' + projectId);
+    }
+
+    public addRatingToProject(rating: string) {
+        this.http.get('/api/addRatingToProject/' + rating).subscribe(result => {
+            console.log('nice rating');
+=======
+    public getCommentsByProject(take: string, skip: string, projectId: string) {
+        return this.http.get('api/getCommentsByProjects' + '/' + projectId + '/' + skip + '/' + take);
+    }
+
+    public sendCommentsOnServer(commentary: any) {
+        this.http.post('api/addCommentInProject/', commentary).subscribe(result => {
+            console.log("hey");
+        });
+    }
+
+    public removeCommentInProject(commentary: any) {
+        return this.http.post('api/removeCommentInProject/', commentary).subscribe(result => {
+            console.log("commend is delete");
+>>>>>>> Add_comments_component
+        });
     }
 }
 
