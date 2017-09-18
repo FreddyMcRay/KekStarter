@@ -9,7 +9,7 @@
     "noImplicitAny": false,
     "inlineSources": true,
     "noStrictGenericChecks": true,
-     "lib": [ "es6", "dom" ],
+    "lib": [ "es6", "dom" ],
     "types": [ "webpack-env" ]
   },
   "exclude": [ "bin", "node_modules" ],

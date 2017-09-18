@@ -73,13 +73,20 @@ import { UserService } from "./UserService/user.service";
             { path: 'projects/:property/:type', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'profile/:id', component: ProfileComponent },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
+<<<<<<< HEAD
             { path: 'home', component: HomeComponent, data: { title: 'Home' } },
+            { path: 'profile/:id', component: ProfileComponent, data: { title: 'Profile' } },
+            { path: 'draft', component: DraftComponent, data: {title: 'Create project'} },
             { path: '**', redirectTo: 'home' },
             { path: 'projects', component: ProjectsBlockComponent },
             { path: 'projects/:property/:type/:value', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'projects/:type/:value', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'projects/:property', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'projects/:property/:type', component: ProjectsBlockComponent, data: { title: 'Projects' } },
+=======
+            { path: 'home', component: HomeComponent },
+            { path: '**', redirectTo: 'home' },
+>>>>>>> 4eab2f09356ed74ab540345949daf038418ab051
         ])
     ],
     providers: [RestService, RoleService, AlertService, ProjectService, UserService]

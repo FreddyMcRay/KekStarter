@@ -42,38 +42,32 @@ namespace KekStarter.Models
         public string Field { get; set; }
     }
 
-    public class UserLike
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public UserProfile UserProfile { get; set; }
-        [Required]
-        [JsonIgnore]
-        public Project Project { get; set; }
-    }
-
     public class Project
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string DateCreated { get; set; }
         public string DateEnd { get; set; }
-        public string PreviewImageUrl { get; set; }
+        public string urlImage { get; set; }
         public string Description { get; set; }
         public int Rating { get; set; }
-        public int SumRequired { get; set; }
-        public int SumCurrent { get; set; }
+        public int requiredSum { get; set; }
+        public int currentSum { get; set; }
+        public int Sponsors { get; set; }
         public bool Status { get; set; }
+        public int CreateUserId { get; set; }
+        public int leftOver { get; set; }
+        public int progress { get; set; }
+        public string image { get; set; }
 
-        public UserProfile UserProfile { get; set; }
+        [NotMapped]
+        public ICollection<UserProfile> UserProfiles { get; set; }
 
         public ICollection<ProjectTag> Tags { get; set; }
         public ICollection<Target> Targets { get; set; }
-        public ICollection<UserLike> UsersLike { get; set; }
         public ICollection<ProjectNew> ProjectNews { get; set; }
         public ICollection<Commentary> ProjectComments { get; set; }
 
@@ -81,9 +75,9 @@ namespace KekStarter.Models
         {
             Targets = new List<Target>();
             Tags = new List<ProjectTag>();
-            UsersLike = new List<UserLike>();
             ProjectNews = new List<ProjectNew>();
             ProjectComments = new List<Commentary>();
+            UserProfiles = new List<UserProfile>();
         }
 
     }
@@ -107,11 +101,11 @@ namespace KekStarter.Models
         public int Id { get; set; }
         public string Name { get; set; }
         [JsonIgnore]
-        public ICollection<ProjectTag> Projects { get; set; }
+        public ICollection<Project> Projects { get; set; }
 
         public Tag()
         {
-            Projects = new List<ProjectTag>();
+            Projects = new List<Project>();
         }
     }
 
@@ -121,7 +115,7 @@ namespace KekStarter.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public ProjectTag Tag { get; set; }
+        public Tag Tag { get; set; }
         [Required]
         [JsonIgnore]
         public Project Project { get; set; }

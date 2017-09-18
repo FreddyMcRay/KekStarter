@@ -9,7 +9,7 @@
 }
 
 export class HomeParseObject {
-    successProjects: UserProject[];
+    successfulProjects: UserProject[];
     newProjects: UserProject[];
     tags: string[];
 }

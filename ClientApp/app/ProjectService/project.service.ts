@@ -44,6 +44,6 @@ export class ProjectService {
 
 
     create(project: Project) {
-        return this.http.post('api/createProject', { project }, this.userService.jwt());
+        return this.http.post('api/CreateProject', project);
     }
 }

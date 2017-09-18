@@ -9,15 +9,30 @@ import 'rxjs/Rx';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+<<<<<<< HEAD
+    parseObject: HomeParseObject;
+    successProjects: UserProject[];
+    newProjects: UserProject[];
+    tags: string[];
+=======
     public projects: HomeParseObject;
     public success: UserProject[];
     public newproj: UserProject[];
     public tags: string[];
+>>>>>>> 4eab2f09356ed74ab540345949daf038418ab051
 
     constructor(private service: RestService) {
     }
 
     ngOnInit() {
+<<<<<<< HEAD
+        this.service.getHomeInfo().subscribe(result => {
+            this.parseObject = result.json();
+        });
+        this.successProjects = this.parseObject.successProjects;
+        this.newProjects = this.parseObject.newProjects;
+        this.tags = this.parseObject.tags;
+=======
         this.service.getProjectsHome().subscribe(result => {
             this.projects = result.json();
             this.success = this.projects.successfulProjects;
@@ -25,5 +40,6 @@ export class HomeComponent implements OnInit {
             this.tags = this.projects.tags;
             console.log(this.tags);
         });
+>>>>>>> 4eab2f09356ed74ab540345949daf038418ab051
     }
 }

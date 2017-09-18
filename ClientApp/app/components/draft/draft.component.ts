@@ -38,6 +38,7 @@ export class DraftComponent {
 
     send() {
         this.addTags();
+        this.project.userId = JSON.parse(localStorage.getItem('currentUser')).id;
         if (!this.projectService.isValid(this.project)) {
             this.invalid = true;
             this.saveDraft();

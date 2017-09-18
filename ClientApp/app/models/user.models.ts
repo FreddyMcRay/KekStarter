@@ -13,7 +13,7 @@ export class UserProfile {
     id: number;
     firstName: string;
     secondName: string;
-    urlPhoto: string;
+    UrlPhoto: string;
     registrationDate: string;
     lastLogInDate: string;
     followedProjects: UserProject[];

@@ -11,9 +11,10 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20170915020651_UpdateKekZzZ")]
+    partial class UpdateKekZzZ
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,33 +108,23 @@ namespace KekStarter.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("PreviewImageUrl");
+
                     b.Property<int>("Rating");
 
                     b.Property<int>("Sponsors");
 
                     b.Property<bool>("Status");
 
-                    b.Property<int?>("TagId");
+                    b.Property<int>("SumCurrent");
+
+                    b.Property<int>("SumRequired");
 
                     b.Property<string>("Title");
 
                     b.Property<int?>("UserProfileId");
 
-                    b.Property<int>("currentSum");
-
-                    b.Property<string>("image");
-
-                    b.Property<int>("leftOver");
-
-                    b.Property<int>("progress");
-
-                    b.Property<int>("requiredSum");
-
-                    b.Property<string>("urlImage");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TagId");
 
                     b.HasIndex("UserProfileId");
 
@@ -167,11 +158,15 @@ namespace KekStarter.Migrations
 
                     b.Property<int?>("TagId");
 
+                    b.Property<int?>("TagId1");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProjectId");
 
                     b.HasIndex("TagId");
+
+                    b.HasIndex("TagId1");
 
                     b.ToTable("InstructionTag");
                 });
@@ -433,10 +428,6 @@ namespace KekStarter.Migrations
 
             modelBuilder.Entity("KekStarter.Models.Project", b =>
                 {
-                    b.HasOne("KekStarter.Models.Tag")
-                        .WithMany("Projects")
-                        .HasForeignKey("TagId");
-
                     b.HasOne("KekStarter.Models.UserProfile")
                         .WithMany("Projects")
                         .HasForeignKey("UserProfileId");
@@ -456,9 +447,13 @@ namespace KekStarter.Migrations
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("KekStarter.Models.Tag", "Tag")
+                    b.HasOne("KekStarter.Models.ProjectTag", "Tag")
                         .WithMany()
                         .HasForeignKey("TagId");
+
+                    b.HasOne("KekStarter.Models.Tag")
+                        .WithMany("Projects")
+                        .HasForeignKey("TagId1");
                 });
 
             modelBuilder.Entity("KekStarter.Models.Target", b =>
