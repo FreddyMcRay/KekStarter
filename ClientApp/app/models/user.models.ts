@@ -21,6 +21,13 @@ export class UserProfile {
     achivments: UserAchivment[];
 }
 
+export class UserProfileMini {
+    id: number;
+    firstName: string;
+    secondName: string;
+    urlPhoto: string;
+}
+
 export class Achivment {
     id: number;
     name: string;

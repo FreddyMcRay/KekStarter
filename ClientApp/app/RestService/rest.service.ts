@@ -56,6 +56,24 @@ export class RestService {
     public getProjects(property: string, type: string, value: string, take: string, skip: string) {
         return this.http.get('/api/getProjects/' + take + '/' + skip + '/' + property + '/' + type + '/' + value);
     }
+
+    public getProjectById(is: string) {
+        return this.http.get('/api/getProjectById');
+    }
+
+    public userFollowProject(userId: string, projectId: string) {
+        return this.http.get('/api/followProject/' + userId + '/' + projectId);
+    }
+
+    public userUnFollowProject(userId: string, projectId: string) {
+        return this.http.get('/api/unFollowProject/' + userId + '/' + projectId);
+    }
+
+    public addRatingToProject(rating: string) {
+        this.http.get('/api/addRatingToProject/' + rating).subscribe(result => {
+            console.log('nice rating');
+        });
+    }
 }
 
 export class User {

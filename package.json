@@ -29,6 +29,7 @@
     "ng2-file-drop": "^1.1.0",
     "ng2-file-upload": "^1.2.1",
     "ng2-modal-dialog": "^1.0.1",
+    "ng2-rating": "0.0.7",
     "ng2-tag-input": "^1.4.1",
     "ngx-file-drop": "^1.0.10",
     "primeng": "^4.2.0-rc.1",

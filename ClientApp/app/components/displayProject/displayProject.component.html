@@ -1,0 +1,88 @@
+﻿<div class="container">
+    <div class="row title">
+        <div class="col-xs-8 project_head">
+            <div class="project_heading">{{project.title}}</div>
+        </div>
+        <div class="col-xs-4">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8 mainImage">
+            <div class="image">
+                <img src="{{project.urlImage}}">
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="stats">
+                <div class="stats-item">
+                    <strong class="stats-item_strong">{{project.sponsors}}</strong>
+                    <div class="stats-item_caption">спонсора</div>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-item_sum">
+                        <strong class="stats-item_strong stats-item_strong--sum">{{project.currentSum}}</strong>
+                        <span class="stats-item_currency">BYN</span>
+                        <sup class="stats-item_percentage">{{project.percent}} %</sup>
+                    </span>
+                    <div class="stats-item_caption">Необходимо {{project.requiredSum}} BYN</div>
+                </div>
+                <div class="stats-item">
+                    <strong class="stats-item_strong">{{project.leftOver}}</strong>
+                    <div class="stats-item_caption">Осталось дней</div>
+                </div>
+                <div class="stats-item">
+                    <p class="stats-item_info">
+                        Цель проекта — минимум {{project.requiredSum}} BYN
+                        <br>
+                        Срок — {{project.dateEnd}}
+                    </p>
+                    <a *ngIf="!project.followed" (click)="followProject()" class="btn  btn_subscribe" [ngClass]="{'disabled' : !guest}">Подписаться</a>
+                    <a *ngIf="project.followed" (click)="unFollowProject()" class="btn  btn_subscribe">Отписаться</a>
+                    <a href="#" class="btn  btn_support" [ngClass]="{'disabled' : !guest}">Поддержать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <rating [(ngModel)]="rating"></rating>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="short-description">
+                <p class="content">
+                    {{project.description}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="tabbable-panel">
+            <div class="tabbable-line">
+                <ul class="nav nav-tabs ">
+                    <li class="active">
+                        <a href="#content" data-toggle="tab">
+                            О проекте
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#comments" data-toggle="tab">
+                            Комментарии
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="content">
+
+                    </div>
+                    <div class="tab-pane" id="comments">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
