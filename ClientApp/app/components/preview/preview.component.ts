@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserProject } from '../../models/project.models';
 
 
@@ -7,7 +7,11 @@ import { UserProject } from '../../models/project.models';
     templateUrl: './preview.component.html',
     styleUrls: ['./preview.component.css']
 })
-export class PreviewComponent {
+export class PreviewComponent implements OnInit {
     @Input() project: UserProject;
+    progress: number;
 
+    ngOnInit() {
+        this.progress = this.project.progress;
+    }
 }
