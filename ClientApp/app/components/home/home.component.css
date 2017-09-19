@@ -1,3 +1,29 @@
+a.tag {
+    display: inline-block;
+    max-width: 100px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 .5em;
+    background-color: #e5e5e5;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    margin: 0 .3em .3em 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+a.tag:hover {
+    background-color: #534f60;
+    border: 1px solid #3498db;
+    color: #fff;
+}
+
 a.projectLink {
     text-decoration: none;
 }

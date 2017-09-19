@@ -13,6 +13,7 @@ import { Ng2FileDropModule } from 'ng2-file-drop';
 import { EditorModule } from 'primeng/primeng';
 import { TagInputModule } from 'ng2-tag-input';
 import { RatingModule } from "ng2-rating";
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
 import { DraftComponent } from './components/draft/draft.component';
 import { GeneralInfoComponent } from './components/draft/general-info-component/general-info.component';
@@ -70,6 +71,7 @@ import { UserService } from "./UserService/user.service";
         EditorModule,
         TagInputModule,
         RatingModule,
+        Angular2FontawesomeModule,
         RouterModule.forRoot([
             { path: 'project/:id', component: DisplayProjectComponent },
             { path: 'draft', component: DraftComponent },
