@@ -1,7 +1,7 @@
 ﻿<div class="container">
 
     <div class="col-sm-8" id="MainComment">
-        <div class="newComment" *ngIf="checkRole()">
+        <div class="newComment">
             <h3 class="pull-left">New Comment</h3>
 
             <fieldset>
@@ -28,7 +28,7 @@
             <button type="submit" (click)="addComment()" class="btn btn-normal pull-right">Add</button>
         </div>
 
-        <h3>{{comments.length}} Comments</h3>
+        <!--<h3>{{comments.length}} Comments</h3>
 
         <div *ngFor="let comment of comments; let i = index">
             <div class="media">
@@ -45,6 +45,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>

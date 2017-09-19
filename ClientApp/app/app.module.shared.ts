@@ -28,6 +28,7 @@ import { FinansalGoalComponent } from './components/financial-goal/finansal-goal
 import { DescriptionComponent } from './components/draft/description-component/description.component';
 import { ProjectsBlockComponent } from './components/projectsBlock/projectsBlock.component';
 import { DisplayProjectComponent } from './components/displayProject/displayProject.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
@@ -51,7 +52,8 @@ import { UserService } from "./UserService/user.service";
         FinansalGoalComponent,
         DescriptionComponent,
         ProjectsBlockComponent,
-        DisplayProjectComponent
+        DisplayProjectComponent,
+        CommentComponent
     ],
     imports: [
         CommonModule,
@@ -69,6 +71,7 @@ import { UserService } from "./UserService/user.service";
         TagInputModule,
         RatingModule,
         RouterModule.forRoot([
+            { path: 'project/:id', component: DisplayProjectComponent },
             { path: 'draft', component: DraftComponent },
             { path: 'projects', component: ProjectsBlockComponent },
             { path: 'projects/:property/:type/:value', component: ProjectsBlockComponent, data: { title: 'Projects' } },
@@ -76,7 +79,6 @@ import { UserService } from "./UserService/user.service";
             { path: 'projects/:property', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'projects/:property/:type', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'profile/:id', component: ProfileComponent },
-            { path: 'project/:id', component: DisplayProjectComponent },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent, data: { title: 'Home' } },
             { path: '**', redirectTo: 'home' }

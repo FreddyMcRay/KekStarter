@@ -16,55 +16,55 @@ import { UserProject } from '../../models/project.models';
 export class CommentComponent {
     comments: Comment[] = [];
     yourComment: Comment = new Comment;
-    @Input() userProfile: UserProfileMini;
-    @Input() projectId: number;
+   // @Input() userProfile: UserProfileMini;
+   // @Input() projectId: number;
     take: string = "10";
     skip: string;
     AuthUser: AuthUser;
 
-    public checkRole(): boolean {
-        this.AuthUser = this.userService.getCurrentUser();
-        return (this.AuthUser.role == 'Admin' || (this.AuthUser.id == this.userProfile.id && this.AuthUser.role != 'Guest')) ? true : false;
-    }
+    //public checkRole(): boolean {
+    //    this.AuthUser = this.userService.getCurrentUser();
+    //    return (this.AuthUser.role == 'Admin' || (this.AuthUser.id == this.userProfile.id && this.AuthUser.role != 'Guest')) ? true : false;
+    //}
 
-    public checkRoleForDeleteComment(i: number): boolean {
-        this.AuthUser = this.userService.getCurrentUser();
-        return (this.AuthUser.role == 'Admin' || this.AuthUser.id == this.comments[i].userProfile.id) ? true : false;
-    }
+    //public checkRoleForDeleteComment(i: number): boolean {
+    //    this.AuthUser = this.userService.getCurrentUser();
+    //    return (this.AuthUser.role == 'Admin' || this.AuthUser.id == this.comments[i].userProfile.id) ? true : false;
+    //}
 
     constructor(private service: RestService, private userService: UserService) {
 
     }
 
-    ngOnInit() {
-        this.getCommentsFromServer();   
-    }
+    //ngOnInit() {
+    //    this.getCommentsFromServer();   
+    //}
 
-    getCommentsFromServer() {
-        this.service.getCommentsByProject(this.take, this.comments.length.toString(), this.projectId.toString()).subscribe(result => {
-            console.log("GetCommentresult= " + result.json());
-            let arrComments = result.json();
-            if (arrComments != null)
-                this.comments = this.comments.concat(arrComments);
-        });
-    }
+    //getCommentsFromServer() {
+    //    this.service.getCommentsByProject(this.take, this.comments.length.toString(), this.projectId.toString()).subscribe(result => {
+    //        console.log("GetCommentresult= " + result.json());
+    //        let arrComments = result.json();
+    //        if (arrComments != null)
+    //            this.comments = this.comments.concat(arrComments);
+    //    });
+    //}
 
-    addComment() {
-        let comment = this.createComment();
-        this.comments.push(comment);
-        this.sendCommentOnServer(comment);
-    }
+    //addComment() {
+    //    let comment = this.createComment();
+    //    this.comments.push(comment);
+    //    this.sendCommentOnServer(comment);
+    //}
 
-    createComment(): Comment {
-        let comment = new Comment();
-        comment.dataCreated = Date.now();
-        comment.userProfile = this.userProfile;
-        comment.content = this.yourComment.content;
-        comment.project = new UserProject();
-        comment.project.id = this.projectId;
-        this.yourComment.content = "";
-        return comment;
-    }
+    //createComment(): Comment {
+    //    let comment = new Comment();
+    //    comment.dataCreated = Date.now();
+    //    comment.userProfile = this.userProfile;
+    //    comment.content = this.yourComment.content;
+    //    comment.project = new UserProject();
+    //    comment.project.id = this.projectId;
+    //    this.yourComment.content = "";
+    //    return comment;
+    //}
 
     sendCommentOnServer(comment: Comment) {
         console.log(comment);

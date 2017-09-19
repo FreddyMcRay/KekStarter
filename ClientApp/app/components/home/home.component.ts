@@ -15,9 +15,6 @@ export class HomeComponent implements OnInit {
     public tags: string[];
 
     constructor(private service: RestService) {
-    }
-
-    ngOnInit() {
         this.service.getProjectsHome().subscribe(result => {
             this.projects = result.json();
             this.success = this.projects.successfulProjects;
@@ -25,5 +22,9 @@ export class HomeComponent implements OnInit {
             this.tags = this.projects.tags;
             console.log(this.tags);
         });
+    }
+
+    ngOnInit() {
+       
     }
 }

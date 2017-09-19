@@ -39,6 +39,6 @@ export class Comment {
     id: number;
     dataCreated: number;
     userProfile: UserProfileMini;
-    project: UserProject;
+    projectId: number;
     content: string;
 }

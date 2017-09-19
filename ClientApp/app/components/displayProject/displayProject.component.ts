@@ -56,6 +56,6 @@ export class DisplayProjectComponent implements OnDestroy {
     }
 
     ngOnDestroy() {
-        this.service.addRatingToProject(this.rating.toString());
+        //this.service.addRatingToProject(this.rating.toString());
     }
 }

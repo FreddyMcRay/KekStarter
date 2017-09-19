@@ -10,6 +10,7 @@ import { AuthUser } from '../../models/user.models';
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
     providers: [RoleService, RestService],
 })
 export class AppComponent {
