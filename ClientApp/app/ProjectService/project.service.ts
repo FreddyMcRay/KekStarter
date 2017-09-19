@@ -19,9 +19,13 @@ export class ProjectService {
 
     getDraft() {
         let project = JSON.parse(localStorage.getItem('draft'));
-        let completionDate = JSON.parse(localStorage.getItem('completionDate'))
-        if (completionDate && project)
-            project.completionDate = new Date(completionDate);
+        if (!(typeof localStorage.getItem('completionDate') === 'undefined')) {
+            let completionDate = JSON.parse(localStorage.getItem('completionDate'))
+            if (completionDate && project)
+                project.completionDate = new Date(completionDate);
+        } else {
+            project.completionDate = new Date();
+        }
         return project ? project : new Project();
     }
 
