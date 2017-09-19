@@ -57,8 +57,8 @@ export class RestService {
         return this.http.get('/api/getProjects/' + take + '/' + skip + '/' + property + '/' + type + '/' + value);
     }
 
-    public getProjectById(is: string) {
-        return this.http.get('/api/getProjectById');
+    public getProjectById(id: string) {
+        return this.http.get('/api/getProjectById/' + id);
     }
 
     public getCommentsByProject(take: string, skip: string, projectId: string) {

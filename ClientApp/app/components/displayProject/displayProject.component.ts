@@ -23,9 +23,6 @@ export class DisplayProjectComponent implements OnDestroy {
             this.guest = false;
             this.user = JSON.parse(localStorage.getItem('currentUser') || "");
         }
-        this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
-        console.log(this.id);
-        console.log(this.user);
 
         this.project = {
             id: 2, urlImage: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
