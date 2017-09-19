@@ -6,8 +6,9 @@ export class UserProject {
     title: string;
     description: string;
     currentSum: string;
-    progress: string;
+    progress: number;
     leftOver: string;
+    requiredSum: number;
 }
 
 export class HomeParseObject {
@@ -29,6 +30,14 @@ export class UserProjectFull {
     percent: string;
     status: boolean;
     followed: boolean;
-  //  user: UserProfileMini;
-   // tags: string[];
+    user: UserProfileMini;
+    tags: string[];
+}
+
+export class Comment {
+    id: number;
+    dataCreated: number;
+    userProfile: UserProfileMini;
+    project: UserProject;
+    content: string;
 }

@@ -18,8 +18,8 @@ namespace KekStarter.Models
         [Required]
         public Project Project { get; set; }
         public int Position { get; set; }
-        public string Name { get; set; }
-        public string Price { get; set; }
+        public string title { get; set; }
+        public int cost { get; set; }
         public string Description { get; set; }
         public bool IsCompleted { get; set; }
         public ICollection<Block> Blocks { get; set; }
@@ -99,13 +99,16 @@ namespace KekStarter.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
-        [JsonIgnore]
-        public ICollection<Project> Projects { get; set; }
 
-        public Tag()
-        {
-            Projects = new List<Project>();
-        }
+        //public ICollection<Project> Projects { get; set; }
+
+        //public ICollection<ProjectTag> ProjectTags { get; set; }
+
+        //public Tag()
+        //{
+            //Projects = new List<Project>();
+           // ProjectTags = new List<ProjectTag>();
+        //}
     }
 
     public class ProjectTag
@@ -115,9 +118,10 @@ namespace KekStarter.Models
         public int Id { get; set; }
 
         public Tag Tag { get; set; }
-        [Required]
-        [JsonIgnore]
-        public Project Project { get; set; }
+
+        //public Project Project { get; set; }
+
+        public int ProjectId { get; set; }
     }
 
     public class Achivment

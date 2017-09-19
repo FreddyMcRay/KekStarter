@@ -16,15 +16,15 @@ export class RestService {
         this.user.login = username;
         this.user.password = password;
         console.log(this.user);
-       return this.http.post("api/Login", this.user)
-                .map((response: Response) => {
-                    let user = response.json();
-                    console.log("rest " + user);
-                    if (user && user.role != 'Guest') {
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-                    }
-                    return user;
-                });
+        return this.http.post("api/Login", this.user)
+            .map((response: Response) => {
+                let user = response.json();
+                console.log("rest " + user);
+                if (user && user.role != 'Guest') {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                }
+                return user;
+            });
     }
 
     public registration(username: string, email: string, name: string, password: string) {
@@ -34,7 +34,7 @@ export class RestService {
         this.ruser.name = username;
         console.log(this.ruser);
         return this.http.post("api/Register", this.ruser);
-            
+
     }
 
     public getUserById(id: string) {
@@ -59,6 +59,8 @@ export class RestService {
 
     public getProjectById(is: string) {
         return this.http.get('/api/getProjectById');
+    }
+
     public getCommentsByProject(take: string, skip: string, projectId: string) {
         return this.http.get('api/getCommentsByProjects' + '/' + projectId + '/' + skip + '/' + take);
     }
@@ -74,6 +76,8 @@ export class RestService {
     public addRatingToProject(rating: string) {
         this.http.get('/api/addRatingToProject/' + rating).subscribe(result => {
             console.log('nice rating');
+        })
+    }
     public sendCommentsOnServer(commentary: any) {
         this.http.post('api/addCommentInProject/', commentary).subscribe(result => {
             console.log("hey");
@@ -83,8 +87,6 @@ export class RestService {
     public removeCommentInProject(commentary: any) {
         return this.http.post('api/removeCommentInProject/', commentary).subscribe(result => {
             console.log("commend is delete");
-        });
-    }
         });
     }
 }

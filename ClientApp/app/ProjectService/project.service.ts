@@ -14,15 +14,20 @@ export class ProjectService {
 
     saveDraft(project: Project) {
         localStorage.setItem('draft', JSON.stringify(project));
+        localStorage.setItem('completionDate', JSON.stringify(project.completionDate));
     }
 
-    //getDraft() {
-    //    let project = JSON.parse(localStorage.getItem('draft') || '');
-    //    return project ? project : new Project();
-    //}
+    getDraft() {
+        let project = JSON.parse(localStorage.getItem('draft'));
+        let completionDate = JSON.parse(localStorage.getItem('completionDate'))
+        if (completionDate && project)
+            project.completionDate = new Date(completionDate);
+        return project ? project : new Project();
+    }
 
     removeDraft() {
         if (localStorage.getItem('draft')) {
+            localStorage.getItem('completionDate');
             localStorage.removeItem('draft');
         }
     }

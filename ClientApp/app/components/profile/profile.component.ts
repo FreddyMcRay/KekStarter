@@ -26,7 +26,7 @@ export class ProfileComponent implements OnDestroy {
 
     project: UserProject = {
         id: 1, image: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
-        title: 'Sasay project', description: 'This is sasay project. So, you need to sasay', currentSum: '200', leftOver: '40', progress: '70'
+        title: 'Sasay project', description: 'This is sasay project. So, you need to sasay', currentSum: '200', requiredSum: 500, leftOver: '40', progress: 70
     };
 
     constructor(private http: Http, private activateRoute: ActivatedRoute, private service: RestService) {
@@ -56,6 +56,6 @@ export class ProfileComponent implements OnDestroy {
 
     ngOnDestroy() {
         console.log(this.user);
-        this.service.editProfile({ id: this.user.id, UrlPhoto: this.user.UrlPhoto });
+        this.service.editProfile(this.user);
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20170918201050_UpdateType")]
+    partial class UpdateType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -455,7 +456,7 @@ namespace KekStarter.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("KekStarter.Models.Tag", "Tag")
-                        .WithMany("ProjectTags")
+                        .WithMany()
                         .HasForeignKey("TagId");
                 });
 

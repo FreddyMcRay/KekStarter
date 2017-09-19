@@ -12,7 +12,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2FileDropModule } from 'ng2-file-drop';
 import { EditorModule } from 'primeng/primeng';
 import { TagInputModule } from 'ng2-tag-input';
-import { RatingModule } from "ng2-rating";
 
 import { DraftComponent } from './components/draft/draft.component';
 import { GeneralInfoComponent } from './components/draft/general-info-component/general-info.component';
@@ -67,7 +66,6 @@ import { UserService } from "./UserService/user.service";
         Ng2FileDropModule,
         EditorModule,
         TagInputModule,
-        RatingModule,
         RouterModule.forRoot([
             { path: 'draft', component: DraftComponent },
             { path: 'projects', component: ProjectsBlockComponent },

@@ -18,7 +18,8 @@ export class DraftComponent {
     tags: any[] = [];
 
     constructor(private projectService: ProjectService, private userService: UserService) {
-        this.project = new Project();
+        this.project = projectService.getDraft();
+        console.log(this.project)
     }
 
     deleteGoal(goal: FinansalGoal) {

@@ -10,6 +10,7 @@ using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using KekStarter.Controllers;
 
 namespace KekStarter.Controllers
 {
@@ -137,6 +138,8 @@ namespace KekStarter.Controllers
         [HttpGet("[action]/{id}")]
         public IActionResult getUserById(int id)
         {
+            var projectController = new ProjectController(_db);
+            projectController.RefreshDate();
             var usProfile = _db.UserProfile.FirstOrDefault(p => p.Id == id);
             List<Project> projects = new List<Project>();
             projects = _db.Project.ToList();

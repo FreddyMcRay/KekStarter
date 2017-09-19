@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using KekStarter.ViewModels;
 using KekStarter.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KekStarter.Controllers
 {
@@ -50,13 +51,11 @@ namespace KekStarter.Controllers
             proj.DateCreated = localDate.ToString();
             proj.DateEnd = project.completionDate;
             proj.currentSum = 0;
-            proj.requiredSum = project.totalCost;
             proj.image = project.image;
             proj.CreateUserId = project.userId;
-            //proj.Targets = project.finansalGoals;
             proj.Sponsors = 0;
-            //project.progress = (project.currentSum / project.requiredSum) * 100;
-            //project.leftOver = Convert.ToInt32(date.Subtract(Convert.ToDateTime(project.DateCreated)));
+            elapsed = Convert.ToDateTime(proj.DateEnd).Subtract(Convert.ToDateTime(proj.DateCreated));
+            proj.leftOver = elapsed.Days;
 
             var tag = new Tag();
             for (int i = 0; i <= project.tags.Count - 1; i++)
@@ -66,24 +65,60 @@ namespace KekStarter.Controllers
                 {
                     var bufTag = new Tag();
                     bufTag.Name = project.tags[i];
-                    bufTag.Projects.Add(proj);
+                    //bufTag.Projects.Add(proj);
                     _db.Tag.Add(bufTag);
+                    tag = bufTag;
                 }
                 else
                 {
-                    tag.Projects.Add(proj);
+                    //tag.Projects.Add(proj);
                     _db.Tag.Update(tag);
                 }
+                var bufProjectTag = new ProjectTag
+                {
+                    Tag = tag,
+                    //Project = proj,
+                    ProjectId = proj.Id
+                };
+                proj.Tags.Add(bufProjectTag);
+                _db.InstructionTag.Add(bufProjectTag);
             }
-            var bufProjectTag = new ProjectTag
-            {
-                Tag = tag,
-                Project = proj,
-            };
-            proj.Tags.Add(bufProjectTag);
-            _db.InstructionTag.Add(bufProjectTag);
 
+            
+            var target = new Target();
+            foreach(var goals in project.finansalGoals)
+            {
+                target.cost = goals.cost;
+                target.title = goals.title;
+                target.Project = proj;
+                proj.Targets.Add(target);
+                proj.requiredSum += target.cost;
+                _db.Step.Add(target);
+            }
+
+            if (proj.currentSum != 0)
+            {
+                proj.progress = (proj.currentSum / proj.requiredSum) * 100;
+            }
+            else
+            {
+                proj.currentSum = 0;
+                proj.progress = 0;
+            }
             return proj;
+        }
+
+        public void RefreshDate()
+        {
+            List<Project> projects = new List<Project>();
+            projects = _db.Project.ToList();
+            foreach (var project in projects)
+            {
+                elapsed = Convert.ToDateTime(project.DateEnd).Subtract(date);
+                project.leftOver = elapsed.Days;
+                _db.Project.Update(project);
+            }
+            _db.SaveChanges();
         }
 
         [HttpPost("[action]")]
@@ -112,6 +147,7 @@ namespace KekStarter.Controllers
         [HttpGet("[action]")]
         public IActionResult GetProjects()
         {
+            RefreshDate();
             List<Project> projects = new List<Project>();
             projects = _db.Project.ToList();
             var tags = new List<Tag>();
@@ -142,7 +178,7 @@ namespace KekStarter.Controllers
             foreach (var project in projects)
             {
                 elapsed = date.Subtract(Convert.ToDateTime(project.DateCreated));
-                if (elapsed.Days < 3 && i < 4)
+                if (elapsed.Days < 1 && i < 4)
                 {
                     proj.Add(project);
                     i++;
@@ -165,6 +201,22 @@ namespace KekStarter.Controllers
                 }
             }
             return proj;
+        }
+
+        [HttpGet("getProjects/{take}/{skip}/{property}/tag/{value}")]
+        public List<Project> GetProjectsByTag(int take, int skip, string property, string type, string value)
+        {
+            var tag = _db.Tag.FirstOrDefault(p => p.Name == value);
+            var tagProjects = _db.InstructionTag.ToList();
+            var projects = _db.Project.ToList();
+
+            var arr = tagProjects.FindAll(p => p.Tag == tag).ToList();
+            var responseProjects = new List<Project>();
+            foreach (var item in arr)
+            {
+                responseProjects.Add(projects.Find(p => p.Id == item.ProjectId));
+            }
+            return responseProjects.Skip(skip).Take(take).ToList();
         }
     }
 }

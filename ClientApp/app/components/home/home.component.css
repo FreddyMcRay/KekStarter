@@ -4,13 +4,13 @@
 
 .row.backgroundPlate {
     box-sizing: border-box;
-    height: 650px;
+    height: 700px;
     margin-top: -3%;
     background-color: #534f60;
     background-image: url("../../../../images/homeBG.png");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 0 -110px;
+    background-position: 0 -70px;
     z-index: -1;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
