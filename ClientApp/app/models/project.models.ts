@@ -25,13 +25,14 @@ export class UserProjectFull {
     currentSum: number;
     requiredSum: number;
     description: string;
+    content: string;
     leftOver: number;
     dateEnd: string;
     percent: string;
     status: boolean;
     followed: boolean;
-    user: UserProfileMini;
-    tags: string[];
+   // user: UserProfileMini;
+  //  tags: string[];
 }
 
 export class Comment {

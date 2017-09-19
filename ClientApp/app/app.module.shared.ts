@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2FileDropModule } from 'ng2-file-drop';
 import { EditorModule } from 'primeng/primeng';
 import { TagInputModule } from 'ng2-tag-input';
+import { RatingModule } from "ng2-rating";
 
 import { DraftComponent } from './components/draft/draft.component';
 import { GeneralInfoComponent } from './components/draft/general-info-component/general-info.component';
@@ -66,6 +67,7 @@ import { UserService } from "./UserService/user.service";
         Ng2FileDropModule,
         EditorModule,
         TagInputModule,
+        RatingModule,
         RouterModule.forRoot([
             { path: 'draft', component: DraftComponent },
             { path: 'projects', component: ProjectsBlockComponent },
@@ -74,15 +76,10 @@ import { UserService } from "./UserService/user.service";
             { path: 'projects/:property', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'projects/:property/:type', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'profile/:id', component: ProfileComponent },
+            { path: 'project/:id', component: DisplayProjectComponent },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent, data: { title: 'Home' } },
-            { path: '**', redirectTo: 'home' },
-            { path: 'projects', component: ProjectsBlockComponent },
-            { path: 'projects/:property/:type/:value', component: ProjectsBlockComponent, data: { title: 'Projects' } },
-            { path: 'projects/:type/:value', component: ProjectsBlockComponent, data: { title: 'Projects' } },
-            { path: 'projects/:property', component: ProjectsBlockComponent, data: { title: 'Projects' } },
-            { path: 'projects/:property/:type', component: ProjectsBlockComponent, data: { title: 'Projects' } },
-            { path: 'project', component: DisplayProjectComponent, data: {title: 'Project'} }
+            { path: '**', redirectTo: 'home' }
         ])
     ],
     providers: [RestService, RoleService, AlertService, ProjectService, UserService]

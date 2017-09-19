@@ -45,14 +45,9 @@
             </div>
         </div>
     </div>
-    
     <div class="row">
-        <div class="col-xs-8">
-            <div class="short-description">
-                <p class="content">
-                    {{project.description}}
-                </p>
-            </div>
+        <div class="col-xs-12">
+            <rating [(ngModel)]="rating"></rating>
         </div>
     </div>
     <div class="row">
@@ -72,7 +67,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="content">
-
+                        {{project.content}}
                     </div>
                     <div class="tab-pane" id="comments">
 

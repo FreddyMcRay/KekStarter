@@ -23,11 +23,15 @@ export class DisplayProjectComponent implements OnDestroy {
             this.guest = false;
             this.user = JSON.parse(localStorage.getItem('currentUser') || "");
         }
-        //this.project = {
-        //    id: 2, urlImage: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
-        //    title: 'looool', sponsors: 123, currentSum: 200, requiredSum: 300, description: 'lkjasnbd.sadm', leftOver: 15,
-        //    dateEnd: '25.09.2017', percent: '66,6', status: true, followed: true,
-        //}
+        this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
+        console.log(this.id);
+        console.log(this.user);
+
+        this.project = {
+            id: 2, urlImage: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
+            title: 'looool', sponsors: 123, currentSum: 200, requiredSum: 300, description: 'lkjasnbd.sadm', content: 'kajsbdv;aklsd', leftOver: 15,
+            dateEnd: '25.09.2017', percent: '66,6', status: true, followed: true,
+        }
 
         //this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
         //console.log(this.id);
