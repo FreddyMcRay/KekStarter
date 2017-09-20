@@ -1,0 +1,20 @@
+﻿.container {
+    font-family: 'Helvetica Neue', 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.cc-img {
+    margin: 0 auto;
+}
+
+.btn-save {
+    background-color: #9E9E9E;
+    color: #ffffff;
+    height: 40px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 25px;
+}
+
+.panel-heading {
+    background: #dddddd;
+}

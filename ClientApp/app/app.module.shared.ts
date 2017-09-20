@@ -30,6 +30,7 @@ import { DescriptionComponent } from './components/draft/description-component/d
 import { ProjectsBlockComponent } from './components/projectsBlock/projectsBlock.component';
 import { DisplayProjectComponent } from './components/displayProject/displayProject.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { PayWayComponent } from './components/draft/payway/payway.component';
 
 import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
@@ -54,7 +55,8 @@ import { UserService } from "./UserService/user.service";
         DescriptionComponent,
         ProjectsBlockComponent,
         DisplayProjectComponent,
-        CommentComponent
+        CommentComponent,
+        PayWayComponent
     ],
     imports: [
         CommonModule,

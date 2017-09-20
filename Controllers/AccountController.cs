@@ -144,7 +144,7 @@ namespace KekStarter.Controllers
             List<Project> projects = new List<Project>();
             projects = _db.Project.ToList();
             var proj = projects.FindAll(z => z.CreateUserId == id);
-            var userInfo = new getUser { FirstName = usProfile.FirstName, SecondName = usProfile.SecondName, LastLogInDate = usProfile.LastLogInDate, RegistrationDate = usProfile.RegistrationDate, UrlPhoto = usProfile.UrlPhoto, projects = proj };
+            var userInfo = new getUser {Id = usProfile.Id, FirstName = usProfile.FirstName, SecondName = usProfile.SecondName, LastLogInDate = usProfile.LastLogInDate, RegistrationDate = usProfile.RegistrationDate, urlPhoto = usProfile.UrlPhoto, projects = proj };
             return new ObjectResult(userInfo);
         }
 
