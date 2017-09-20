@@ -15,7 +15,7 @@
                                 <div class="form-group">
                                     <label>CARD NUMBER</label>
                                     <div class="input-group">
-                                        <input type="tel" class="form-control" placeholder="Valid Card Number" [(ngModel)]="project.payment.cardNumber"/>
+                                        <input type="tel" class="form-control" placeholder="Valid Card Number" [(ngModel)]="project.payment.cardNumber" name="card"/>
                                         <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
                                     </div>
                                 </div>
@@ -25,13 +25,13 @@
                             <div class="col-xs-7 col-md-7">
                                 <div class="form-group">
                                     <label><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
-                                    <input type="tel" class="form-control" placeholder="MM / YY" [(ngModel)]="project.payment.expirationDate"/>
+                                    <input type="tel" class="form-control" placeholder="MM / YY" [(ngModel)]="project.payment.expirationDate" name="date"/>
                                 </div>
                             </div>
                             <div class="col-xs-5 col-md-5 pull-right">
                                 <div class="form-group">
                                     <label>CV CODE</label>
-                                    <input type="tel" class="form-control" placeholder="CVC" [(ngModel)]="project.payment.cvCode"/>
+                                    <input type="tel" class="form-control" placeholder="CVC" [(ngModel)]="project.payment.cvCode" name="code"/>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>CARD OWNER</label>
-                                    <input type="text" class="form-control" placeholder="Card Owner Names" [(ngModel)]="project.payment.owner"/>
+                                    <input type="text" class="form-control" placeholder="Card Owner Names" [(ngModel)]="project.payment.owner" name="owner"/>
                                 </div>
                             </div>
                         </div>
