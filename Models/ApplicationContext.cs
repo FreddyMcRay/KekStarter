@@ -16,6 +16,7 @@ namespace KekStarter.Models
         public DbSet<Block> Block { get; set; }
         public DbSet<ProjectTag> InstructionTag { get; set; }
         public DbSet<Commentary> Commentary { get; set; }
+        public DbSet<Rating> Rating { get; set; }
         public DbSet<Achivment> Achivment { get; set; }
         public DbSet<AchivmentUser> AchivmentUser { get; set; }
         public DbSet<Tag> Tag { get; set; }

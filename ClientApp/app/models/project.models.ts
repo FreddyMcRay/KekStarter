@@ -19,7 +19,7 @@ export class HomeParseObject {
 
 export class UserProjectFull {
     id: number;
-    urlImage: string;
+    image: string;
     title: string;
     sponsors: number;
     currentSum: number;
@@ -28,11 +28,13 @@ export class UserProjectFull {
     content: string;
     leftOver: number;
     dateEnd: string;
-    percent: string;
+    progress: string;
     status: boolean;
-    followed: boolean;
-   // user: UserProfileMini;
-  //  tags: string[];
+    rating: number;
+    userRating: number;
+    followed: boolean = false;
+    user: UserProfileMini;
+    tags: string[];
 }
 
 export class Comment {

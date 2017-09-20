@@ -11,9 +11,10 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20170920154157_UpdateBDKekRefresh")]
+    partial class UpdateBDKekRefresh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,8 +118,6 @@ namespace KekStarter.Migrations
 
                     b.Property<int?>("UserProfileId");
 
-                    b.Property<int>("UserRating");
-
                     b.Property<string>("content");
 
                     b.Property<int>("currentSum");
@@ -174,22 +173,6 @@ namespace KekStarter.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("InstructionTag");
-                });
-
-            modelBuilder.Entity("KekStarter.Models.Rating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ProjectId");
-
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("Value");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Rating");
                 });
 
             modelBuilder.Entity("KekStarter.Models.Tag", b =>

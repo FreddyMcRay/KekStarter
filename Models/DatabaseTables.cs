@@ -61,6 +61,9 @@ namespace KekStarter.Models
         public int leftOver { get; set; }
         public int progress { get; set; }
         public string image { get; set; }
+        public string content { get; set; }
+        public bool followed { get; set; }
+        public int UserRating { get; set; }
 
         [NotMapped]
         public ICollection<UserProfile> UserProfiles { get; set; }
@@ -93,22 +96,23 @@ namespace KekStarter.Models
 
     }
 
+    public class Rating
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public int ProjectId { get; set; }
+        public int UserId { get; set; }
+        public int Value { get; set; }
+
+    }
+
     public class Tag
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
-
-        //public ICollection<Project> Projects { get; set; }
-
-        //public ICollection<ProjectTag> ProjectTags { get; set; }
-
-        //public Tag()
-        //{
-            //Projects = new List<Project>();
-           // ProjectTags = new List<ProjectTag>();
-        //}
     }
 
     public class ProjectTag
@@ -118,9 +122,7 @@ namespace KekStarter.Models
         public int Id { get; set; }
 
         public Tag Tag { get; set; }
-
-        //public Project Project { get; set; }
-
+        
         public int ProjectId { get; set; }
     }
 

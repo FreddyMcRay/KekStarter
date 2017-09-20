@@ -49,13 +49,14 @@ namespace KekStarter.Controllers
             proj.Title = project.title;
             proj.Description = project.description;
             proj.DateCreated = localDate.ToString();
-            proj.DateEnd = project.completionDate;
+            proj.DateEnd = project.completionDate.Split("T").First();
             proj.currentSum = 0;
             proj.image = project.image;
             proj.CreateUserId = project.userId;
             proj.Sponsors = 0;
             elapsed = Convert.ToDateTime(proj.DateEnd).Subtract(Convert.ToDateTime(proj.DateCreated));
             proj.leftOver = elapsed.Days;
+            proj.content = project.content;
 
             var tag = new Tag();
             for (int i = 0; i <= project.tags.Count - 1; i++)
@@ -217,6 +218,85 @@ namespace KekStarter.Controllers
                 responseProjects.Add(projects.Find(p => p.Id == item.ProjectId));
             }
             return responseProjects.Skip(skip).Take(take).ToList();
+        }
+
+        [HttpGet("[action]/{id}/{userId}")]
+        public IActionResult getProjectById(int id, int userId)
+        {
+            var projectController = new ProjectController(_db);
+            var rating = _db.Rating.FirstOrDefault(p => (p.UserId == userId) && (p.ProjectId == id));
+            projectController.RefreshDate();
+            var project = _db.Project.FirstOrDefault(p => p.Id == id);
+            foreach (var bufUser in project.UserProfiles)
+            {
+                if (bufUser.Id == userId)
+                {
+                    project.followed = true;
+                }
+                else
+                {
+                    project.followed = false;
+                }
+            }
+            if (rating == null)
+            {
+                project.UserRating = 0;
+            }
+            else
+            {
+                project.UserRating = rating.Value;
+            }
+            return new ObjectResult(project);
+        }
+
+        [HttpPost("[action]")]
+        [AllowAnonymous]
+        public IActionResult AddCommentary([FromBody] ViewModels.Commentary model)
+        {
+            var project = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
+            var commentary = new Models.Commentary();
+            commentary.Content = model.Content;
+            commentary.DateCreated = model.DateCreated;
+            commentary.Project = project;
+            commentary.UserProfile = _db.UserProfile.FirstOrDefault(p => p.Id == model.UserPofileId);
+            _db.Commentary.Add(commentary);
+            project.ProjectComments.Add(commentary);
+            _db.Project.Update(project);
+            _db.SaveChanges();
+            return BadRequest("Ok");
+        }
+
+        [HttpPost("[action]")]
+        [AllowAnonymous]
+        public IActionResult AddRating([FromBody] ViewModels.Rating model)
+        {
+            var project = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
+            if (model.Value > 5 && model.Value < 0)
+            {
+                return BadRequest("Pashel nahuy pidor, naebat on reshil");
+            }
+            var rating = _db.Rating.FirstOrDefault(p => (p.ProjectId == model.ProjectId) && (p.UserId == model.UserPofileId));
+            if (rating == null)
+            {
+                rating = new Models.Rating
+                {
+                    ProjectId = model.ProjectId,
+                    UserId = model.UserPofileId,
+                    Value = model.Value
+                };
+                project.Rating += model.Value;
+                _db.Rating.Add(rating);
+            }
+            else
+            {
+                project.Rating -= rating.Value;
+                project.Rating += model.Value;
+                rating.Value = model.Value;
+                _db.Rating.Update(rating);
+            }
+            _db.Project.Update(project);
+            _db.SaveChanges();
+            return Ok("Ok");
         }
     }
 }

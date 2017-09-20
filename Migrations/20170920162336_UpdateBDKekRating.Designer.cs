@@ -11,9 +11,10 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20170920162336_UpdateBDKekRating")]
+    partial class UpdateBDKekRating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,8 +117,6 @@ namespace KekStarter.Migrations
                     b.Property<string>("Title");
 
                     b.Property<int?>("UserProfileId");
-
-                    b.Property<int>("UserRating");
 
                     b.Property<string>("content");
 

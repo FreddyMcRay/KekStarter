@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { AuthUser } from '../../models/user.models';
 import { UserProjectFull } from '../../models/project.models';
+import { UserProfileMini } from '../../models/user.models';
 
 @Component({
     selector: 'displayProject',
@@ -13,28 +14,27 @@ import { UserProjectFull } from '../../models/project.models';
 export class DisplayProjectComponent implements OnDestroy {
     id: number;
     private subscription: Subscription;
-    user: AuthUser;
-    project: UserProjectFull;
+    user: AuthUser = new AuthUser();
+    project: UserProjectFull = new UserProjectFull();
     rating: number;
     guest: boolean = true;
+    creater: UserProfileMini;
+    tags: string[];
 
     constructor(private service: RestService, private activateRoute: ActivatedRoute) {
-        if (!(typeof localStorage === "undefined") && localStorage.getItem('currentUser')) {
+        if (!(typeof localStorage === "undefined")) {
             this.guest = false;
-            this.user = JSON.parse(localStorage.getItem('currentUser') || "");
+            this.user = JSON.parse(localStorage.getItem('currentUser'));
         }
-
-        this.project = {
-            id: 2, urlImage: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
-            title: 'looool', sponsors: 123, currentSum: 200, requiredSum: 300, description: 'lkjasnbd.sadm', content: 'kajsbdv;aklsd', leftOver: 15,
-            dateEnd: '25.09.2017', percent: '66,6', status: true, followed: true,
-        }
-
-        //this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
-        //console.log(this.id);
-        //this.service.getProjectById(this.id.toString()).subscribe(result => {
-        //    this.project = result.json();
-        //})
+        console.log(this.user);
+        this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
+        console.log(this.id);
+        this.service.getProjectById(this.id.toString(), this.user.id.toString()).subscribe(result => {
+            this.project = result.json();
+            this.rating = this.project.userRating;
+            this.tags = this.project.tags;
+            this.creater = this.project.user;
+        })
     }
 
 
@@ -53,6 +53,6 @@ export class DisplayProjectComponent implements OnDestroy {
     }
 
     ngOnDestroy() {
-        //this.service.addRatingToProject(this.rating.toString());
+        this.service.addRatingToProject({ ProjectId: this.project.id.toString(), UserPofileId: this.user.id.toString(), Value: this.rating.toString() });
     }
 }

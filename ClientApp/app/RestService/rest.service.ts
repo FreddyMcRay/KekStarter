@@ -57,8 +57,8 @@ export class RestService {
         return this.http.get('/api/getProjects/' + take + '/' + skip + '/' + property + '/' + type + '/' + value);
     }
 
-    public getProjectById(id: string) {
-        return this.http.get('/api/getProjectById/' + id);
+    public getProjectById(id: string, userId: string) {
+        return this.http.get('/api/getProjectById/' + id + '/' + userId);
     }
 
     public getCommentsByProject(take: string, skip: string, projectId: string) {
@@ -73,8 +73,8 @@ export class RestService {
         return this.http.get('/api/unFollowProject/' + userId + '/' + projectId);
     }
 
-    public addRatingToProject(rating: string) {
-        this.http.get('/api/addRatingToProject/' + rating).subscribe(result => {
+    public addRatingToProject(rating: any) {
+        this.http.post('/api/AddRating/', rating).subscribe(result => {
             console.log('nice rating');
         })
     }
