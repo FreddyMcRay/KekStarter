@@ -17,6 +17,14 @@ export class Project {
     image = 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg';
     finansalGoals: FinansalGoal[] = [];
     totalCost = 0;
+    payment: Payment;
     userId: number;
     tags: string[] = []
+}
+
+export class Payment {
+    cardNumber: string;
+    expirationDate: string;
+    cvCode: string;
+    owner: string;
 }
