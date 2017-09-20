@@ -18,7 +18,6 @@ export class ProfileComponent implements OnDestroy {
     public user: UserProfile;
     public achivments: UserAchivment[];
     public projects: UserProject[];
-    public imageUrl: string = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/anonim_user_vdzhx0.jpg";
     private subscription: Subscription;
     public uploader: CloudinaryUploader = new CloudinaryUploader(
         new CloudinaryOptions({ cloudName: 'dbsjugefb', uploadPreset: 'bkydfdx3' })
@@ -34,8 +33,8 @@ export class ProfileComponent implements OnDestroy {
         console.log(this.id);
         this.service.getUserById(this.id.toString()).subscribe(result => {
             this.user = result.json();
-            if (this.user.UrlPhoto == null)
-                this.user.UrlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/anonim_user_vdzhx0.jpg";
+            if (this.user.urlPhoto == null)
+                this.user.urlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/anonim_user_vdzhx0.jpg";
             console.log(this.user);
             console.log(this.user.achivments)
             console.log("GetUserById");
@@ -45,7 +44,7 @@ export class ProfileComponent implements OnDestroy {
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
             let res: any = JSON.parse(response);
             console.log("suuuula");
-            this.user.UrlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/" + res.public_id + ".jpg";
+            this.user.urlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/" + res.public_id + ".jpg";
             return { item, response, status, headers };
         };
     }
@@ -56,6 +55,6 @@ export class ProfileComponent implements OnDestroy {
 
     ngOnDestroy() {
         console.log(this.user);
-        this.service.editProfile(this.user);
+        this.service.editProfile({ id: this.user.id.toString(), UrlPhoto: this.user.urlPhoto });
     }
 }

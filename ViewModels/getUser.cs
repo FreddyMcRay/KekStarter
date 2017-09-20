@@ -8,11 +8,13 @@ namespace KekStarter.ViewModels
 {
     public class getUser
     {
+        public int Id { get; set; }
+
         public string SecondName { get; set; }
 
         public string FirstName { get; set; }
 
-        public string UrlPhoto { get; set; }
+        public string urlPhoto { get; set; }
 
         public string RegistrationDate { get; set; }
 
