@@ -15,12 +15,14 @@ import { UserProject } from '../../models/project.models';
 
 export class CommentComponent {
     comments: Comment[] = [];
-    yourComment: Comment = new Comment;
+    yourComment: Comment = new Comment();
    // @Input() userProfile: UserProfileMini;
    // @Input() projectId: number;
     take: string = "10";
     skip: string;
     AuthUser: AuthUser;
+
+    
 
     //public checkRole(): boolean {
     //    this.AuthUser = this.userService.getCurrentUser();
@@ -33,6 +35,10 @@ export class CommentComponent {
     //}
 
     constructor(private service: RestService, private userService: UserService) {
+        this.comments = [{
+            id: 1, dataCreated: '21.09.2017', userProfile: { id: 1, firstName: 'Andrey', secondName: 'Repkovcki', urlPhoto: 'http://res.cloudinary.com/dbsjugefb/image/upload/v1505769861/syqcdp8w55xgzvpyx0pm.jpg' },
+            projectId: 2002, content: 'lknwlkfklmn lkmneklrv w klmnlkevlkn klwnerkb k oik'
+        }]
 
     }
 
@@ -49,20 +55,20 @@ export class CommentComponent {
     //    });
     //}
 
-    //addComment() {
-    //    let comment = this.createComment();
+    //addcomment() {
+    //    let comment = this.createcomment();
     //    this.comments.push(comment);
-    //    this.sendCommentOnServer(comment);
+    //    this.sendcommentonserver(comment);
     //}
 
-    //createComment(): Comment {
+    //createcomment(): Comment {
     //    let comment = new Comment();
-    //    comment.dataCreated = Date.now();
-    //    comment.userProfile = this.userProfile;
-    //    comment.content = this.yourComment.content;
-    //    comment.project = new UserProject();
-    //    comment.project.id = this.projectId;
-    //    this.yourComment.content = "";
+    //    comment.datacreated = date.now();
+    //    comment.userprofile = this.userprofile;
+    //    comment.content = this.yourcomment.content;
+    //    comment.project = new userproject();
+    //    comment.project.id = this.projectid;
+    //    this.yourcomment.content = "";
     //    return comment;
     //}
 

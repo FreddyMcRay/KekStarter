@@ -39,7 +39,7 @@ export class UserProjectFull {
 
 export class Comment {
     id: number;
-    dataCreated: number;
+    dataCreated: string;
     userProfile: UserProfileMini;
     projectId: number;
     content: string;
