@@ -5,7 +5,8 @@ import { CloudinaryOptions, CloudinaryUploader, CloudinaryImageComponent } from 
 import { Subscription } from 'rxjs/Subscription';
 import { RestService } from '../../RestService/rest.service';
 import { UserProject } from '../../models/project.models';
-import { UserProfile, UserAchivment } from '../../models/user.models';
+import { UserProfile, UserAchivment, AuthUser } from '../../models/user.models';
+import { UserService } from '../../UserService/user.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { UserProfile, UserAchivment } from '../../models/user.models';
 })
 export class ProfileComponent implements OnDestroy {
     private id: number;
+    public currentUser: AuthUser;
     public user: UserProfile = new UserProfile();
     public achivments: UserAchivment[];
     public projects: UserProject[];
@@ -28,7 +30,8 @@ export class ProfileComponent implements OnDestroy {
         title: 'Sasay project', description: 'This is sasay project. So, you need to sasay', currentSum: '200', requiredSum: 500, leftOver: '40', progress: 70
     };
 
-    constructor(private http: Http, private activateRoute: ActivatedRoute, private service: RestService) {
+    constructor(private http: Http, private activateRoute: ActivatedRoute, private service: RestService, private userService: UserService) {
+        this.currentUser = this.userService.getCurrentUser();
         this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
         this.service.getUserById(this.id.toString()).subscribe(result => {
@@ -47,6 +50,10 @@ export class ProfileComponent implements OnDestroy {
             this.user.urlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/" + res.public_id + ".jpg";
             return { item, response, status, headers };
         };
+    }
+
+    public checkRole() {
+        return (this.currentUser.role == 'Admin' || this.currentUser.id == this.user.id) ? true : false;
     }
 
     onChange(event: any) {
