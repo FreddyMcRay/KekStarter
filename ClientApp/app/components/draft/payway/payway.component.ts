@@ -9,5 +9,9 @@ import { Project } from '../../../models/draft.models';
 })
 export class PayWayComponent {
     @Input() project: Project;
+    checking: boolean = false;
 
+    public checkCard() {
+        this.checking = true;
+    }
 }
