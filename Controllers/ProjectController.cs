@@ -285,24 +285,7 @@ namespace KekStarter.Controllers
             display.finansalGoal = goals;
             return new ObjectResult(display);
         }
-
-        [HttpPost("[action]")]
-        [AllowAnonymous]
-        public IActionResult AddCommentary([FromBody] ViewModels.Commentary model)
-        {
-            var project = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
-            var commentary = new Models.Commentary();
-            commentary.Content = model.Content;
-            commentary.DateCreated = model.DateCreated;
-            commentary.Project = project;
-            commentary.UserProfile = _db.UserProfile.FirstOrDefault(p => p.Id == model.UserPofileId);
-            _db.Commentary.Add(commentary);
-            project.ProjectComments.Add(commentary);
-            _db.Project.Update(project);
-            _db.SaveChanges();
-            return BadRequest("Ok");
-        }
-
+        
         [HttpPost("[action]")]
         [AllowAnonymous]
         public IActionResult AddRating([FromBody] ViewModels.Rating model)
@@ -334,6 +317,87 @@ namespace KekStarter.Controllers
             _db.Project.Update(project);
             _db.SaveChanges();
             return Ok("Ok");
+        }
+
+        //Commentary
+
+        [HttpPost("[action]")]
+        [AllowAnonymous]
+        public IActionResult addCommentInProject([FromBody] ViewModels.Commentary model)
+        {
+            var userProfile = _db.UserProfile.ToList().FirstOrDefault(p => p.Id == model.UserId);
+            var project = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
+            var commentary = new Models.Commentary();
+            AddCommentaryAction(model, project, commentary, userProfile);
+            return Ok("Ok");
+        }
+
+        public Models.Commentary ContructorCommentary(ViewModels.Commentary model, Models.Commentary commentary, Project project)
+        {
+            commentary.Content = model.Content;
+            commentary.DateCreated = model.DateCreated;
+            commentary.Project = project;
+            commentary.UserProfile = _db.UserProfile.FirstOrDefault(p => p.Id == model.userProfileMini.id);
+            return commentary;
+        }
+
+        public void AddCommentaryAction(ViewModels.Commentary model, Project project, Models.Commentary commentary, UserProfile userProfile)
+        {
+            if (Validation(userProfile))
+            {
+                commentary = ContructorCommentary(model, commentary, project);
+                AddCommentary(project, commentary);
+            }
+            BadRequest("Error. 401 Unauthorized.");
+        }
+
+        public void AddCommentary(Project project, Models.Commentary commentary)
+        {
+            _db.Commentary.Add(commentary);
+            project.ProjectComments.Add(commentary);
+            UpdateProjectDB(project);
+        }
+        
+        [HttpPost("[action]")]
+        [AllowAnonymous]
+        public IActionResult removeCommentInProject([FromBody] ViewModels.RemoveComment model)
+        {
+            var userProfile = _db.UserProfile.ToList().FirstOrDefault(p => p.Id == model.UserId);
+            var project = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
+            var commentary = _db.Commentary.ToList().FirstOrDefault(p => p.Id == model.CommentaryId);
+            RemoveCommentaryAction(model, project, commentary, userProfile);
+            return Ok("Ok");
+        }
+
+        public bool Validation(UserProfile userProfile)
+        {
+            if (userProfile.Role == "User" || userProfile.Role == "AuthUser" || userProfile.Role == "Admin")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void RemoveCommentaryAction(ViewModels.RemoveComment model, Project project, Models.Commentary commentary, UserProfile userProfile)
+        {
+            if (Validation(userProfile))
+            {
+                RemoveCommentary(project, commentary);
+            }
+            BadRequest("Error. 401 Unauthorized.");
+        }
+
+        public void RemoveCommentary(Project project, Models.Commentary commentary)
+        {
+            _db.Commentary.Remove(commentary);
+            project.ProjectComments.Remove(commentary);
+            UpdateProjectDB(project);
+        }
+
+        public void UpdateProjectDB(Project project)
+        {
+            _db.Project.Update(project);
+            _db.SaveChanges();
         }
     }
 }
