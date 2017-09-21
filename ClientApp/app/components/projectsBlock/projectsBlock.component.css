@@ -1,3 +1,7 @@
+a.projectLink {
+    text-decoration: none;
+}
+
 .container-fluid {
     position: relative;
 }
