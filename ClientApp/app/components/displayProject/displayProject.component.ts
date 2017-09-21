@@ -23,7 +23,7 @@ export class DisplayProjectComponent implements OnDestroy {
     previewProject: Project;
     rating: number;
     guest: boolean = true;
-    creater: UserProfileMini;
+    creater: UserProfileMini = new UserProfileMini();
     tags: string[];
     targets: FinansalGoal[] = [];
     preview: boolean = false;
@@ -47,12 +47,14 @@ export class DisplayProjectComponent implements OnDestroy {
                 this.project = this.parse.project;
                 this.project.tags = this.parse.tags;
                 this.project.goals = this.parse.finansalGoal;
+                this.project.user = this.parse.user;
                 this.rating = this.project.userRating;
                 this.tags = this.project.tags;
                 this.targets = this.project.goals;
                 console.log(this.targets);
                 console.log(this.tags);
                 this.creater = this.project.user;
+                console.log(this.creater);
             })
         }
     }

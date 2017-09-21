@@ -230,9 +230,11 @@ namespace KekStarter.Controllers
         {
             var display = new Display();
             var projectController = new ProjectController(_db);
+            var profile = new UserProfileMini();
             var rating = _db.Rating.FirstOrDefault(p => (p.UserId == userId) && (p.ProjectId == id));
             projectController.RefreshDate();
             var project = _db.Project.FirstOrDefault(p => p.Id == id);
+            var user = _db.UserProfile.FirstOrDefault(p => (p.Id == project.CreateUserId));
             foreach (var bufUser in project.UserProfiles)
             {
                 if (bufUser.Id == userId)
@@ -278,11 +280,16 @@ namespace KekStarter.Controllers
                 finansalGoal.title = tar.title;
                 goals.Add(finansalGoal);
             }
-            
+
+            profile.id = user.Id;
+            profile.firstName = user.FirstName;
+            profile.secondName = user.SecondName;
+            profile.urlPhoto = user.UrlPhoto;
 
             display.project = project;
             display.tags = tagsString;
             display.finansalGoal = goals;
+            display.user = profile;
             return new ObjectResult(display);
         }
 

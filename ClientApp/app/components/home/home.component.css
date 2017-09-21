@@ -4,7 +4,7 @@ a.tag {
     height: 28px;
     line-height: 28px;
     padding: 0 .5em;
-    background-color: #e5e5e5;
+    background-color: transparent;
     border: 1px solid #aaa;
     border-radius: 5px;
     margin: 0 .3em .3em 0;
@@ -19,9 +19,8 @@ a.tag {
 }
 
 a.tag:hover {
-    background-color: #534f60;
-    border: 1px solid #3498db;
-    color: #fff;
+    border: 1px solid rgba(204, 204, 204, 1);
+    color: #206ea1;
 }
 
 a.projectLink {
