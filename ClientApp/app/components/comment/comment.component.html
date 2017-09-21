@@ -19,29 +19,31 @@
             </div>
         </div>
         <div class="newComment">
-            <h3 class="pull-left" style="margin-right: 20px;">New Comment</h3>
-            <fieldset>
-                <div class="row">
-                    <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-                        <p-editor [(ngModel)]="yourComment.content">
-                            <p-header>
-                                <span class="ql-formats">
-                                    <select class="ql-header">
+            <div class="col-xs-12">
+                <h3 class="pull-left" style="margin-right: 20px;">New Comment</h3>
+                <fieldset>
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+                            <p-editor [(ngModel)]="yourComment.content">
+                                <p-header>
+                                    <span class="ql-formats">
+                                        <select class="ql-header">
 
-                                        <option value="2">Subheading</option>
-                                        <option selected="">Normal</option>
-                                    </select>
-                                    <button class="ql-bold" aria-label="Bold"></button>
-                                    <button class="ql-italic" aria-label="Italic"></button>
-                                    <button class="ql-underline" aria-label="Underline"></button>
-                                </span>
+                                            <option value="2">Subheading</option>
+                                            <option selected="">Normal</option>
+                                        </select>
+                                        <button class="ql-bold" aria-label="Bold"></button>
+                                        <button class="ql-italic" aria-label="Italic"></button>
+                                        <button class="ql-underline" aria-label="Underline"></button>
+                                    </span>
 
-                            </p-header>
-                        </p-editor>
+                                </p-header>
+                            </p-editor>
+                        </div>
                     </div>
-                </div>
-            </fieldset>
-            <button type="submit" (click)="addComment()" class="btn btn-normal pull-right">Add</button>
+                </fieldset>
+                <button type="submit" (click)="addComment()" class="btn btn-normal pull-right">Add</button>
+            </div>
         </div>
     </div>
 </div>
