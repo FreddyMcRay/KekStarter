@@ -30,6 +30,6 @@ export class LoginComponent {
             error => {
                 this.alertService.error(error);
             });
-            
+        this.model = {}; 
     }
 }

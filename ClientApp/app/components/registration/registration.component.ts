@@ -26,5 +26,6 @@ export class RegistrationComponent {
             error => {
                 this.alertService.error(error);
             })
+        this.model = {};
     }
 }
