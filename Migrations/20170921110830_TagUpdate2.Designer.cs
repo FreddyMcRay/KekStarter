@@ -11,9 +11,10 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20170921110830_TagUpdate2")]
+    partial class TagUpdate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,15 +218,15 @@ namespace KekStarter.Migrations
 
                     b.Property<int>("Position");
 
-                    b.Property<int>("cost");
+                    b.Property<int>("ProjectId");
 
-                    b.Property<int>("projectId");
+                    b.Property<int>("cost");
 
                     b.Property<string>("title");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("projectId");
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Step");
                 });
@@ -479,7 +480,7 @@ namespace KekStarter.Migrations
                 {
                     b.HasOne("KekStarter.Models.Project", "Project")
                         .WithMany("Targets")
-                        .HasForeignKey("projectId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

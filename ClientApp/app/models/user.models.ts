@@ -13,7 +13,7 @@ export class UserProfile {
     id: number;
     firstName: string;
     secondName: string;
-    urlPhoto: string;
+    urlPhoto: string = 'https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/anonim_user_vdzhx0.jpg';
     registrationDate: string;
     lastLogInDate: string;
     followedProjects: UserProject[];

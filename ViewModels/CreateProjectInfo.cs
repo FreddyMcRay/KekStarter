@@ -30,6 +30,8 @@ namespace KekStarter.ViewModels
 
     public class FinansalGoal
     {
+        public bool isCompleted { get; set; }
+
         public string title { get; set; }
 
         public int cost { get; set; }

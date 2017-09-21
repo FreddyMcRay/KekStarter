@@ -17,7 +17,7 @@ export class DraftComponent {
     invalid = false;
     tags: any[] = [];
 
-    constructor(private projectService: ProjectService, private userService: UserService) {
+    constructor(private projectService: ProjectService, private userService: UserService, private router: Router) {
         this.project = projectService.getDraft();
         console.log(this.project)
     }
@@ -38,7 +38,7 @@ export class DraftComponent {
     }
 
     send() {
-        this.addTags();
+        this.project = this.projectService.addTags(this.project);
         this.project.userId = JSON.parse(localStorage.getItem('currentUser')).id;
         if (!this.projectService.isValid(this.project)) {
             this.invalid = true;
@@ -48,6 +48,8 @@ export class DraftComponent {
             console.log(this.project);
             this.projectService.create(this.project).subscribe(
                 data => {
+                    let id = data.json();
+                    this.router.navigate(['/project/' + id]);
                     console.log("OK");
                     console.log(data);
                 },
@@ -57,13 +59,10 @@ export class DraftComponent {
 
     }
 
-    addTags() {
-        this.tags = this.project.tags;
-        let ta: string[] = [];
-        for (let tag1 of this.tags) {
-            ta.push(tag1.value);
-        }
-        this.project.tags = ta;
-        console.log(this.project.tags);
+    showPreview() {
+        this.saveDraft();
+        this.router.navigate(['/project/0']);
     }
+
+    
 }

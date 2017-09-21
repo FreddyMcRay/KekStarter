@@ -1,4 +1,5 @@
 ﻿import { UserProfileMini } from './user.models';
+import { FinansalGoal } from './draft.models';
 
 export class UserProject {
     id: number;
@@ -15,6 +16,12 @@ export class HomeParseObject {
     successfulProjects: UserProject[];
     newProjects: UserProject[];
     tags: string[];
+}
+
+export class ProjectParseObject {
+    project: UserProjectFull;
+    tags: string[];
+    finansalGoal: FinansalGoal[];
 }
 
 export class UserProjectFull {
@@ -35,6 +42,7 @@ export class UserProjectFull {
     followed: boolean = false;
     user: UserProfileMini;
     tags: string[];
+    goals: FinansalGoal[] = [];
 }
 
 export class Comment {

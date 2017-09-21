@@ -30,7 +30,7 @@ namespace KekStarter.Controllers
         {
             _db.Project.Add(FillingFields(model));
             _db.SaveChanges();
-            return new ObjectResult(model);
+            return new ObjectResult(_db.Project.Last().Id);
         }
 
         [HttpPost("[action]")]
@@ -59,6 +59,8 @@ namespace KekStarter.Controllers
             proj.content = project.content;
 
             var tag = new Tag();
+            int helpIdTag = 0;
+            int j = 1;
             for (int i = 0; i <= project.tags.Count - 1; i++)
             {
                 tag = _db.Tag.FirstOrDefault(p => p.Name == project.tags[i]);
@@ -66,35 +68,38 @@ namespace KekStarter.Controllers
                 {
                     var bufTag = new Tag();
                     bufTag.Name = project.tags[i];
-                    //bufTag.Projects.Add(proj);
+                    helpIdTag = _db.Tag.ToList().Last().Id + j;
                     _db.Tag.Add(bufTag);
                     tag = bufTag;
+                    j++;
                 }
                 else
                 {
-                    //tag.Projects.Add(proj);
+                    helpIdTag = tag.Id;
                     _db.Tag.Update(tag);
                 }
                 var bufProjectTag = new ProjectTag
                 {
                     Tag = tag,
-                    //Project = proj,
-                    ProjectId = proj.Id
+                    ProjectId = _db.Project.ToList().Last().Id + 1,
+                    IdTags = helpIdTag
                 };
                 proj.Tags.Add(bufProjectTag);
                 _db.InstructionTag.Add(bufProjectTag);
             }
-
             
-            var target = new Target();
+            //
             foreach(var goals in project.finansalGoals)
             {
+                var target = new Target();
+                target.projectId = _db.Project.ToList().Last().Id + 1;
                 target.cost = goals.cost;
                 target.title = goals.title;
-                target.Project = proj;
+                target.IsCompleted = false;
                 proj.Targets.Add(target);
                 proj.requiredSum += target.cost;
                 _db.Step.Add(target);
+
             }
 
             if (proj.currentSum != 0)
@@ -223,6 +228,7 @@ namespace KekStarter.Controllers
         [HttpGet("[action]/{id}/{userId}")]
         public IActionResult getProjectById(int id, int userId)
         {
+            var display = new Display();
             var projectController = new ProjectController(_db);
             var rating = _db.Rating.FirstOrDefault(p => (p.UserId == userId) && (p.ProjectId == id));
             projectController.RefreshDate();
@@ -246,7 +252,38 @@ namespace KekStarter.Controllers
             {
                 project.UserRating = rating.Value;
             }
-            return new ObjectResult(project);
+            var tags = _db.InstructionTag.ToList();
+            var tagsString = new List<string>();
+            tags = tags.FindAll(p => p.ProjectId == id);
+            foreach (var tag in tags)
+            {
+                var bufTag = _db.Tag.FirstOrDefault(p => p.Id == tag.IdTags);
+                if (bufTag != null)
+                {
+                    tagsString.Add(bufTag.Name);
+                }
+                else
+                {
+                    tagsString.Add("");
+                }
+                
+            }
+
+            var goals = new List<FinansalGoal>();
+            foreach (var tar in _db.Step.ToList().FindAll(p => p.projectId == id))
+            {
+                var finansalGoal = new FinansalGoal();
+                finansalGoal.cost = tar.cost;
+                finansalGoal.isCompleted = tar.IsCompleted;
+                finansalGoal.title = tar.title;
+                goals.Add(finansalGoal);
+            }
+            
+
+            display.project = project;
+            display.tags = tagsString;
+            display.finansalGoal = goals;
+            return new ObjectResult(display);
         }
 
         [HttpPost("[action]")]

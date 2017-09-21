@@ -55,4 +55,16 @@ export class ProjectService {
     create(project: Project) {
         return this.http.post('api/CreateProject', project);
     }
+
+    addTags(project: Project): Project {
+        let tags: any[] = [];
+        tags = project.tags;
+        let ta: string[] = [];
+        for (let tag1 of tags) {
+            ta.push(tag1.value);
+        }
+        project.tags = ta;
+        console.log(project.tags);
+        return project;
+    }
 }

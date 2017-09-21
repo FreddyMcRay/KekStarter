@@ -17,6 +17,7 @@ namespace KekStarter.Models
         [JsonIgnore]
         [Required]
         public Project Project { get; set; }
+        public int projectId { get; set; }
         public int Position { get; set; }
         public string title { get; set; }
         public int cost { get; set; }
@@ -124,6 +125,8 @@ namespace KekStarter.Models
         public Tag Tag { get; set; }
         
         public int ProjectId { get; set; }
+
+        public int IdTags { get; set; }
     }
 
     public class Achivment

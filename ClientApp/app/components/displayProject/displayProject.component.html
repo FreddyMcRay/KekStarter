@@ -35,24 +35,37 @@
                         <br>
                         Срок — {{project.dateEnd}}
                     </p>
-                    <a *ngIf="!project.followed" (click)="followProject()" class="btn  btn_subscribe" [ngClass]="{'disabled' : !guest}">Подписаться</a>
-                    <a *ngIf="project.followed" (click)="unFollowProject()" class="btn  btn_subscribe">Отписаться</a>
-                    <a href="#" class="btn  btn_support" [ngClass]="{'disabled' : !guest}">Поддержать</a>
+                    <a *ngIf="!preview && !project.followed" (click)="followProject()" class="btn  btn_subscribe" [ngClass]="{'disabled' : guest}">Подписаться</a>
+                    <a *ngIf="!preview && project.followed" (click)="unFollowProject()" class="btn  btn_subscribe">Отписаться</a>
+                    <a *ngIf="preview && !project.followed" (click)="refactor()" class="btn  btn_subscribe">Редактировать</a>
+                    <a href="#" class="btn  btn_support" *ngIf="!preview" [ngClass]="{'disabled' : guest}">Поддержать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: -20px; margin-left: -20px">
+        <div class="col-xs-8" *ngIf="!preview">
+            <h4>Tags:</h4>
+            <div>
+                <a *ngFor="let tag of tags" class="tag" routerLink="/projects/all/tag/{{tag}}">{{tag}}  </a>
+            </div>
+        </div>
+        <div class="col-xs-8" *ngIf="preview">
+            <h4 class="line">Tags:</h4>
+            <a *ngFor="let tag of project.tags" class="tag">{{tag}}  </a>
+        </div>
+        <div class="col-xs-4">
+            <div *ngIf="!preview">
+                <h4 class="line text-center">Rating: {{project.rating}}</h4>
+                <div style="margin-top: -15px;">
+                    <rating [(ngModel)]="rating" class="line"></rating>  
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class=" col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <rating [(ngModel)]="rating"></rating>  {{project.rating}}
-        </div>
-        <div class=" col-lg-10 col-md-9 col-sm-6 col-xs-12">
-            <a *ngFor="let tag of tags" class="tag" routerLink="/projects/all/tag/{{tag}}">#{{tag}}  </a>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-xs-12">
-            <p>{{project.description}}</p>
+            <h3>{{project.description}}</h3>
         </div>
     </div>
     <div class="row">
@@ -64,7 +77,7 @@
                             О проекте
                         </a>
                     </li>
-                    <li>
+                    <li *ngIf="!preview">
                         <a href="#comments" data-toggle="tab">
                             Комментарии
                         </a>
@@ -74,7 +87,7 @@
                     <div class="tab-pane active" id="content">
                         <div [innerHTML]="project.content" class="tab-pane active ql-editor " id="content"></div>
                     </div>
-                    <div class="tab-pane" id="comments">
+                    <div *ngIf="!preview" class="tab-pane" id="comments">
                         <comments></comments>
                     </div>
                 </div>

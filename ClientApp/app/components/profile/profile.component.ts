@@ -15,7 +15,7 @@ import { UserProfile, UserAchivment } from '../../models/user.models';
 })
 export class ProfileComponent implements OnDestroy {
     private id: number;
-    public user: UserProfile;
+    public user: UserProfile = new UserProfile();
     public achivments: UserAchivment[];
     public projects: UserProject[];
     private subscription: Subscription;

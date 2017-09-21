@@ -66,7 +66,7 @@
                     <div class="col-xs-4" id="preview">
                         <div class="block" style="text-align: center">
                             <a class="btn  btn_save" (click)="saveDraft()">Сохранить</a>
-                            <a class="btn  btn_subscribe">Предпросмотр</a>
+                            <a class="btn  btn_subscribe" (click)="showPreview()">Предпросмотр</a>
                         </div>
                         <preview [project]="project"></preview>
                         <div>

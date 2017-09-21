@@ -1,10 +1,13 @@
 ﻿import { Component, OnDestroy } from '@angular/core';
 import { RestService } from "../../RestService/rest.service";
 import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthUser } from '../../models/user.models';
-import { UserProjectFull } from '../../models/project.models';
+import { UserProjectFull, ProjectParseObject } from '../../models/project.models';
 import { UserProfileMini } from '../../models/user.models';
+import { Project } from '../../models/draft.models';
+import { ProjectService } from '../../ProjectService/project.service';
+import { FinansalGoal } from "../../models/draft.models";
 
 @Component({
     selector: 'displayProject',
@@ -14,14 +17,18 @@ import { UserProfileMini } from '../../models/user.models';
 export class DisplayProjectComponent implements OnDestroy {
     id: number;
     private subscription: Subscription;
+    parse: ProjectParseObject;
     user: AuthUser = new AuthUser();
     project: UserProjectFull = new UserProjectFull();
+    previewProject: Project;
     rating: number;
     guest: boolean = true;
     creater: UserProfileMini;
     tags: string[];
+    targets: FinansalGoal[] = [];
+    preview: boolean = false;
 
-    constructor(private service: RestService, private activateRoute: ActivatedRoute) {
+    constructor(private service: RestService, private activateRoute: ActivatedRoute, private projectService: ProjectService, private router: Router) {
         if (!(typeof localStorage === "undefined")) {
             this.guest = false;
             this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -29,14 +36,44 @@ export class DisplayProjectComponent implements OnDestroy {
         console.log(this.user);
         this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
-        this.service.getProjectById(this.id.toString(), this.user.id.toString()).subscribe(result => {
-            this.project = result.json();
-            this.rating = this.project.userRating;
-            this.tags = this.project.tags;
-            this.creater = this.project.user;
-        })
+        if (this.id == 0) {
+            this.preview = true;
+            this.getPreviewProject();
+        } else {
+            this.preview = false;
+            this.service.getProjectById(this.id.toString(), this.user.id.toString()).subscribe(result => {
+                this.parse = result.json();
+                console.log(this.parse);
+                this.project = this.parse.project;
+                this.project.tags = this.parse.tags;
+                this.project.goals = this.parse.finansalGoal;
+                this.rating = this.project.userRating;
+                this.tags = this.project.tags;
+                this.targets = this.project.goals;
+                console.log(this.targets);
+                console.log(this.tags);
+                this.creater = this.project.user;
+            })
+        }
     }
 
+    public getPreviewProject() {
+        this.previewProject = this.projectService.getDraft();
+        this.previewProject = this.projectService.addTags(this.previewProject);
+        this.project.title = this.previewProject.title;
+        this.project.dateEnd = this.previewProject.completionDate.toDateString().split('T')[0];
+        this.project.content = this.previewProject.content;
+        this.project.requiredSum = this.previewProject.totalCost;
+        this.project.goals = this.previewProject.finansalGoals;
+        this.project.description = this.previewProject.description;
+        this.project.image = this.previewProject.image;
+        this.project.sponsors = 0;
+        this.project.currentSum = 0;
+        this.project.progress = '0';
+        this.project.tags = this.previewProject.tags;
+        this.project.followed = false;
+        this.project.leftOver = 0;
+    }
 
     public followProject() {
         this.service.userFollowProject(this.user.id.toString(), this.project.id.toString())
@@ -52,7 +89,13 @@ export class DisplayProjectComponent implements OnDestroy {
             )
     }
 
+    refactor() {
+        this.router.navigate(['/draft']);
+    }
+
     ngOnDestroy() {
-        this.service.addRatingToProject({ ProjectId: this.project.id.toString(), UserPofileId: this.user.id.toString(), Value: this.rating.toString() });
+        if (!(this.id == 0)) {
+            this.service.addRatingToProject({ ProjectId: this.project.id.toString(), UserPofileId: this.user.id.toString(), Value: this.rating.toString() });
+        }
     }
 }

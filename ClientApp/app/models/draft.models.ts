@@ -1,10 +1,12 @@
 ﻿export class FinansalGoal {
     title: string;
     cost: number;
+    isCompleted: boolean;
 
-    constructor(title: string, cost: number) {
+    constructor(title: string, cost: number, isCompleted: boolean) {
         this.title = title;
         this.cost = cost;
+        this.isCompleted = isCompleted;
     }
 }
 
