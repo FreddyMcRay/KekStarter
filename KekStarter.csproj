@@ -39,7 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\AlertService\alert.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\displayProject\displayProject.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\draft.models.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\project.models.ts" />

@@ -15,66 +15,38 @@ import { UserProject } from '../../models/project.models';
 
 export class CommentComponent {
     comments: Comment[] = [];
-    yourComment: Comment = new Comment();
-   // @Input() userProfile: UserProfileMini;
-   // @Input() projectId: number;
-    take: string = "10";
-    skip: string;
+    yourComment: Comment;
+    content: string;
+    @Input() projectId: number;
     AuthUser: AuthUser;
 
-    
-
-    //public checkRole(): boolean {
-    //    this.AuthUser = this.userService.getCurrentUser();
-    //    return (this.AuthUser.role == 'Admin' || (this.AuthUser.id == this.userProfile.id && this.AuthUser.role != 'Guest')) ? true : false;
-    //}
-
-    //public checkRoleForDeleteComment(i: number): boolean {
-    //    this.AuthUser = this.userService.getCurrentUser();
-    //    return (this.AuthUser.role == 'Admin' || this.AuthUser.id == this.comments[i].userProfile.id) ? true : false;
-    //}
-
-    constructor(private service: RestService, private userService: UserService) {
-        this.comments = [{
-            id: 1, dataCreated: '21.09.2017', userProfile: { id: 1, firstName: 'Andrey', secondName: 'Repkovcki', urlPhoto: 'http://res.cloudinary.com/dbsjugefb/image/upload/v1505769861/syqcdp8w55xgzvpyx0pm.jpg' },
-            projectId: 2002, content: 'lknwlkfklmn lkmneklrv w klmnlkevlkn klwnerkb k oik'
-        }]
-
+    public checkrolefordeletecomment(i: number): boolean {
+        return (this.AuthUser.role == 'Admin' || this.AuthUser.id == this.comments[i].userProfile.id) ? true : false;
     }
 
-    //ngOnInit() {
-    //    this.getCommentsFromServer();   
-    //}
+    constructor(private service: RestService, private userService: UserService) {
+      
+        this.AuthUser = this.userService.getCurrentUser();
+    }
 
-    //getCommentsFromServer() {
-    //    this.service.getCommentsByProject(this.take, this.comments.length.toString(), this.projectId.toString()).subscribe(result => {
-    //        console.log("GetCommentresult= " + result.json());
-    //        let arrComments = result.json();
-    //        if (arrComments != null)
-    //            this.comments = this.comments.concat(arrComments);
-    //    });
-    //}
+    ngOnInit() {
+        this.getCommentsFromServer();   
+    }
 
-    //addcomment() {
-    //    let comment = this.createcomment();
-    //    this.comments.push(comment);
-    //    this.sendcommentonserver(comment);
-    //}
+    getCommentsFromServer() {
+        this.service.getCommentsByProject(this.projectId.toString()).subscribe(result => {
+            console.log("GetCommentresult= " + result.json());
+            let arrComments = result.json();
+            if (arrComments != null)
+                this.comments = this.comments.concat(arrComments);
+        });
+    }
 
-    //createcomment(): Comment {
-    //    let comment = new Comment();
-    //    comment.datacreated = date.now();
-    //    comment.userprofile = this.userprofile;
-    //    comment.content = this.yourcomment.content;
-    //    comment.project = new userproject();
-    //    comment.project.id = this.projectid;
-    //    this.yourcomment.content = "";
-    //    return comment;
-    //}
-
-    sendCommentOnServer(comment: Comment) {
-        console.log(comment);
-        this.service.sendCommentsOnServer(comment);
+    sendCommentOnServer() {
+        this.service.sendCommentsOnServer({ ProjectId: this.projectId, UserId: this.AuthUser.id, Content: this.content })
+            .subscribe(result => {
+                this.yourComment = result.json();
+            });
     }
 
 

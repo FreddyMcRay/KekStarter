@@ -61,8 +61,8 @@ export class RestService {
         return this.http.get('/api/getProjectById/' + id + '/' + userId);
     }
 
-    public getCommentsByProject(take: string, skip: string, projectId: string) {
-        return this.http.get('api/getCommentsByProjects' + '/' + projectId + '/' + skip + '/' + take);
+    public getCommentsByProject( projectId: string) {
+        return this.http.get('api/getCommentsByProjects' + '/' + projectId);
     }
 
     public userFollowProject(followInfo: any) {
@@ -79,9 +79,7 @@ export class RestService {
         })
     }
     public sendCommentsOnServer(commentary: any) {
-        this.http.post('api/addCommentInProject/', commentary).subscribe(result => {
-            console.log("hey");
-        });
+        return this.http.post('api/addCommentInProject/', commentary);
     }
 
     public removeCommentInProject(commentary: any) {
