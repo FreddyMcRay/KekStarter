@@ -37,14 +37,17 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="yourProjects">
-                        <div class="row">
+                    <div class="tab-pane active" id="yourProjects" style="min-height: 500px;">
+                        <div *ngIf="projects.length" class="row">
                             <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let project of projects">
                                 <preview [project]="project"></preview>
                             </div>
                         </div>
+                        <div *ngIf="!projects.length" class="row text-center" style="margin-top: 30px;">
+                            <h3>You have no projects</h3>
+                        </div>
                     </div>
-                    <div class="tab-pane" id="followedProjects">
+                    <div class="tab-pane" id="followedProjects" style="min-height: 500px;">
                         <div class="row">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <preview [project]="project"></preview>

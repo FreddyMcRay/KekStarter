@@ -19,7 +19,7 @@ export class ProfileComponent implements OnDestroy {
     public currentUser: AuthUser;
     public user: UserProfile = new UserProfile();
     public achivments: UserAchivment[];
-    public projects: UserProject[];
+    public projects: UserProject[] = [];
     private subscription: Subscription;
     public uploader: CloudinaryUploader = new CloudinaryUploader(
         new CloudinaryOptions({ cloudName: 'dbsjugefb', uploadPreset: 'bkydfdx3' })
