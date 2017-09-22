@@ -3,7 +3,7 @@
         <h2>Account confirmation</h2>
         <p>You can't create a project now. You need to verify your person.</p>
         <p>Please, upload your passport scan to verify your account.</p>
-        <div class="profile-picture-section">
+        <div class="profile-picture-section" *ngIf="!successUpload">
             <div ng2FileDrop [ng2FileDropSupportedFileTypes]="supportedFileTypes" (ng2FileDropFileAccepted)="dragFileAccepted($event)"
                  [uploader]="uploader" class="profile-picture-section-drop-zone">
                 <div class=profile-picture-section-request-image-group>
@@ -12,5 +12,13 @@
             </div>
             <p class="profile-picture-section-limitations">Scan picture can be .png, .jpeg or .gif only</p>
         </div>
+        <div *ngIf="successUpload">
+            <img src="{{scanImage}}" />
+            <div class="controls">
+                <a class="btn btn_subscribe">Add new scan</a>
+                <a class="btn  btn_subscribe">Send</a>
+            </div>
+        </div>
+        
     </div>
 </div>

@@ -7,6 +7,26 @@
     padding-top: 15px;
 }
 
+a.btn_subscribe {
+    display: inline-block;
+    width: 150px;
+    border: 1px solid rgba(204, 204, 204, 0.3);
+    background-color: transparent;
+    height: 50px;
+    color: #202020;
+    font-family: 'Helvetica Neue', 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    margin-top: 15px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 40px;
+}
+
+a.btn_subscribe:hover {
+    border: 1px solid rgba(204, 204, 204, 1);
+    color: #206ea1;
+}
+
 .profile-picture-section-drop-zone {
     margin: 0px auto;
     border-radius: 30px;

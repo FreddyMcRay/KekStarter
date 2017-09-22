@@ -11,6 +11,7 @@ import { Ng2FileDropAcceptedFile, Ng2FileDropRejectedFile } from 'ng2-file-drop'
 export class ConfirmationComponent {
 
     public scanImage: string;
+    public successUpload: boolean = false;
 
     public supportedFileTypes: string[] = ['image/png', 'image/jpeg', 'image/gif']
 
@@ -24,6 +25,7 @@ export class ConfirmationComponent {
             this.scanImage = 'http://res.cloudinary.com/' + this.uploader.cloudName +
                 '/image/upload/w_800,h_450/v1505306556/' + res.public_id + '.jpg';
             console.log(this.scanImage);
+            this.successUpload = true;
             return { item, response, status, headers };
         };
     }

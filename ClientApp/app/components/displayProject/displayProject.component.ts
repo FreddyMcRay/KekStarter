@@ -29,9 +29,12 @@ export class DisplayProjectComponent implements OnDestroy {
     preview: boolean = false;
 
     constructor(private service: RestService, private activateRoute: ActivatedRoute, private projectService: ProjectService, private router: Router) {
-        if (!(typeof localStorage === "undefined")) {
+        if (!(typeof localStorage === "undefined") && (localStorage.getItem('currentUser'))) {
             this.guest = false;
             this.user = JSON.parse(localStorage.getItem('currentUser'));
+        } else {
+            this.user = new AuthUser();
+            console.log(this.user);
         }
         console.log(this.user);
         this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
