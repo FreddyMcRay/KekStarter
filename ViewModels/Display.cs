@@ -15,7 +15,7 @@ namespace KekStarter.ViewModels
 
         public List<FinansalGoal> finansalGoal { get; set; }
 
-        public UserProfileMini user { get; set; }
+        public UserProfileMini creater { get; set; }
 
     }
 

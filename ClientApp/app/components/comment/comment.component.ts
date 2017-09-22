@@ -29,31 +29,32 @@ export class CommentComponent {
         this.AuthUser = this.userService.getCurrentUser();
     }
 
-    ngOnInit() {
-        this.getCommentsFromServer();   
-    }
+    //ngOnInit() {
+    //    this.getCommentsFromServer();   
+    //}
 
-    getCommentsFromServer() {
-        this.service.getCommentsByProject(this.projectId.toString()).subscribe(result => {
-            console.log("GetCommentresult= " + result.json());
-            let arrComments = result.json();
-            if (arrComments != null)
-                this.comments = this.comments.concat(arrComments);
-        });
-    }
+    //getCommentsFromServer() {
+    //    this.service.getCommentsByProject(this.projectId.toString()).subscribe(result => {
+    //        console.log("GetCommentresult= " + result.json());
+    //        let arrComments = result.json();
+    //        if (arrComments != null)
+    //            this.comments = this.comments.concat(arrComments);
+    //    });
+    //}
 
-    sendCommentOnServer() {
-        this.service.sendCommentsOnServer({ ProjectId: this.projectId, UserId: this.AuthUser.id, Content: this.content })
-            .subscribe(result => {
-                this.yourComment = result.json();
-            });
-    }
+    //sendcommentonserver() {
+    //    this.service.sendCommentsOnServer({ projectid: this.projectId, userid: this.AuthUser.id, content: this.content })
+    //        .subscribe(result => {
+    //            this.yourComment = result.json();
+    //            this.comments.push(this.yourComment)
+    //        });
+    //}
 
 
 
-    deleteComment(i: number): void {
-        let comment = this.comments[i];
-        this.service.removeCommentInProject(comment);
-        this.comments.splice(i, 1);
-    }
+    //deletecomment(i: number): void {
+    //    let comment = this.comments[i];
+    //    this.service.removeCommentInProject(comment);
+    //    this.comments.splice(i, 1);
+    //}
 }
