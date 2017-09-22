@@ -260,16 +260,14 @@ namespace KekStarter.Controllers
             projectController.RefreshDate();
             var project = _db.Project.FirstOrDefault(p => p.Id == id);
             var user = _db.UserProfile.FirstOrDefault(p => (p.Id == project.CreateUserId));
-            foreach (var bufUser in project.UserProfiles)
+            var checkStatus = _db.FollowsUser.ToList().FirstOrDefault(p => (p.UserId == userId) && (p.ProjectId == id));
+            if (checkStatus != null)
             {
-                if (bufUser.Id == userId)
-                {
-                    project.followed = true;
-                }
-                else
-                {
-                    project.followed = false;
-                }
+                project.followed = true;
+            }
+            else
+            {
+                project.followed = false;
             }
             if (rating == null)
             {

@@ -145,9 +145,18 @@ namespace KekStarter.Controllers
             projectController.RefreshDate();
             var usProfile = _db.UserProfile.FirstOrDefault(p => p.Id == id);
             List<Project> projects = new List<Project>();
+            //followedProjects
+            List<FollowsUser> followedProjects = new List<FollowsUser>();
             projects = _db.Project.ToList();
+            followedProjects = _db.FollowsUser.ToList();
             var proj = projects.FindAll(z => z.CreateUserId == id);
-            var userInfo = new getUser {Id = usProfile.Id, FirstName = usProfile.FirstName, SecondName = usProfile.SecondName, LastLogInDate = usProfile.LastLogInDate, RegistrationDate = usProfile.RegistrationDate, urlPhoto = usProfile.UrlPhoto, projects = proj };
+            var follow = followedProjects.ToList().FindAll(p => p.UserId == id);
+            var followproj = new List<Project>();
+            foreach (var fol in follow)
+            {
+                followproj.Add(projects.FirstOrDefault(p => p.Id == fol.ProjectId));
+            }
+            var userInfo = new getUser {Id = usProfile.Id, FirstName = usProfile.FirstName, SecondName = usProfile.SecondName, LastLogInDate = usProfile.LastLogInDate, RegistrationDate = usProfile.RegistrationDate, urlPhoto = usProfile.UrlPhoto, projects = proj, followedProjects = followproj };
             return new ObjectResult(userInfo);
         }
 

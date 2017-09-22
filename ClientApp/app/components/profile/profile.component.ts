@@ -20,6 +20,7 @@ export class ProfileComponent implements OnDestroy {
     public user: UserProfile = new UserProfile();
     public achivments: UserAchivment[];
     public projects: UserProject[] = [];
+    public followedProjects: UserProject[] = [];
     private subscription: Subscription;
     public uploader: CloudinaryUploader = new CloudinaryUploader(
         new CloudinaryOptions({ cloudName: 'dbsjugefb', uploadPreset: 'bkydfdx3' })
@@ -43,6 +44,7 @@ export class ProfileComponent implements OnDestroy {
             console.log("GetUserById");
             this.achivments = this.user.achivments;
             this.projects = this.user.projects;
+            this.followedProjects = this.user.followedProjects;
         });
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
             let res: any = JSON.parse(response);
