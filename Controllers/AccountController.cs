@@ -82,6 +82,9 @@ namespace KekStarter.Controllers
                         new { userId = user.Id, code = code },
                         protocol: HttpContext.Request.Scheme);
                     await SendEmailAsync(model.Email, "Confirm your account", $"Confirm registration by clicking on the link: <a href='{ callbackUrl}'>link</a>");
+                    userProfile.FirstName = model.Name.Split(' ')[0];
+                    if (model.Name.Split(' ').Length > 1)
+                        userProfile.SecondName = model.Name.Split(' ')[1];
                     _db.UserProfile.Add(userProfile);
                     _db.SaveChanges();
                     return Ok("Check your email to confirm your account");

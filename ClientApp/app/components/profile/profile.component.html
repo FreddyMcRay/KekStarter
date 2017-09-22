@@ -4,7 +4,7 @@
         <div class="col-sm-4 col-sm-offset-4 col-xs-12">
             <div class="profileImage">
                 <img src="{{user.urlPhoto}}" class="round" />
-                <div class="hover">
+                <div class="hover" *ngIf="checkRole()">
                     <label id="labelPhoto" title="Change main photo" style="line-height: 40px">
                         <span class="glyphicon glyphicon-camera" style="margin-top:3%;"><input class="hidden" type="file" ng2FileSelect [uploader]="uploader" (change)="onChange($event)" /></span>
                     </label>
@@ -27,7 +27,7 @@
                 <ul class="nav nav-tabs ">
                     <li class="active">
                         <a href="#yourProjects" data-toggle="tab">
-                            Your projects
+                            User projects
                         </a>
                     </li>
                     <li>
@@ -37,14 +37,17 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane" id="yourProjects">
-                        <div class="row">
+                    <div class="tab-pane active" id="yourProjects" style="min-height: 500px;">
+                        <div *ngIf="projects.length" class="row">
                             <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let project of projects">
                                 <preview [project]="project"></preview>
                             </div>
                         </div>
+                        <div *ngIf="!projects.length" class="row text-center" style="margin-top: 30px;">
+                            <h3>You have no projects</h3>
+                        </div>
                     </div>
-                    <div class="tab-pane active" id="followedProjects">
+                    <div class="tab-pane" id="followedProjects" style="min-height: 500px;">
                         <div class="row">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <preview [project]="project"></preview>

@@ -22,6 +22,7 @@ export class ProjectParseObject {
     project: UserProjectFull;
     tags: string[];
     finansalGoal: FinansalGoal[];
+    user: UserProfileMini;
 }
 
 export class UserProjectFull {

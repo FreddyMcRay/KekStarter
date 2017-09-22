@@ -45,6 +45,10 @@ export class AppComponent {
         this.router.navigate([this.returnUrl]);
     }
 
+    public checkAdmin() {
+        return (this.user.role == 'Admin') ? true : false;
+    }
+
     handleEvent(value: boolean) {
         this.guest = value;
         this.loading = false;

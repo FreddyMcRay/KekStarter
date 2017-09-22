@@ -65,12 +65,12 @@ export class RestService {
         return this.http.get('api/getCommentsByProjects' + '/' + projectId + '/' + skip + '/' + take);
     }
 
-    public userFollowProject(userId: string, projectId: string) {
-        return this.http.get('/api/followProject/' + userId + '/' + projectId);
+    public userFollowProject(followInfo: any) {
+        return this.http.post('/api/FollowProject', followInfo);
     }
 
-    public userUnFollowProject(userId: string, projectId: string) {
-        return this.http.get('/api/unFollowProject/' + userId + '/' + projectId);
+    public userUnFollowProject(followInfo: any) {
+        return this.http.post('/api/UnFollowProject', followInfo);
     }
 
     public addRatingToProject(rating: any) {

@@ -24,12 +24,11 @@ export class LoginComponent {
             .subscribe(
             data => {
                 console.log("Login back to front");
-                this.alertService.success("LogIn sucsess!")
                 this.myEvent.emit(false)
             },
             error => {
                 this.alertService.error(error);
             });
-            
+        this.model = {}; 
     }
 }

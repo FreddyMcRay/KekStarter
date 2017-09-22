@@ -3,6 +3,9 @@
         <div class="col-xs-8 project_head">
             <div class="project_heading">{{project.title}}</div>
         </div>
+        <div class="col-xs-4 pull-right" style="margin-top: 50px">
+            <p style="color: rgba(204, 204, 204, 1);">Created by <a style="color: #1d1d1d" routerLink="/profile/{{creater.id}}">{{creater.firstName}} {{creater.secondName}}</a></p>
+        </div>
     </div>
     <div class="row">
         <div class="col-xs-8 mainImage">
@@ -45,19 +48,25 @@
     </div>
     <div class="row" style="margin-top: -20px; margin-left: -20px">
         <div class="col-xs-8" *ngIf="!preview">
-            <h4>Tags:</h4>
-            <div>
+            <div class="line">
+                <h4 >Tags:</h4>
+            </div>
+            <div class="line" style="vertical-align: bottom">
                 <a *ngFor="let tag of tags" class="tag" routerLink="/projects/all/tag/{{tag}}">{{tag}}  </a>
             </div>
         </div>
         <div class="col-xs-8" *ngIf="preview">
-            <h4 class="line">Tags:</h4>
-            <a *ngFor="let tag of project.tags" class="tag">{{tag}}  </a>
+            <div class="line">
+                <h4>Tags:</h4>
+            </div>
+            <div class="line" style="vertical-align: bottom">
+                <a *ngFor="let tag of project.tags" class="tag">{{tag}}  </a>
+            </div>
         </div>
         <div class="col-xs-4">
             <div *ngIf="!preview">
                 <h4 class="line text-center">Rating: {{project.rating}}</h4>
-                <div style="margin-top: -15px;">
+                <div class="line">
                     <rating [(ngModel)]="rating" class="line"></rating>  
                 </div>
             </div>
@@ -83,7 +92,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content" style="min-height: 700px;">
                     <div class="tab-pane active" id="content">
                         <div [innerHTML]="project.content" class="tab-pane active ql-editor " id="content"></div>
                     </div>
@@ -93,5 +102,50 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" *ngIf="checkRole()">
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"
+             *ngFor="let goal of targets">
+            <finansal-goal [finansalGoal]="goal" [editable]="true"></finansal-goal>
+        </div>
+    </div>
+    <div class="row" *ngIf="!checkRole()">
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"
+             *ngFor="let goal of targets">
+            <finansal-goal [finansalGoal]="goal"  [editable]="false"></finansal-goal>
+        </div>
+    </div>
+    <div class="block" *ngIf="checkRole()">
+        <form [formGroup]="finansalGoalForm">
+            <div class="create-header"><p>Финансовая цель</p></div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <input id="finansal-input-title"
+                           class="finansal"
+                           type="text"
+                           placeholder="Введите название цели"
+                           pInputText
+                           maxlength="20"
+                           formControlName="title">
+                </div>
+                <div class="col-xs-6">
+                    <input id="finansal-input-cost"
+                           class="finansal"
+                           type="number"
+                           placeholder="Введите сумму цели"
+                           pInputText
+                           formControlName="cost">
+                    <span class="currency">BYN</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a class="btn  btn_subscribe btn_add"
+                       (click)="addGoal(finansalGoalForm)">Добавить</a>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <p class="create-desc">Вы можете создавать несколько целей. Общая сумма проекта будет состоять из суммы всех целей</p>
     </div>
 </div>
