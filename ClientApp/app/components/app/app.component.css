@@ -1,6 +1,13 @@
 .body-content {
+    position: relative;
     min-height: 100%;
     margin-bottom: -50px;
+}
+
+.alert {
+    position: absolute;
+    top: 100px;
+    right: 20px;
 }
 
 .footer,

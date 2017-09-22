@@ -24,7 +24,7 @@
                 <fieldset>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-                            <p-editor [(ngModel)]="yourComment.content">
+                            <p-editor [(ngModel)]="content">
                                 <p-header>
                                     <span class="ql-formats">
                                         <select class="ql-header">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <button type="submit" (click)="addComment()" class="btn btn-normal pull-right">Add</button>
+                <button type="submit" (click)="sendCommentToServer()" class="btn btn-normal pull-right">Add</button>
             </div>
         </div>
     </div>

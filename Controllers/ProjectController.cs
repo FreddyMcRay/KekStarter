@@ -312,7 +312,7 @@ namespace KekStarter.Controllers
             display.project = project;
             display.tags = tagsString;
             display.finansalGoal = goals;
-            display.user = profile;
+            display.creater = profile;
             return new ObjectResult(display);
         }
         

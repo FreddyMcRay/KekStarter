@@ -1,7 +1,6 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { RestService } from "../../RestService/rest.service";
-import { AlertService } from "../../AlertService/alert.service";
 import "rxjs/Rx";
 
 @Component({
@@ -14,7 +13,7 @@ export class LoginComponent {
     model: any = {};
     returnUrl: string;
 
-    constructor(private restService: RestService, private alertService: AlertService, private activatedRouter: ActivatedRoute, private router: Router) {
+    constructor(private restService: RestService, private activatedRouter: ActivatedRoute, private router: Router) {
         this.returnUrl = activatedRouter.snapshot.queryParams['returnUrl'] || "/";
     }
 
@@ -27,7 +26,7 @@ export class LoginComponent {
                 this.myEvent.emit(false)
             },
             error => {
-                this.alertService.error(error);
+                this.myEvent.emit(true);
             });
         this.model = {}; 
     }

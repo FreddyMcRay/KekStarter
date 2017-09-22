@@ -5,7 +5,7 @@ import { RestService } from "../../RestService/rest.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleService } from "../../RoleService/role.service";
 import { AuthUser } from '../../models/user.models';
-
+import { Message } from 'primeng/primeng';
 
 @Component({
     selector: 'app',
@@ -19,6 +19,7 @@ export class AppComponent {
     loading: boolean = false;
     returnUrl: string;
     guest: boolean = true;
+    message: Message[] = [];
     user: AuthUser;
     public constructor(private titleService: Title, private router: Router, private service: RestService, private activeRoute: ActivatedRoute) {
         if (!(typeof localStorage === "undefined") && localStorage.getItem('currentUser')) {
@@ -52,7 +53,24 @@ export class AppComponent {
     handleEvent(value: boolean) {
         this.guest = value;
         this.loading = false;
+        if (value == true) {
+            this.message.push({ severity: 'error', summary: 'Error', detail: 'Login failed' });
+        } else {
+            if (value == false) {
+                this.message.push({ severity: 'info', summary: 'Success', detail: 'Login success' });
+                this.user = JSON.parse(localStorage.getItem('currentUser') || "");
+                console.log(this.user);
+            }
+        }
         this.user = JSON.parse(localStorage.getItem('currentUser') || "");
         console.log(this.user);
+    }
+
+    registrationHandle(event: any) {
+        this.message.push({ severity: 'info', summary: 'Success', detail: 'Check your email to confirm account' });
+    }
+
+    clear() {
+        this.message = [];
     }
 }

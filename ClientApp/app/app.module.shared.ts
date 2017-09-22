@@ -14,6 +14,7 @@ import { EditorModule } from 'primeng/primeng';
 import { TagInputModule } from 'ng2-tag-input';
 import { RatingModule } from "ng2-rating";
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { GrowlModule } from 'primeng/primeng';
 
 import { DraftComponent } from './components/draft/draft.component';
 import { GeneralInfoComponent } from './components/draft/general-info-component/general-info.component';
@@ -22,7 +23,6 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from "./components/profile/profile.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegistrationComponent } from "./components/registration/registration.component";
-import { AlertComponent } from './components/alert/alert.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.component';
 import { FinansalGoalComponent } from './components/financial-goal/finansal-goal.component';
@@ -34,7 +34,6 @@ import { PayWayComponent } from './components/draft/payway/payway.component';
 
 import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
-import { AlertService } from "./AlertService/alert.service";
 import { ProjectService } from "./ProjectService/project.service";
 import { UserService } from "./UserService/user.service";
 
@@ -46,7 +45,6 @@ import { UserService } from "./UserService/user.service";
         ProfileComponent,
         LoginComponent,
         RegistrationComponent,
-        AlertComponent,
         PreviewComponent,
         DraftComponent,
         GeneralInfoComponent,
@@ -73,6 +71,7 @@ import { UserService } from "./UserService/user.service";
         EditorModule,
         TagInputModule,
         RatingModule,
+        GrowlModule,
         Angular2FontawesomeModule,
         RouterModule.forRoot([
             { path: 'project/:id', component: DisplayProjectComponent },
@@ -88,7 +87,7 @@ import { UserService } from "./UserService/user.service";
             { path: '**', redirectTo: 'home' }
         ])
     ],
-    providers: [RestService, RoleService, AlertService, ProjectService, UserService]
+    providers: [RestService, RoleService, ProjectService, UserService]
 })
 export class AppModuleShared {
 }

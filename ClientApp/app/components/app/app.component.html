@@ -1,5 +1,6 @@
 ﻿
 <nav class="navbar navbar-default navbar-fixed-top">
+    <p-growl [(value)]="message" (onClose)="clear()"></p-growl>
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -52,17 +53,18 @@
                         <login (myEvent)="handleEvent($event)"></login>
                     </div>
                     <div class="tab-pane fade" role="tabpanel" id="registration">
-                        <registration></registration>
+                        <registration (myEvent)="registrationHandle($event)"></registration>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<alert></alert>
 
 <div class="body-content">
+    
     <router-outlet></router-outlet>
+    
     <div class="push"></div>
 </div>
 <hr />
