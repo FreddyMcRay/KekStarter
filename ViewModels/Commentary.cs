@@ -18,16 +18,16 @@ namespace KekStarter.ViewModels
         public string Content { get; set; }
     }
 
-    public class UserProfileMini
-    {
-        public int id { get; set; }
+    //public class UserProfileMini
+    //{
+    //    public int id { get; set; }
 
-        public string firstName { get; set; }
+    //    public string firstName { get; set; }
 
-        public string secondName { get; set; }
+    //    public string secondName { get; set; }
 
-        public string urlPhoto { get; set; }
-    }
+    //    public string urlPhoto { get; set; }
+    //}
 
     public class ResponseComments
     {
