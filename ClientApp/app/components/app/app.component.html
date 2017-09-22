@@ -20,6 +20,7 @@
                     <ul class="dropdown-menu">
                         <li><a asp-area="" routerLink="profile/{{user.id.toString()}}">Profile</a></li>
                         <li><a asp-area="" routerLink="draft">Create Project</a></li>
+                        <li *ngIf="checkAdmin()"><a asp-area="" routerLink="">Admin</a></li>
                         <li><hr style="margin-top: 3px; margin-bottom: 3px;" /></li>
                         <li style="padding-left: 3px;">
                             <button style="background-color: #fff; margin-left: 5px;" (click)="logOut()" class="btn"><span class="glyphicon glyphicon-log-in"></span> LogOut</button>

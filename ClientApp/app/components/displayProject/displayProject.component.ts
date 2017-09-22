@@ -96,14 +96,14 @@ export class DisplayProjectComponent implements OnDestroy {
     }
 
     public followProject() {
-        this.service.userFollowProject(this.user.id.toString(), this.project.id.toString())
+        this.service.userFollowProject({ UserId: this.user.id, ProjectId: this.project.id })
             .subscribe(data => { this.project.followed = true },
             error => { }
             )
     }
 
     public unFollowProject() {
-        this.service.userUnFollowProject(this.user.id.toString(), this.project.id.toString())
+        this.service.userUnFollowProject({ UserId: this.user.id, ProjectId: this.project.id })
             .subscribe(data => { this.project.followed = false },
             error => { }
             )
