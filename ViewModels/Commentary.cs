@@ -29,6 +29,11 @@ namespace KekStarter.ViewModels
         public string urlPhoto { get; set; }
     }
 
+    public class ResponseComments
+    {
+        public List<Commentary> commentaryes { get; set; }
+    }
+
     public class RemoveComment
     {
         public int UserId { get; set; }

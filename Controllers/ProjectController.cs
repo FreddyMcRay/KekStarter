@@ -319,13 +319,13 @@ namespace KekStarter.Controllers
             return Ok("Ok");
         }
 
-        //Commentary
+        //Begin Commentary
 
         [HttpPost("[action]")]
         [AllowAnonymous]
         public IActionResult addCommentInProject([FromBody] ViewModels.Commentary model)
         {
-            var userProfile = _db.UserProfile.ToList().FirstOrDefault(p => p.Id == model.UserId);
+            var userProfile = _db.UserProfile.ToList().FirstOrDefault(p => p.Id == model.userProfileMini.id);
             var project = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
             var commentary = new Models.Commentary();
             AddCommentaryAction(model, project, commentary, userProfile);
@@ -399,5 +399,50 @@ namespace KekStarter.Controllers
             _db.Project.Update(project);
             _db.SaveChanges();
         }
+
+        [HttpGet("[action]/{id}/{userId}")]
+        public IActionResult getCommentsByProjects(int projectId, int skip, int take)
+        {
+            var commentaryes = new List<ViewModels.Commentary>();
+            return new ObjectResult(commentaryes = ViewCommentaryes(projectId, commentaryes));
+        }
+
+        public List<ViewModels.Commentary> ViewCommentaryes(int projectId, List<ViewModels.Commentary> commentaryes)
+        {
+            return commentaryes = View(projectId);
+        }
+
+        public List<ViewModels.Commentary> View(int projectId)
+        {
+            var commentaryes = _db.Commentary.ToList().FindAll(p => p.Project.Id == projectId);
+            var viewCommentaryes = new List<ViewModels.Commentary>();
+            foreach (var comment in commentaryes)
+            {
+                var bufComment = new ViewModels.Commentary();
+                FillCommentInfo(comment, bufComment);
+                FillUserMiniInfo(comment, bufComment);
+            }
+            return viewCommentaryes;
+        }
+
+        public ViewModels.Commentary FillCommentInfo(Models.Commentary comment, ViewModels.Commentary bufComment)
+        {
+            bufComment.Id = comment.Id;
+            bufComment.ProjectId = comment.Project.Id;
+            bufComment.Content = comment.Content;
+            bufComment.DateCreated = comment.DateCreated;
+            return bufComment;
+        }
+
+        public ViewModels.Commentary FillUserMiniInfo(Models.Commentary comment, ViewModels.Commentary bufComment)
+        {
+            bufComment.userProfileMini.id = comment.UserProfile.Id;
+            bufComment.userProfileMini.firstName = comment.UserProfile.FirstName;
+            bufComment.userProfileMini.secondName = comment.UserProfile.SecondName;
+            bufComment.userProfileMini.urlPhoto = comment.UserProfile.UrlPhoto;
+            return bufComment;
+        }
+
+        //End Commentary
     }
 }
