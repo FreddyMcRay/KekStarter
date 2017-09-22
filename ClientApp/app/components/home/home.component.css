@@ -16,6 +16,8 @@ a.tag {
     text-decoration: none;
     -webkit-transition: .2s;
     transition: .2s;
+    font-family: 'Helvetica Neue', 'Open Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-weight: 300;
 }
 
 a.tag:hover {

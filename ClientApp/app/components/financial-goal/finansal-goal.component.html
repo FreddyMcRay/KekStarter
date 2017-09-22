@@ -1,4 +1,4 @@
-﻿<div class="block">
+﻿<div class="block" [ngClass]="{'complite': finansalGoal.isComplited}">
     <div class="glyphicon glyphicon-bookmark"></div>
     <div style="overflow: hidden">{{finansalGoal.title}}</div>
     <div class="cost">{{finansalGoal.cost}} BYN</div>
