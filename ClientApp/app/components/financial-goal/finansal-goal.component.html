@@ -2,5 +2,5 @@
     <div class="glyphicon glyphicon-bookmark"></div>
     <div style="overflow: hidden">{{finansalGoal.title}}</div>
     <div class="cost">{{finansalGoal.cost}} BYN</div>
-    <a (click)="deleteGoal()"><span class="glyphicon glyphicon-remove-circle"></span></a>
+    <a *ngIf="editable" (click)="deleteGoal()"><span class="glyphicon glyphicon-remove-circle"></span></a>
 </div>

@@ -7,6 +7,8 @@ import { UserProjectFull, ProjectParseObject } from '../../models/project.models
 import { UserProfileMini } from '../../models/user.models';
 import { Project, FinansalGoal } from '../../models/draft.models';
 import { ProjectService } from '../../ProjectService/project.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+
 @Component({
     selector: 'displayProject',
     templateUrl: './displayProject.component.html',
@@ -21,12 +23,18 @@ export class DisplayProjectComponent implements OnDestroy {
     previewProject: Project;
     rating: number;
     guest: boolean = true;
+    finansalGoalForm: FormGroup;
     creater: UserProfileMini = new UserProfileMini();
     tags: string[];
     targets: FinansalGoal[] = [];
     preview: boolean = false;
 
-    constructor(private service: RestService, private activateRoute: ActivatedRoute, private projectService: ProjectService, private router: Router) {
+    public checkRole() {
+        return (this.user.role == 'Admin' || this.user.id == this.creater.id) ? true : false;
+    }
+
+    constructor(private service: RestService, private activateRoute: ActivatedRoute, private projectService: ProjectService, private router: Router,
+        private fb: FormBuilder) {
         if (!(typeof localStorage === "undefined")) {
             this.guest = false;
             this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -55,6 +63,18 @@ export class DisplayProjectComponent implements OnDestroy {
                 console.log(this.creater);
             })
         }
+        this.finansalGoalForm = this.fb.group({
+            'title': ['', Validators.required],
+            'cost': ['', Validators.required]
+        });
+    }
+
+    addGoal(form: FormGroup) {
+        if (!form.valid) return;
+        let goal: FinansalGoal = form.value;
+        this.targets.push(goal);
+        form.controls['title'].setValue("");
+        form.controls['cost'].setValue("");
     }
 
     public getPreviewProject() {
@@ -96,6 +116,9 @@ export class DisplayProjectComponent implements OnDestroy {
     ngOnDestroy() {
         if (!(this.id == 0)) {
             this.service.addRatingToProject({ ProjectId: this.project.id.toString(), UserPofileId: this.user.id.toString(), Value: this.rating.toString() });
+        }
+        if (this.checkRole()) {
+
         }
     }
 }
