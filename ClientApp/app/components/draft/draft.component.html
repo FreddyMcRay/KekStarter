@@ -71,7 +71,10 @@
                         <preview [project]="project"></preview>
                         <div>
                             <div class="create-header finansal-header">Финансовые цели</div>
-                            <finansal-goal *ngFor="let goal of project.finansalGoals" [finansalGoal]="goal" (removeFinansalGoal)="deleteGoal($event)"></finansal-goal>
+                            <finansal-goal *ngFor="let goal of project.financialGoals"
+                                           [finansalGoal]="goal"
+                                           [editable]="true"
+                                           (removeFinansalGoal)="deleteGoal($event)"></finansal-goal>
                         </div>
                     </div>
                 </div>

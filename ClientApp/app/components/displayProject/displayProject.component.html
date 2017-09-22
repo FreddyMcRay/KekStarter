@@ -92,7 +92,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content" style="min-height: 700px;">
                     <div class="tab-pane active" id="content">
                         <div [innerHTML]="project.content" class="tab-pane active ql-editor " id="content"></div>
                     </div>
@@ -101,6 +101,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"
+             *ngFor="let goal of targets">
+            <finansal-goal [finansalGoal]="goal" [editable]="false"></finansal-goal>
         </div>
     </div>
 </div>

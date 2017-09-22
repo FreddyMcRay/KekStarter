@@ -5,10 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthUser } from '../../models/user.models';
 import { UserProjectFull, ProjectParseObject } from '../../models/project.models';
 import { UserProfileMini } from '../../models/user.models';
-import { Project } from '../../models/draft.models';
+import { Project, FinansalGoal } from '../../models/draft.models';
 import { ProjectService } from '../../ProjectService/project.service';
-import { FinansalGoal } from "../../models/draft.models";
-
 @Component({
     selector: 'displayProject',
     templateUrl: './displayProject.component.html',

@@ -8,6 +8,7 @@ import { FinansalGoal } from "../../models/draft.models";
 })
 export class FinansalGoalComponent {
     @Input() finansalGoal: FinansalGoal;
+    @Input() editable: Boolean;
     @Output() removeFinansalGoal = new EventEmitter<FinansalGoal>()
 
     deleteGoal() {
