@@ -154,22 +154,24 @@ namespace KekStarter.Controllers
         [AllowAnonymous]
         public IActionResult FollowProject([FromBody] FollowInfo model)
         {
-            var followProject = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
-            followProject.UserProfiles.Add(_db.UserProfile.FirstOrDefault(p => p.Id == model.UserId));
-            _db.Project.Update(followProject);
+            var followProject = new FollowsUser
+            {
+                UserId = model.UserId,
+                ProjectId = model.ProjectId
+            };
+            _db.FollowsUser.Add(followProject);
             _db.SaveChanges();
-            return new ObjectResult(followProject);
+            return Ok();
         }
 
         [HttpPost("[action]")]
         [AllowAnonymous]
         public IActionResult UnFollowProject([FromBody] FollowInfo model)
         {
-            var followProject = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
-            followProject.UserProfiles.Remove(_db.UserProfile.FirstOrDefault(p => p.Id == model.UserId));
-            _db.Project.Update(followProject);
+            var followProject = _db.FollowsUser.ToList().FirstOrDefault(p => (p.ProjectId == model.ProjectId) && (p.UserId == model.UserId));
+            _db.FollowsUser.Remove(followProject);
             _db.SaveChanges();
-            return new ObjectResult(followProject);
+            return Ok();
 
         }
 
