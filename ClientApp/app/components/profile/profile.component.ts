@@ -26,15 +26,11 @@ export class ProfileComponent implements OnDestroy {
         new CloudinaryOptions({ cloudName: 'dbsjugefb', uploadPreset: 'bkydfdx3' })
     );
 
-    project: UserProject = {
-        id: 1, image: 'http://res.cloudinary.com/profunding/image/upload/v1504950919/default-bg.jpg',
-        title: 'Sasay project', description: 'This is sasay project. So, you need to sasay', currentSum: '200', requiredSum: 500, leftOver: '40', progress: 70
-    };
-
     constructor(private http: Http, private activateRoute: ActivatedRoute, private service: RestService, private userService: UserService) {
         this.currentUser = this.userService.getCurrentUser();
         this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
+
         this.service.getUserById(this.id.toString()).subscribe(result => {
             this.user = result.json();
             if (this.user.urlPhoto == null)
@@ -48,7 +44,6 @@ export class ProfileComponent implements OnDestroy {
         });
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
             let res: any = JSON.parse(response);
-            console.log("suuuula");
             this.user.urlPhoto = "https://res.cloudinary.com/dbsjugefb/image/upload/w_250,h_250,c_thumb,r_max/v1505042128/" + res.public_id + ".jpg";
             return { item, response, status, headers };
         };

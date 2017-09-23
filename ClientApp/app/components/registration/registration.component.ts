@@ -1,8 +1,8 @@
 import { Component} from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
-import { RestService } from "../../RestService/rest.service";
+import { Router, ActivatedRoute } from '@angular/router';
+import { RestService } from '../../RestService/rest.service';
 import { MessageService } from '../../MessageService/message.service';
-import "rxjs/Rx";
+import 'rxjs/Rx';
 
 @Component({
     selector: 'registration',

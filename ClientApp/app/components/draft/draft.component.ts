@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Project, FinansalGoal } from '../../models/draft.models';
 import { ProjectService } from '../../ProjectService/project.service';
 import { AuthUser } from '../../models/user.models';
@@ -37,7 +37,7 @@ export class DraftComponent {
 
     removeDraft() {
         this.projectService.removeDraft();
-        this.messageService.sendErrorMessage('Successful deleting');
+        this.messageService.sendSuccessMessage('Successful deleting');
     }
 
     send() {

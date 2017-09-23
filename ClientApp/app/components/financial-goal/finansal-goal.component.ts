@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FinansalGoal } from "../../models/draft.models";
+import { FinansalGoal } from '../../models/draft.models';
 
 @Component({
     selector: 'finansal-goal',

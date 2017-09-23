@@ -4,8 +4,8 @@
             <h3>{{comments.length}} Comments</h3>
             <div *ngFor="let comment of comments; let i = index">
                 <div class="media">
-                    <div class="pull-right" style="">
-                        <span title="Delete" (click)="deletecomment(i)" class="glyphicon glyphicon-trash "></span>
+                    <div class="pull-right" *ngIf="checkroleForDeleteComment(i)">
+                        <span title="Delete" (click)="deleteComment(i)" class="glyphicon glyphicon-trash "></span>
                     </div>
                     <a class="pull-left" routerLink="/profile/{{comment.userProfile.id.toString()}}"><img class="media-object img-circle" style="width:80px" src={{comment.userProfile.urlPhoto}} alt=""></a>
                     <div class="media-body">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <button type="submit" (click)="sendcommentonserver()" class="btn btn-normal pull-right">Add</button>
+                <button type="submit" (click)="sendCommentOnServer()" class="btn btn-normal pull-right">Add</button>
             </div>
         </div>
     </div>

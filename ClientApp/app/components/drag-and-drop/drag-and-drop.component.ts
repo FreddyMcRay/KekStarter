@@ -1,7 +1,7 @@
 import { Component, Input, ElementRef, Output, EventEmitter } from '@angular/core';
-import { CloudinaryOptions, CloudinaryUploader } from "ng2-cloudinary";
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { Ng2FileDropAcceptedFile, Ng2FileDropRejectedFile } from 'ng2-file-drop';
-import { Project } from "../../models/draft.models";
+import { Project } from '../../models/draft.models';
 
 @Component({
 

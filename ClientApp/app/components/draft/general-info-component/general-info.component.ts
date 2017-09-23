@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { Project, FinansalGoal } from "../../../models/draft.models"; 
-import { CloudinaryOptions, CloudinaryUploader } from "ng2-cloudinary";
+import { Project, FinansalGoal } from '../../../models/draft.models'; 
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 
 @Component({
     selector: 'general-info',

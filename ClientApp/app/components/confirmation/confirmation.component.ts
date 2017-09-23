@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { CloudinaryOptions, CloudinaryUploader } from "ng2-cloudinary";
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { Ng2FileDropAcceptedFile, Ng2FileDropRejectedFile } from 'ng2-file-drop';
 import { RestService } from '../../RestService/rest.service';
 import { AuthUser } from '../../models/user.models';
@@ -24,6 +24,7 @@ export class ConfirmationComponent {
     );
     constructor(private service: RestService, private userService: UserService, private router: Router) {
         this.user = this.userService.getCurrentUser();
+
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
             console.log(item);
             let res: any = JSON.parse(response);

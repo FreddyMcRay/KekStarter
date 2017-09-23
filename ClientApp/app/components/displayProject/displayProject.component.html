@@ -4,7 +4,7 @@
             <div class="project_heading">{{project.title}}</div>
         </div>
         <div class="col-xs-4 pull-right" style="margin-top: 50px">
-            <p style="color: rgba(204, 204, 204, 1);">Created by <a style="color: #1d1d1d" routerLink="/profile/{{creater.id}}">{{creater.firstName}} {{creater.secondName}}</a></p>
+            <p style="color: rgba(204, 204, 204, 1);">Created by <a style="color: #1d1d1d" routerLink="/profile/{{project.user.id}}">{{project.user.firstName}} {{project.user.secondName}}</a></p>
         </div>
     </div>
     <div class="row">
@@ -52,7 +52,7 @@
                 <h4 >Tags:</h4>
             </div>
             <div class="line" style="vertical-align: bottom">
-                <a *ngFor="let tag of tags" class="tag" routerLink="/projects/all/tag/{{tag}}">{{tag}}  </a>
+                <a *ngFor="let tag of project.tags" class="tag" routerLink="/projects/all/tag/{{tag}}">{{tag}}  </a>
             </div>
         </div>
         <div class="col-xs-8" *ngIf="preview">
@@ -105,13 +105,13 @@
     </div>
     <div class="row" *ngIf="checkRole()">
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"
-             *ngFor="let goal of targets">
+             *ngFor="let goal of project.goals">
             <finansal-goal [finansalGoal]="goal" [editable]="true"></finansal-goal>
         </div>
     </div>
     <div class="row" *ngIf="!checkRole()">
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"
-             *ngFor="let goal of targets">
+             *ngFor="let goal of project.goals">
             <finansal-goal [finansalGoal]="goal"  [editable]="false"></finansal-goal>
         </div>
     </div>

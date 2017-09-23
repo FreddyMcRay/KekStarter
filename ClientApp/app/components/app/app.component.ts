@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { RestService } from "../../RestService/rest.service";
+import { RestService } from '../../RestService/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RoleService } from "../../RoleService/role.service";
+import { RoleService } from '../../RoleService/role.service';
 import { AuthUser } from '../../models/user.models';
 import { Message } from 'primeng/primeng';
 import { MessageService } from '../../MessageService/message.service';
+import { UserService } from '../../UserService/user.service';
 
 @Component({
     selector: 'app',
@@ -22,17 +23,15 @@ export class AppComponent {
     guest: boolean = true;
     message: Message[] = [];
     user: AuthUser;
-    public constructor(private messageService: MessageService, private router: Router, private service: RestService, private activeRoute: ActivatedRoute) {
-        if (!(typeof localStorage === "undefined") && localStorage.getItem('currentUser')) {
-            this.user = JSON.parse(localStorage.getItem('currentUser') || "");
-            if (this.user.role !== "Guest") {
-                this.guest = false;
-            }
-        } else {
-            this.user = new AuthUser();
-        }
+    public constructor(private messageService: MessageService, private router: Router,
+        private service: RestService, private activeRoute: ActivatedRoute, private userService: UserService) {
+
+        this.user = this.userService.getCurrentUser();
+        if (this.user.role != 'Guest')
+            this.guest = false;
         this.subscription = this.messageService.getMessage().subscribe(message => { this.message.push(message) });
-        this.returnUrl = activeRoute.snapshot.queryParams["returnUrl"] || "/";
+        this.returnUrl = activeRoute.snapshot.queryParams['returnUrl'] || '/';
+
     }
 
     public logOut() {
@@ -51,7 +50,7 @@ export class AppComponent {
         this.guest = value;
         this.loading = false;
         if (value == false) {
-            this.user = JSON.parse(localStorage.getItem('currentUser'));
+            this.user = this.userService.getCurrentUser();
             console.log(this.user);
         } else {
             this.user = new AuthUser();

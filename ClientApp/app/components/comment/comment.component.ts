@@ -20,7 +20,7 @@ export class CommentComponent {
     @Input() projectId: number;
     AuthUser: AuthUser;
 
-    public checkrolefordeletecomment(i: number): boolean {
+    public checkroleForDeleteComment(i: number): boolean {
         return (this.AuthUser.role == 'Admin' || this.AuthUser.id == this.comments[i].userProfile.id) ? true : false;
     }
 
@@ -34,7 +34,7 @@ export class CommentComponent {
     }
 
     getCommentsFromServer() {
-        console.log("klasdfpasjdopfjopsd")
+        console.log('getCommentsFromServer')
         this.service.getCommentsByProject(this.projectId.toString()).subscribe(result => {
             let arrComments = result.json();
             if (arrComments != null)
@@ -42,7 +42,7 @@ export class CommentComponent {
         });
     }
 
-    sendcommentonserver() {
+    sendCommentOnServer() {
         this.service.sendCommentsOnServer({ projectid: this.projectId, userid: this.AuthUser.id, content: this.content })
             .subscribe(result => {
                 this.yourComment = result.json();
@@ -51,7 +51,7 @@ export class CommentComponent {
             });
     }
 
-    deletecomment(i: number): void {
+    deleteComment(i: number): void {
         let comment = this.comments[i];
         this.service.removeCommentInProject({ projectid: this.projectId, userid: this.AuthUser.id, createUser: comment.userProfile.id, id: comment.id });
 

@@ -1,8 +1,8 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
-import { RestService } from "../../RestService/rest.service";
+import { Router, ActivatedRoute } from '@angular/router';
+import { RestService } from '../../RestService/rest.service';
 import { MessageService } from '../../MessageService/message.service';
-import "rxjs/Rx";
+import 'rxjs/Rx';
 
 @Component({
     selector: 'login',
@@ -20,7 +20,6 @@ export class LoginComponent {
     }
 
     login() {
-        console.log("aaaaa");
         this.restService.login(this.model.username, this.model.password)
             .subscribe(
             data => {

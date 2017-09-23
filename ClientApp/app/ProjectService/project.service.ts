@@ -2,6 +2,7 @@
 import { Project } from "../models/draft.models";
 import { Http, Response } from "@angular/http";
 import { UserService } from "../UserService/user.service";
+import { UserProjectFull } from '../models/project.models';
 import 'rxjs/add/operator/map';
 
 
@@ -27,6 +28,25 @@ export class ProjectService {
             project.completionDate = new Date();
         }
         return project ? project : new Project();
+    }
+
+    public getPreviewProject(project: UserProjectFull): UserProjectFull {
+        let previewProject = this.getDraft();
+        previewProject = this.addTags(previewProject);
+        project.title = previewProject.title;
+        project.dateEnd = previewProject.completionDate.toDateString().split('T')[0];
+        project.content = previewProject.content;
+        project.requiredSum = previewProject.totalCost;
+        project.goals = previewProject.finansalGoals;
+        project.description = previewProject.description;
+        project.image = previewProject.image;
+        project.sponsors = 0;
+        project.currentSum = 0;
+        project.progress = '0';
+        project.tags = previewProject.tags;
+        project.followed = false;
+        project.leftOver = 0;
+        return project;
     }
 
     removeDraft() {
