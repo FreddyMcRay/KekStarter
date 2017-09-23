@@ -41,6 +41,7 @@ export class AppComponent {
 
     public logOut() {
         localStorage.removeItem('currentUser');
+        this.service.logOut().subscribe(result => console.log(result));
         this.guest = true;
         this.user = new AuthUser();
         this.router.navigate([this.returnUrl]);

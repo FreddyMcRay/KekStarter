@@ -7,6 +7,7 @@ export class AuthUser {
     language: string = "en";
     role: string = "Guest";
     token: string = "";
+    onCheck: boolean = false;
 }
 
 export class UserProfile {

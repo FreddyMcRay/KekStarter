@@ -174,5 +174,12 @@ namespace KekStarter.Controllers
             }
             return BadRequest("User is not found");
         }
+
+        [HttpGet("logOut")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok();
+        }
     }
 }

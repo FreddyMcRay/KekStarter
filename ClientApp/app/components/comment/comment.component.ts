@@ -30,17 +30,13 @@ export class CommentComponent {
     }
 
     ngOnInit() {
-        this.getCommentsFromServer();   
-        console.log('aaaa' + this.projectId.toString());
-        
+        this.getCommentsFromServer();          
     }
 
     getCommentsFromServer() {
         console.log("klasdfpasjdopfjopsd")
         this.service.getCommentsByProject(this.projectId.toString()).subscribe(result => {
-            console.log("GetCommentresult= " + result.json());
             let arrComments = result.json();
-            console.log(arrComments);
             if (arrComments != null)
                 this.comments = this.comments.concat(arrComments);
         });
@@ -50,7 +46,6 @@ export class CommentComponent {
         this.service.sendCommentsOnServer({ projectid: this.projectId, userid: this.AuthUser.id, content: this.content })
             .subscribe(result => {
                 this.yourComment = result.json();
-                console.log(this.yourComment);
                 this.comments.push(this.yourComment);
                 this.content = "";
             });
@@ -58,8 +53,6 @@ export class CommentComponent {
 
     deletecomment(i: number): void {
         let comment = this.comments[i];
-        console.log("breaaaaaaa");
-        console.log(this.projectId, this.AuthUser.id, comment.userProfile, comment.id);
         this.service.removeCommentInProject({ projectid: this.projectId, userid: this.AuthUser.id, createUser: comment.userProfile.id, id: comment.id });
 
         this.comments.splice(i, 1);

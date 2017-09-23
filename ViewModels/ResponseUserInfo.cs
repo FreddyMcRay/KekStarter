@@ -18,5 +18,7 @@ namespace KekStarter.ViewModels
         public string Language { get; set; }
 
         public string Token { get; set; }
+
+        public bool OnCheck { get; set; }
     }
 }

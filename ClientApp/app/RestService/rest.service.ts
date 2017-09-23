@@ -87,6 +87,11 @@ export class RestService {
             console.log("commend is delete");
         });
     }
+
+    public logOut() {
+        console.log('anal');
+        return this.http.get('api/logOut');
+    }
 }
 
 export class User {
