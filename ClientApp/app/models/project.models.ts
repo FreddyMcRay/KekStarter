@@ -53,3 +53,8 @@ export class Comment {
     projectId: number;
     content: string;
 }
+
+export class ProjectNew {
+    description: string;
+    dateCreated: string;
+}

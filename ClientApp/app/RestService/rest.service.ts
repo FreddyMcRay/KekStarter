@@ -96,6 +96,10 @@ export class RestService {
     public sendConfirmInfoToServer(info: any) {
         return this.http.post('api/', info);
     }
+
+    public getNewsByProject(projectId: string) {
+        return this.http.get('api/' + projectId);
+    }
 }
 
 export class User {

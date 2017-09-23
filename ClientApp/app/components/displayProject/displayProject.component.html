@@ -41,7 +41,7 @@
                     <a *ngIf="!preview && !project.followed" (click)="followProject()" class="btn  btn_subscribe" [ngClass]="{'disabled' : guest}">Подписаться</a>
                     <a *ngIf="!preview && project.followed" (click)="unFollowProject()" class="btn  btn_subscribe">Отписаться</a>
                     <a *ngIf="preview && !project.followed" (click)="refactor()" class="btn  btn_subscribe">Редактировать</a>
-                    <a href="#" class="btn  btn_support" *ngIf="!preview" [ngClass]="{'disabled' : guest}">Поддержать</a>
+                    <a href="#" class="btn  btn_support" *ngIf="!preview" [ngClass]="{'disabled' : guest}" data-toggle="modal" data-target="#purchase" style="cursor: pointer">Поддержать</a>
                 </div>
             </div>
         </div>
@@ -147,5 +147,26 @@
         </form>
         <hr>
         <p class="create-desc">Вы можете создавать несколько целей. Общая сумма проекта будет состоять из суммы всех целей</p>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="purchase" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Purchase</h4>
+            </div>
+            <div class="modal-body" style="background-color: #ffffff">
+                <input id="finansal-input-cost"
+                       [(ngModel)]="inputSum"
+                       class="finansal"
+                       type="number"
+                       placeholder="Введите вашу сумму"
+                       pInputText>
+                <div class="modal-footer">
+                    <a class="btn  btn_support" data-dismiss="modal" (click)="addPurchase()" style="width: 150px; margin-top: 10px;">Поддержать</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
