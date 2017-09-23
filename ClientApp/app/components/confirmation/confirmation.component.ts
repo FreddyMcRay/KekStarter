@@ -41,6 +41,8 @@ export class ConfirmationComponent {
     public sendToServer() {
         this.service.sendConfirmInfoToServer({ userId: this.user.id, scanImage: this.scanImage }).subscribe(
             result => {
+                this.user.onCheck = true;
+                localStorage.setItem('currentUser', JSON.stringify(this.user));
                 console.log('nice confirmation');
                 this.router.navigate(['/home']);
             })
