@@ -92,10 +92,36 @@ namespace KekStarter.Models
         public int Id { get; set; }
         public Project Project { get; set; }
         public UserProfile UserProfile { get; set; }
+        public int IdProject { get; set; }
+        public int IdUserProfile { get; set; }
         public string DateCreated { get; set; }
         public string Content { get; set; }
 
     }
+
+    public class Visa
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public int Pin { get; set; }
+        public int NumberCard { get; set; }
+        public string Date { get; set; }
+        public string OwnerName { get; set; }
+        public int UserId { get; set; }
+        public int ProjectId { get; set; }
+
+    }
+
+    public class FollowsUser
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int ProjectId { get; set; }
+    }
+
 
     public class Rating
     {

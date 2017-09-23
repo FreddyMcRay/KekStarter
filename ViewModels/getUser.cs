@@ -21,5 +21,7 @@ namespace KekStarter.ViewModels
         public string LastLogInDate { get; set; }
 
         public List<Project> projects { get; set; }
+
+        public List<Project> followedProjects { get; set; }
     }
 }

@@ -1,13 +1,13 @@
-﻿<div class="content-item" id="comments">
+﻿+<div class="content-item" id="comments">
     <div class="container">
         <div class="col-sm-8" id="MainComment">
             <h3>{{comments.length}} Comments</h3>
             <div *ngFor="let comment of comments; let i = index">
                 <div class="media">
                     <div class="pull-right" style="">
-                        <span title="Delete" (click)="deleteComment(i)" class="glyphicon glyphicon-trash "></span>
+                        <span title="Delete" (click)="deletecomment(i)" class="glyphicon glyphicon-trash "></span>
                     </div>
-                    <a class="pull-left" routerLink="/profile/{{comment.userProfile.id.toString()}}"><img class="media-object" style="width:80px" src={{comment.userProfile.urlPhoto}} alt=""></a>
+                    <a class="pull-left" routerLink="/profile/{{comment.userProfile.id.toString()}}"><img class="media-object img-circle" style="width:80px" src={{comment.userProfile.urlPhoto}} alt=""></a>
                     <div class="media-body">
                         <h4 class="media-heading">{{comment.userProfile.firstName}} {{comment.userProfile.secondName}}</h4>
                         <div [innerHTML]="comment.content" style="word-wrap:break-word;"></div>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <button type="submit" (click)="sendCommentToServer()" class="btn btn-normal pull-right">Add</button>
+                <button type="submit" (click)="sendcommentonserver()" class="btn btn-normal pull-right">Add</button>
             </div>
         </div>
     </div>

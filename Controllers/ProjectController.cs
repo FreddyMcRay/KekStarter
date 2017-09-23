@@ -154,22 +154,24 @@ namespace KekStarter.Controllers
         [AllowAnonymous]
         public IActionResult FollowProject([FromBody] FollowInfo model)
         {
-            var followProject = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
-            followProject.UserProfiles.Add(_db.UserProfile.FirstOrDefault(p => p.Id == model.UserId));
-            _db.Project.Update(followProject);
+            var followProject = new FollowsUser
+            {
+                UserId = model.UserId,
+                ProjectId = model.ProjectId
+            };
+            _db.FollowsUser.Add(followProject);
             _db.SaveChanges();
-            return new ObjectResult(followProject);
+            return Ok();
         }
 
         [HttpPost("[action]")]
         [AllowAnonymous]
         public IActionResult UnFollowProject([FromBody] FollowInfo model)
         {
-            var followProject = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
-            followProject.UserProfiles.Remove(_db.UserProfile.FirstOrDefault(p => p.Id == model.UserId));
-            _db.Project.Update(followProject);
+            var followProject = _db.FollowsUser.ToList().FirstOrDefault(p => (p.ProjectId == model.ProjectId) && (p.UserId == model.UserId));
+            _db.FollowsUser.Remove(followProject);
             _db.SaveChanges();
-            return new ObjectResult(followProject);
+            return Ok();
 
         }
 
@@ -258,16 +260,14 @@ namespace KekStarter.Controllers
             projectController.RefreshDate();
             var project = _db.Project.FirstOrDefault(p => p.Id == id);
             var user = _db.UserProfile.FirstOrDefault(p => (p.Id == project.CreateUserId));
-            foreach (var bufUser in project.UserProfiles)
+            var checkStatus = _db.FollowsUser.ToList().FirstOrDefault(p => (p.UserId == userId) && (p.ProjectId == id));
+            if (checkStatus != null)
             {
-                if (bufUser.Id == userId)
-                {
-                    project.followed = true;
-                }
-                else
-                {
-                    project.followed = false;
-                }
+                project.followed = true;
+            }
+            else
+            {
+                project.followed = false;
             }
             if (rating == null)
             {
@@ -349,132 +349,98 @@ namespace KekStarter.Controllers
             return Ok("Ok");
         }
 
-        //Begin Commentary
-
         [HttpPost("[action]")]
         [AllowAnonymous]
         public IActionResult addCommentInProject([FromBody] ViewModels.Commentary model)
         {
-            var userProfile = _db.UserProfile.ToList().FirstOrDefault(p => p.Id == model.userProfileMini.id);
-            var project = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
+            var project = _db.Project.FirstOrDefault(p => p.Id == model.projectid);
             var commentary = new Models.Commentary();
-            AddCommentaryAction(model, project, commentary, userProfile);
-            return Ok("Ok");
-        }
 
-        public Models.Commentary ContructorCommentary(ViewModels.Commentary model, Models.Commentary commentary, Project project)
-        {
-            commentary.Content = model.Content;
-            commentary.DateCreated = model.DateCreated;
+            commentary.Content = model.content;
+            commentary.DateCreated = date.ToString();
+            
             commentary.Project = project;
-            commentary.UserProfile = _db.UserProfile.FirstOrDefault(p => p.Id == model.userProfileMini.id);
-            return commentary;
-        }
+            commentary.IdProject = project.Id;
+            commentary.UserProfile = _db.UserProfile.FirstOrDefault(p => p.Id == model.userid);
+            commentary.IdUserProfile = commentary.UserProfile.Id;
 
-        public void AddCommentaryAction(ViewModels.Commentary model, Project project, Models.Commentary commentary, UserProfile userProfile)
-        {
-            if (Validation(userProfile))
-            {
-                commentary = ContructorCommentary(model, commentary, project);
-                AddCommentary(project, commentary);
-            }
-            BadRequest("Error. 401 Unauthorized.");
-        }
-
-        public void AddCommentary(Project project, Models.Commentary commentary)
-        {
             _db.Commentary.Add(commentary);
             project.ProjectComments.Add(commentary);
             UpdateProjectDB(project);
-        }
-        
-        [HttpPost("[action]")]
-        [AllowAnonymous]
-        public IActionResult removeCommentInProject([FromBody] ViewModels.RemoveComment model)
-        {
-            var userProfile = _db.UserProfile.ToList().FirstOrDefault(p => p.Id == model.UserId);
-            var project = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
-            var commentary = _db.Commentary.ToList().FirstOrDefault(p => p.Id == model.CommentaryId);
-            RemoveCommentaryAction(model, project, commentary, userProfile);
-            return Ok("Ok");
-        }
 
-        public bool Validation(UserProfile userProfile)
-        {
-            if (userProfile.Role == "User" || userProfile.Role == "AuthUser" || userProfile.Role == "Admin")
+            var mini = new UserProfileMini
             {
-                return true;
-            }
-            return false;
-        }
+                firstName = commentary.UserProfile.FirstName,
+                secondName = commentary.UserProfile.SecondName,
+                id = commentary.UserProfile.Id,
+                urlPhoto = commentary.UserProfile.UrlPhoto
+            };
 
-        public void RemoveCommentaryAction(ViewModels.RemoveComment model, Project project, Models.Commentary commentary, UserProfile userProfile)
-        {
-            if (Validation(userProfile))
+            var displayView = new ViewModels.Commentary
             {
-                RemoveCommentary(project, commentary);
-            }
-            BadRequest("Error. 401 Unauthorized.");
-        }
+                content = commentary.Content,
+                Id = commentary.Id,
+                userProfile = mini,
+                dataCreated = commentary.DateCreated,
+                userid = commentary.UserProfile.Id,
+                projectid = commentary.Project.Id
+            };
 
-        public void RemoveCommentary(Project project, Models.Commentary commentary)
-        {
-            _db.Commentary.Remove(commentary);
-            project.ProjectComments.Remove(commentary);
-            UpdateProjectDB(project);
+            return new ObjectResult(displayView);
         }
-
+                
         public void UpdateProjectDB(Project project)
         {
             _db.Project.Update(project);
             _db.SaveChanges();
         }
 
-        [HttpGet("[action]/{id}/{userId}")]
-        public IActionResult getCommentsByProjects(int projectId, int skip, int take)
+        [HttpGet("[action]/{projectId}")]
+        public IActionResult getCommentsByProjects(int projectId)
         {
-            var commentaryes = new List<ViewModels.Commentary>();
-            return new ObjectResult(commentaryes = ViewCommentaryes(projectId, commentaryes));
-        }
+            List<Models.Commentary> commentarys = _db.Commentary.ToList().FindAll(p => p.IdProject == projectId);
+            var coments = new List<ViewModels.Commentary>();
 
-        public List<ViewModels.Commentary> ViewCommentaryes(int projectId, List<ViewModels.Commentary> commentaryes)
-        {
-            return commentaryes = View(projectId);
-        }
-
-        public List<ViewModels.Commentary> View(int projectId)
-        {
-            var commentaryes = _db.Commentary.ToList().FindAll(p => p.Project.Id == projectId);
-            var viewCommentaryes = new List<ViewModels.Commentary>();
-            foreach (var comment in commentaryes)
+            foreach (var com in commentarys)
             {
-                var bufComment = new ViewModels.Commentary();
-                FillCommentInfo(comment, bufComment);
-                FillUserMiniInfo(comment, bufComment);
+                var comment = new ViewModels.Commentary();
+                comment.Id = com.Id;
+                comment.projectid = com.IdProject;
+                comment.dataCreated = com.DateCreated;
+                comment.content = com.Content;
+                comment.userid = com.IdUserProfile;
+
+                var userProf = _db.UserProfile.FirstOrDefault(p => p.Id == com.IdUserProfile);
+               
+                var mini = new UserProfileMini
+                {
+                    firstName = userProf.FirstName,
+                    secondName = userProf.SecondName,
+                    id = userProf.Id,
+                    urlPhoto = userProf.UrlPhoto
+                };
+                comment.userProfile = mini;
+                coments.Add(comment);
             }
-            return viewCommentaryes;
+            return new ObjectResult(coments);
         }
 
-        public ViewModels.Commentary FillCommentInfo(Models.Commentary comment, ViewModels.Commentary bufComment)
+        [HttpPost("[action]")]
+        public IActionResult removeCommentInProject([FromBody] ViewModels.RemoveComment model)
         {
-            bufComment.Id = comment.Id;
-            bufComment.ProjectId = comment.Project.Id;
-            bufComment.Content = comment.Content;
-            bufComment.DateCreated = comment.DateCreated;
-            return bufComment;
+            var commentary = _db.Commentary.ToList().FirstOrDefault(p => p.Id == model.id);
+            if (commentary.IdUserProfile == model.userid || _db.UserProfile.FirstOrDefault(p => p.Id == model.userid).Role == "Admin")
+            {
+                _db.Commentary.Remove(commentary);
+                _db.SaveChanges();
+            }
+            else
+            {
+                BadRequest("Error. 401 Unauthorized.");
+            }
+            return Ok();
         }
-
-        public ViewModels.Commentary FillUserMiniInfo(Models.Commentary comment, ViewModels.Commentary bufComment)
-        {
-            bufComment.userProfileMini.id = comment.UserProfile.Id;
-            bufComment.userProfileMini.firstName = comment.UserProfile.FirstName;
-            bufComment.userProfileMini.secondName = comment.UserProfile.SecondName;
-            bufComment.userProfileMini.urlPhoto = comment.UserProfile.UrlPhoto;
-            return bufComment;
-        }
-
-        //End Commentary
-
+  
         [HttpGet("getProjects/{take}/{skip}/{property}/{type}/{value}")]
         public List<Models.Project> GetInstructionDefaulttype(int take, int skip, string property, string type, string value)
         {

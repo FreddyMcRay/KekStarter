@@ -11,9 +11,10 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20170922192236_Visa")]
+    partial class Visa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,10 +82,6 @@ namespace KekStarter.Migrations
 
                     b.Property<string>("DateCreated");
 
-                    b.Property<int>("IdProject");
-
-                    b.Property<int>("IdUserProfile");
-
                     b.Property<int?>("ProjectId");
 
                     b.Property<int?>("UserProfileId");
@@ -96,20 +93,6 @@ namespace KekStarter.Migrations
                     b.HasIndex("UserProfileId");
 
                     b.ToTable("Commentary");
-                });
-
-            modelBuilder.Entity("KekStarter.Models.FollowsUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ProjectId");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FollowsUser");
                 });
 
             modelBuilder.Entity("KekStarter.Models.Project", b =>

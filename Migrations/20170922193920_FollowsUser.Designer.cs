@@ -11,9 +11,10 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20170922193920_FollowsUser")]
+    partial class FollowsUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,10 +81,6 @@ namespace KekStarter.Migrations
                     b.Property<string>("Content");
 
                     b.Property<string>("DateCreated");
-
-                    b.Property<int>("IdProject");
-
-                    b.Property<int>("IdUserProfile");
 
                     b.Property<int?>("ProjectId");
 
