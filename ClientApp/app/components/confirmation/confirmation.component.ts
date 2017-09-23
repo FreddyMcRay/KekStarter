@@ -1,6 +1,10 @@
 ﻿import { Component } from '@angular/core';
 import { CloudinaryOptions, CloudinaryUploader } from "ng2-cloudinary";
 import { Ng2FileDropAcceptedFile, Ng2FileDropRejectedFile } from 'ng2-file-drop';
+import { RestService } from '../../RestService/rest.service';
+import { AuthUser } from '../../models/user.models';
+import { UserService } from '../../UserService/user.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'confirmation',
@@ -12,13 +16,14 @@ export class ConfirmationComponent {
 
     public scanImage: string;
     public successUpload: boolean = false;
-
+    public user: AuthUser
     public supportedFileTypes: string[] = ['image/png', 'image/jpeg', 'image/gif']
 
     uploader: CloudinaryUploader = new CloudinaryUploader(
         new CloudinaryOptions({ cloudName: 'dbsjugefb', uploadPreset: 'bkydfdx3' })
     );
-    constructor() {
+    constructor(private service: RestService, private userService: UserService, private router: Router) {
+        this.user = this.userService.getCurrentUser();
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
             console.log(item);
             let res: any = JSON.parse(response);
@@ -31,6 +36,19 @@ export class ConfirmationComponent {
     }
     public dragFileAccepted(acceptedFile: Ng2FileDropAcceptedFile) {
         this.uploader.uploadAll();
+    }
+
+    public sendToServer() {
+        this.service.sendConfirmInfoToServer({ userId: this.user.id, scanImage: this.scanImage }).subscribe(
+            result => {
+                console.log('nice confirmation');
+                this.router.navigate(['/home']);
+            })
+    }
+
+    public declineSending() {
+        this.successUpload = false;
+        this.scanImage = '';
     }
    
 }

@@ -89,6 +89,10 @@ export class RestService {
             console.log("commend is delete");
         });
     }
+
+    public sendConfirmInfoToServer(info: any) {
+        return this.http.post('api/', info);
+    }
 }
 
 export class User {

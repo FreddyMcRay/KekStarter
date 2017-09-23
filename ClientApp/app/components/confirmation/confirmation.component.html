@@ -15,8 +15,8 @@
         <div *ngIf="successUpload">
             <img src="{{scanImage}}" />
             <div class="controls">
-                <a class="btn btn_subscribe">Add new scan</a>
-                <a class="btn  btn_subscribe">Send</a>
+                <a class="btn btn_subscribe" (click)="declineSending()">Add new scan</a>
+                <a class="btn  btn_subscribe" (click)="sendToServer()">Send</a>
             </div>
         </div>
         
