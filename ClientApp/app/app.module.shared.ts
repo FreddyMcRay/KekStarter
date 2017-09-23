@@ -31,6 +31,7 @@ import { ProjectsBlockComponent } from './components/projectsBlock/projectsBlock
 import { DisplayProjectComponent } from './components/displayProject/displayProject.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { PayWayComponent } from './components/draft/payway/payway.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
@@ -54,7 +55,8 @@ import { UserService } from "./UserService/user.service";
         ProjectsBlockComponent,
         DisplayProjectComponent,
         CommentComponent,
-        PayWayComponent
+        PayWayComponent,
+        ConfirmationComponent
     ],
     imports: [
         CommonModule,
@@ -82,6 +84,7 @@ import { UserService } from "./UserService/user.service";
             { path: 'projects/:property', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'projects/:property/:type', component: ProjectsBlockComponent, data: { title: 'Projects' } },
             { path: 'profile/:id', component: ProfileComponent },
+            { path: 'confirm', component: ConfirmationComponent },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent, data: { title: 'Home' } },
             { path: '**', redirectTo: 'home' }

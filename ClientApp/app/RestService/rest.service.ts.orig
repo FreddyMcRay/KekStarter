@@ -16,15 +16,15 @@ export class RestService {
         this.user.login = username;
         this.user.password = password;
         console.log(this.user);
-       return this.http.post("api/Login", this.user)
-                .map((response: Response) => {
-                    let user = response.json();
-                    console.log("rest " + user);
-                    if (user && user.role != 'Guest') {
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-                    }
-                    return user;
-                });
+        return this.http.post("api/Login", this.user)
+            .map((response: Response) => {
+                let user = response.json();
+                console.log("rest " + user);
+                if (user && user.role != 'Guest') {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                }
+                return user;
+            });
     }
 
     public registration(username: string, email: string, name: string, password: string) {
@@ -34,7 +34,7 @@ export class RestService {
         this.ruser.name = username;
         console.log(this.ruser);
         return this.http.post("api/Register", this.ruser);
-            
+
     }
 
     public getUserById(id: string) {
@@ -57,38 +57,45 @@ export class RestService {
         return this.http.get('/api/getProjects/' + take + '/' + skip + '/' + property + '/' + type + '/' + value);
     }
 
-<<<<<<< HEAD
-    public getProjectById(is: string) {
-        return this.http.get('/api/getProjectById');
+    public getProjectById(id: string, userId: string) {
+        return this.http.get('/api/getProjectById/' + id + '/' + userId);
     }
 
-    public userFollowProject(userId: string, projectId: string) {
-        return this.http.get('/api/followProject/' + userId + '/' + projectId);
+    public getCommentsByProject( projectId: string) {
+        return this.http.get('api/getCommentsByProjects' + '/' + projectId);
     }
 
-    public userUnFollowProject(userId: string, projectId: string) {
-        return this.http.get('/api/unFollowProject/' + userId + '/' + projectId);
+    public userFollowProject(followInfo: any) {
+        return this.http.post('/api/FollowProject', followInfo);
     }
 
-    public addRatingToProject(rating: string) {
-        this.http.get('/api/addRatingToProject/' + rating).subscribe(result => {
+    public userUnFollowProject(followInfo: any) {
+        return this.http.post('/api/UnFollowProject', followInfo);
+    }
+
+    public addRatingToProject(rating: any) {
+        this.http.post('/api/AddRating/', rating).subscribe(result => {
             console.log('nice rating');
-=======
-    public getCommentsByProject(take: string, skip: string, projectId: string) {
-        return this.http.get('api/getCommentsByProjects' + '/' + projectId + '/' + skip + '/' + take);
+        })
     }
-
     public sendCommentsOnServer(commentary: any) {
-        this.http.post('api/addCommentInProject/', commentary).subscribe(result => {
-            console.log("hey");
-        });
+        return this.http.post('api/addCommentInProject/', commentary);
     }
 
     public removeCommentInProject(commentary: any) {
         return this.http.post('api/removeCommentInProject/', commentary).subscribe(result => {
             console.log("commend is delete");
->>>>>>> Add_comments_component
         });
+    }
+
+<<<<<<< HEAD
+    public logOut() {
+        console.log('anal');
+        return this.http.get('api/logOut');
+=======
+    public sendConfirmInfoToServer(info: any) {
+        return this.http.post('api/', info);
+>>>>>>> Add_confirmation_component
     }
 }
 

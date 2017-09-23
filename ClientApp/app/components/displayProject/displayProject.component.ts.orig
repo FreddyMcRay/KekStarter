@@ -30,6 +30,7 @@ export class DisplayProjectComponent implements OnDestroy {
     targets: FinansalGoal[] = [];
     preview: boolean = false;
 
+<<<<<<< HEAD
     public checkRole() {
         return (this.user.role == 'Admin' || this.user.id == this.creater.id) ? true : false;
     }
@@ -37,6 +38,10 @@ export class DisplayProjectComponent implements OnDestroy {
     constructor(private service: RestService, private activateRoute: ActivatedRoute, private projectService: ProjectService, private router: Router,
         private fb: FormBuilder) {
         if (!(typeof localStorage === "undefined")) {
+=======
+    constructor(private service: RestService, private activateRoute: ActivatedRoute, private projectService: ProjectService, private router: Router) {
+        if (!(typeof localStorage === "undefined") && (localStorage.getItem('currentUser'))) {
+>>>>>>> Add_confirmation_component
             this.guest = false;
             this.user = JSON.parse(localStorage.getItem('currentUser'));
         } else {

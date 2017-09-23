@@ -92,6 +92,10 @@ export class RestService {
         console.log('anal');
         return this.http.get('api/logOut');
     }
+
+    public sendConfirmInfoToServer(info: any) {
+        return this.http.post('api/', info);
+    }
 }
 
 export class User {
