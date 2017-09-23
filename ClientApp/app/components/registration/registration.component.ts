@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { RestService } from "../../RestService/rest.service";
+import { Language } from "angular-l10n";
 import "rxjs/Rx";
 
 @Component({
@@ -9,6 +10,7 @@ import "rxjs/Rx";
     styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
+    @Language() lang;
     model: any = {};
     returnUrl: string;
     loading = false;

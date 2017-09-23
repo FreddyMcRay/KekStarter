@@ -6,6 +6,25 @@
   "Admin": "Admin",
   "logout": "LogOut",
   "login": "LogIn",
-  "signup": "SignUp"
+  "signup": "SignUp",
+  "username": "UserName",
+  "password": "Password",
+  "usernameIsRequired": "Username is required",
+  "passwordIsRequired": "Password is required",
+  "yourName": "Your name",
+  "nameIsRequired": "Name is required",
+  "email": "Your email",
+  "emailIsRequired": "Email is required",
+  "confirmPassword": "Confirm Password",
+  "isNotConfirmed": "Password is not confirmed",
+
+  "Profile": {
+    "registration": "Registration",
+    "lastLogIn": "Last logIn",
+    "userProjects": "User projects",
+    "followedProjects": "Followed projects",
+    "noProjects": "You have no projects",
+    "noFollowedProjects": "You have no followed projects"
+  }
 
 }

@@ -15,8 +15,8 @@
                     <strong>{{user.firstName}} {{user.secondName}}</strong>
                 </div>
                 <div class="otherInfo">
-                    <div class="registrationDate">Registration: {{user.registrationDate}}</div>
-                    <div class="registrationDate">Last login: {{user.lastLogInDate}}</div>
+                    <div class="registrationDate">{{ 'Profile.registration' | translate:lang }}: {{user.registrationDate}}</div>
+                    <div class="registrationDate">{{ 'Profile.lastLogIn' | translate:lang }}: {{user.lastLogInDate}}</div>
                 </div>
             </div>
         </div>
@@ -27,12 +27,12 @@
                 <ul class="nav nav-tabs ">
                     <li class="active">
                         <a href="#yourProjects" data-toggle="tab">
-                            User projects
+                            {{ 'Profile.userProjects' | translate:lang }}
                         </a>
                     </li>
                     <li>
                         <a href="#followedProjects" data-toggle="tab">
-                            Followed projects
+                            {{ 'Profile.followedProjects' | translate:lang }}
                         </a>
                     </li>
                 </ul>
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div *ngIf="!projects.length" class="row text-center" style="margin-top: 30px;">
-                            <h3>You have no projects</h3>
+                            <h3>{{ 'Profile.noProjects' | translate:lang }}</h3>
                         </div>
                     </div>
                     <div class="tab-pane" id="followedProjects" style="min-height: 500px;">

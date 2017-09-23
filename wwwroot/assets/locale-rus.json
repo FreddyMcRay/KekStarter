@@ -6,6 +6,25 @@
   "Admin": "Админ",
   "logout": "Выход",
   "login": "Вход",
-  "signup": "Регистрация"
+  "signup": "Регистрация",
+  "username": "Имя пользователя",
+  "password": "Пароль",
+  "usernameIsRequired": "Требуется имя пользователя",
+  "passwordIsRequired": "Требуется пароль",
+  "yourName": "Ваше имя",
+  "nameIsRequired": "Требуется имя",
+  "email": "Ваш email",
+  "emailIsRequired": "Требуется email",
+  "confirmPassword": "Подтверждение пароля",
+  "isNotConfirmed": "Пароль не подтверждён",
+
+  "Profile": {
+    "registration": "Регистрация",
+    "lastLogIn": "Последний вход",
+    "userProjects": "Проекты пользователя",
+    "followedProjects": "Отслеживаемые проекты",
+    "noProjects": "У пользователя нет проектов",
+    "noFollowedProjects": "У пользователя нет отслеживаемых проектов"
+  }
 
 }
