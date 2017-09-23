@@ -92,6 +92,8 @@ namespace KekStarter.Models
         public int Id { get; set; }
         public Project Project { get; set; }
         public UserProfile UserProfile { get; set; }
+        public int IdProject { get; set; }
+        public int IdUserProfile { get; set; }
         public string DateCreated { get; set; }
         public string Content { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KekStarter.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,13 +10,15 @@ namespace KekStarter.ViewModels
     {
         public int Id { get; set; }
 
-        public int ProjectId { get; set; }
+        public int projectid { get; set; }
 
-        public UserProfileMini userProfileMini { get; set; }
+        public int userid { get; set; }
 
-        public string DateCreated { get; set; }
+        public UserProfileMini userProfile { get; set; }
 
-        public string Content { get; set; }
+        public string dataCreated { get; set; }
+
+        public string content { get; set; }
     }
 
     //public class UserProfileMini

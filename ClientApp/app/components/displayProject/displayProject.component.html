@@ -97,7 +97,7 @@
                         <div [innerHTML]="project.content" class="tab-pane active ql-editor " id="content"></div>
                     </div>
                     <div *ngIf="!preview" class="tab-pane" id="comments">
-                        <comments></comments>
+                        <comments [projectId]="id"></comments>
                     </div>
                 </div>
             </div>
