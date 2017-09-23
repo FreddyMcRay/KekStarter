@@ -8,6 +8,7 @@ import { UserProfileMini } from '../../models/user.models';
 import { Project, FinansalGoal } from '../../models/draft.models';
 import { ProjectService } from '../../ProjectService/project.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { MessageService } from '../../MessageService/message.service';
 
 @Component({
     selector: 'displayProject',
@@ -35,7 +36,7 @@ export class DisplayProjectComponent implements OnDestroy {
     }
 
     constructor(private service: RestService, private activateRoute: ActivatedRoute, private projectService: ProjectService, private router: Router,
-        private fb: FormBuilder) {
+        private fb: FormBuilder, private messageService: MessageService) {
         if (!(typeof localStorage === "undefined")) {
             this.guest = false;
             this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -101,15 +102,25 @@ export class DisplayProjectComponent implements OnDestroy {
 
     public followProject() {
         this.service.userFollowProject({ UserId: this.user.id, ProjectId: this.project.id })
-            .subscribe(data => { this.project.followed = true },
-            error => { }
+            .subscribe(data => {
+                this.project.followed = true;
+                this.messageService.sendSuccessMessage('You follow this project');
+            },
+            error => {
+                this.messageService.sendErrorMessage('Error with following');
+            }
             )
     }
 
     public unFollowProject() {
         this.service.userUnFollowProject({ UserId: this.user.id, ProjectId: this.project.id })
-            .subscribe(data => { this.project.followed = false },
-            error => { }
+            .subscribe(data => {
+                this.project.followed = false;
+                this.messageService.sendSuccessMessage('You unfollow this project')
+            },
+            error => {
+                this.messageService.sendErrorMessage('Error with unfollowing');
+            }
             )
     }
 

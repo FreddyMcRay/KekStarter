@@ -37,6 +37,7 @@ import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
 import { ProjectService } from "./ProjectService/project.service";
 import { UserService } from "./UserService/user.service";
+import { MessageService } from './MessageService/message.service';
 
 
 @NgModule({
@@ -90,7 +91,7 @@ import { UserService } from "./UserService/user.service";
             { path: '**', redirectTo: 'home' }
         ])
     ],
-    providers: [RestService, RoleService, ProjectService, UserService]
+    providers: [RestService, RoleService, ProjectService, UserService, MessageService]
 })
 export class AppModuleShared {
 }

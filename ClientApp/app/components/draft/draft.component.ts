@@ -4,6 +4,7 @@ import { Project, FinansalGoal } from '../../models/draft.models';
 import { ProjectService } from '../../ProjectService/project.service';
 import { AuthUser } from '../../models/user.models';
 import { UserService } from '../../UserService/user.service';
+import { MessageService } from '../../MessageService/message.service';
 import "rxjs/Rx";
 
 @Component({
@@ -17,7 +18,7 @@ export class DraftComponent {
     invalid = false;
     tags: any[] = [];
 
-    constructor(private projectService: ProjectService, private userService: UserService, private router: Router) {
+    constructor(private projectService: ProjectService, private userService: UserService, private router: Router, private messageService: MessageService) {
         this.project = projectService.getDraft();
         console.log(this.project)
     }
@@ -31,10 +32,12 @@ export class DraftComponent {
 
     saveDraft() {
         this.projectService.saveDraft(this.project);
+        this.messageService.sendSuccessMessage('Successful saving')
     }
 
     removeDraft() {
         this.projectService.removeDraft();
+        this.messageService.sendErrorMessage('Successful deleting');
     }
 
     send() {

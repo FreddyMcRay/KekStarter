@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 import { RestService } from "../../RestService/rest.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleService } from "../../RoleService/role.service";
 import { AuthUser } from '../../models/user.models';
 import { Message } from 'primeng/primeng';
+import { MessageService } from '../../MessageService/message.service';
 
 @Component({
     selector: 'app',
@@ -16,12 +16,13 @@ import { Message } from 'primeng/primeng';
 export class AppComponent {
     angularClientSideData = 'Angular';
     text: string;
+    subscription: Subscription;
     loading: boolean = false;
     returnUrl: string;
     guest: boolean = true;
     message: Message[] = [];
     user: AuthUser;
-    public constructor(private titleService: Title, private router: Router, private service: RestService, private activeRoute: ActivatedRoute) {
+    public constructor(private messageService: MessageService, private router: Router, private service: RestService, private activeRoute: ActivatedRoute) {
         if (!(typeof localStorage === "undefined") && localStorage.getItem('currentUser')) {
             this.user = JSON.parse(localStorage.getItem('currentUser') || "");
             if (this.user.role !== "Guest") {
@@ -30,13 +31,8 @@ export class AppComponent {
         } else {
             this.user = new AuthUser();
         }
-
+        this.subscription = this.messageService.getMessage().subscribe(message => { this.message.push(message) });
         this.returnUrl = activeRoute.snapshot.queryParams["returnUrl"] || "/";
-    }
-
-    public setTitle(newTitle: string) {
-        this.titleService.setTitle(newTitle);
-
     }
 
     public logOut() {
@@ -54,21 +50,13 @@ export class AppComponent {
     handleEvent(value: boolean) {
         this.guest = value;
         this.loading = false;
-        if (value == true) {
-            this.message.push({ severity: 'error', summary: 'Error', detail: 'Login failed' });
+        if (value == false) {
+            this.user = JSON.parse(localStorage.getItem('currentUser'));
+            console.log(this.user);
         } else {
-            if (value == false) {
-                this.message.push({ severity: 'info', summary: 'Success', detail: 'Login success' });
-                this.user = JSON.parse(localStorage.getItem('currentUser') || "");
-                console.log(this.user);
-            }
+            this.user = new AuthUser();
+            console.log(this.user);
         }
-        this.user = JSON.parse(localStorage.getItem('currentUser') || "");
-        console.log(this.user);
-    }
-
-    registrationHandle(event: any) {
-        this.message.push({ severity: 'info', summary: 'Success', detail: 'Check your email to confirm account' });
     }
 
     clear() {
