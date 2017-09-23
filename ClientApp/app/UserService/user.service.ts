@@ -10,9 +10,10 @@ export class UserService {
     }
 
     getCurrentUser() {
-        if (!(typeof localStorage === 'undefined')) {
-            return JSON.parse(localStorage.getItem('currentUser') || '');
+        if (!(typeof localStorage === 'undefined') && localStorage.getItem('currentUser')) {
+            return JSON.parse(localStorage.getItem('currentUser'));
         }
+        return new AuthUser();
     }
 
     public jwt() {

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 import { RestService } from "../../RestService/rest.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleService } from "../../RoleService/role.service";
+import { UserService } from '../../UserService/user.service';
 import { AuthUser } from '../../models/user.models';
 import { Message } from 'primeng/primeng';
+import { LocaleService, Language } from 'angular-l10n';
 
 @Component({
     selector: 'app',
@@ -14,6 +15,7 @@ import { Message } from 'primeng/primeng';
     providers: [RoleService, RestService],
 })
 export class AppComponent {
+    @Language() lang: string;
     angularClientSideData = 'Angular';
     text: string;
     loading: boolean = false;
@@ -21,22 +23,20 @@ export class AppComponent {
     guest: boolean = true;
     message: Message[] = [];
     user: AuthUser;
-    public constructor(private titleService: Title, private router: Router, private service: RestService, private activeRoute: ActivatedRoute) {
-        if (!(typeof localStorage === "undefined") && localStorage.getItem('currentUser')) {
-            this.user = JSON.parse(localStorage.getItem('currentUser') || "");
-            if (this.user.role !== "Guest") {
-                this.guest = false;
-            }
-        } else {
-            this.user = new AuthUser();
-        }
-
+    public constructor(private router: Router, private service: RestService, private activeRoute: ActivatedRoute, private locale: LocaleService,
+        private userService: UserService) {
+        this.user = this.userService.getCurrentUser();
+        if (this.user.role != 'Guest')
+            this.guest = false;
         this.returnUrl = activeRoute.snapshot.queryParams["returnUrl"] || "/";
     }
 
-    public setTitle(newTitle: string) {
-        this.titleService.setTitle(newTitle);
-
+    selectLanguage(language: string) {
+        this.locale.setCurrentLanguage(language);
+        this.user.language = language;
+        if (this.user.role != 'Guest') {
+            localStorage.setItem('currentUser', JSON.stringify(this.user));
+        }
     }
 
     public logOut() {

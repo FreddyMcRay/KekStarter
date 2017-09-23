@@ -1,0 +1,11 @@
+﻿{
+  "projects": "Projects",
+  "language": "Language",
+  "profile": "Profile",
+  "createProject": "Create project",
+  "Admin": "Admin",
+  "logout": "LogOut",
+  "login": "LogIn",
+  "signup": "SignUp"
+
+}

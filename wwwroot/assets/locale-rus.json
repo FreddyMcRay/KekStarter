@@ -1,0 +1,11 @@
+﻿{
+  "projects": "Проекты",
+  "language": "Язык",
+  "profile": "Профиль",
+  "createProject": "Создать проект",
+  "Admin": "Админ",
+  "logout": "Выход",
+  "login": "Вход",
+  "signup": "Регистрация"
+
+}
