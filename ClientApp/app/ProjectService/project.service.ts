@@ -31,7 +31,7 @@ export class ProjectService {
 
     removeDraft() {
         if (localStorage.getItem('draft')) {
-            localStorage.getItem('completionDate');
+            localStorage.removeItem('completionDate');
             localStorage.removeItem('draft');
         }
     }

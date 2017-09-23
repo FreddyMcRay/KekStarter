@@ -71,7 +71,7 @@
                         <preview [project]="project"></preview>
                         <div>
                             <div class="create-header finansal-header">Финансовые цели</div>
-                            <finansal-goal *ngFor="let goal of project.financialGoals"
+                            <finansal-goal *ngFor="let goal of project.finansalGoals"
                                            [finansalGoal]="goal"
                                            [editable]="true"
                                            (removeFinansalGoal)="deleteGoal($event)"></finansal-goal>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="row main remove">
                     <hr>
-                    <a class="btn btn_remove" (click)="removeDraft()">Удалить черновик</a>
+                    <a class="btn btn_remove" routerLink="/draft" (click)="removeDraft()">Удалить черновик</a>
                 </div>
             </div>
         </section>

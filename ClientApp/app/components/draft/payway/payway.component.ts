@@ -18,10 +18,10 @@ export class PayWayComponent implements OnInit {
 
     ngOnInit() {
         this.paywayForm = this.fb.group({
-            'cardNumber': [this.payment.cardNumber, Validators.required],
-            'expirationDate': [this.payment.expirationDate, Validators.required],
-            'cvCode': [this.payment.cvCode, Validators.required],
-            'owner': [this.payment.owner, Validators.required]
+            'cardNumber': [this.project.payment.cardNumber, Validators.required],
+            'expirationDate': [this.project.payment.expirationDate, Validators.required],
+            'cvCode': [this.project.payment.cvCode, Validators.required],
+            'owner': [this.project.payment.owner, Validators.required]
         });
     }
 
