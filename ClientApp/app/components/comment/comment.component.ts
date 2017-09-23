@@ -51,13 +51,17 @@ export class CommentComponent {
             .subscribe(result => {
                 this.yourComment = result.json();
                 console.log(this.yourComment);
-                this.comments.push(this.yourComment)
+                this.comments.push(this.yourComment);
+                this.content = "";
             });
     }
 
     deletecomment(i: number): void {
         let comment = this.comments[i];
-        this.service.removeCommentInProject(comment);
+        console.log("breaaaaaaa");
+        console.log(this.projectId, this.AuthUser.id, comment.userProfile, comment.id);
+        this.service.removeCommentInProject({ projectid: this.projectId, userid: this.AuthUser.id, createUser: comment.userProfile.id, id: comment.id });
+
         this.comments.splice(i, 1);
     }
 }
