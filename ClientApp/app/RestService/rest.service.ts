@@ -100,6 +100,10 @@ export class RestService {
     public getNewsByProject(projectId: string) {
         return this.http.get('api/' + projectId);
     }
+
+    public addPurchase(purchase: any) {
+        return this.http.post('api/', purchase);
+    }
 }
 
 export class User {

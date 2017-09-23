@@ -24,6 +24,7 @@ export class DisplayProjectComponent implements OnDestroy {
     user: AuthUser = new AuthUser();
     project: UserProjectFull = new UserProjectFull();
     rating: number;
+    inputSum: number = 0;
     guest: boolean = true;
     finansalGoalForm: FormGroup;
     preview: boolean = false;
@@ -64,7 +65,7 @@ export class DisplayProjectComponent implements OnDestroy {
         });
     }
 
-    addGoal(form: FormGroup) {
+    public addGoal(form: FormGroup) {
         if (!form.valid) return;
         let goal: FinansalGoal = form.value;
         this.project.goals.push(goal);
@@ -96,7 +97,7 @@ export class DisplayProjectComponent implements OnDestroy {
             )
     }
 
-    refactor() {
+    public refactor() {
         this.router.navigate(['/draft']);
     }
 
@@ -106,6 +107,17 @@ export class DisplayProjectComponent implements OnDestroy {
         }
         if (this.checkRole()) {
 
+        }
+    }
+
+    public addPurchase() {
+        if (this.inputSum == 0) {
+            this.messageService.sendErrorMessage('Error with purchasing');
+        } else {
+            this.service.addPurchase({ projectId: this.project.id, userId: this.user.id, purchase: this.inputSum })
+                .subscribe(result => {
+                    this.messageService.sendSuccessMessage('Thank you,' + this.user.login);
+                })
         }
     }
 }
