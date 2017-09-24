@@ -10,6 +10,7 @@ import { ProjectService } from '../../ProjectService/project.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from '../../MessageService/message.service';
 import { UserService } from '../../UserService/user.service';
+import { Language } from 'angular-l10n';
 
 @Component({
     selector: 'displayProject',
@@ -17,6 +18,7 @@ import { UserService } from '../../UserService/user.service';
     styleUrls: ['./displayProject.component.css']
 })
 export class DisplayProjectComponent implements OnDestroy {
+    @Language() lang;
     id: number;
     private subscription: Subscription;
     parse: ProjectParseObject;

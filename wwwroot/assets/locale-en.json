@@ -25,6 +25,60 @@
     "followedProjects": "Followed projects",
     "noProjects": "You have no projects",
     "noFollowedProjects": "You have no followed projects"
-  }
+  },
+
+  "Comments": {
+    "comments": "Comments",
+    "newComment": "New comment",
+    "add": "Add"
+  },
+
+  "Confirmation": {
+    "accountConfirmation": "Account confirmation",
+    "youCant": "You can't create a project now. You need to verify your person.",
+    "pleaseUpload": "Please, upload your passport scan to verify your account.",
+    "dropPictureHere": "Drop a picture here",
+    "scanPictureCanBe": "Scan picture can be .png, .jpeg or .gif only",
+    "addNewScan": "Add new scan",
+    "send": "Send"
+  },
+
+  "displayProject": {
+    "sponsors": "sponsors",
+    "required": "Required",
+    "leftover": "Days left",
+    "projectGoal": "Project goal - minimum",
+    "time": "Term",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "edit": "Edit",
+    "subscribe": "Support",
+    "tags": "Tags",
+    "rating": "Rating",
+    "about": "About",
+    "comments": "Comments",
+    "finansial": "Finansial goal",
+    "enterGoalName": "Enter name of goal",
+    "enterGoalCost": "Enter cost of goal",
+    "add": "Add",
+    "youCanAdd": "You can create multiple goals. The total amount of the project will consist of the sum of all the objectives.",
+    "purchase": "Purchase",
+    "enterYourSum": "Enter your sum"
+  },
+
+  "successfullyCreateProject": "You have successfully created the project, click the \"Send\" button to verify the entered data and publish your project",
+  "send": "Send",
+  "save": "Save",
+  "preview": "Preview",
+  "finansialGoals": "Finansial goals",
+  "deletedraft": "Delete draft",
+  "paymentDetails": "Payment details",
+  "cardNumber": "Card number",
+  "validCardNumber": "Valid card number",
+  "expirationDate": "Expiration date",
+  "code": "code",
+  "owner": "Card owner",
+  "cardOwnerName": "Card owner name",
+  "checkCard": "Check card"
 
 }

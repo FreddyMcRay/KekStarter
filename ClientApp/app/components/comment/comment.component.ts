@@ -5,6 +5,7 @@ import { Comment } from '../../models/project.models';
 import { UserProfileMini, AuthUser } from '../../models/user.models';
 import { UserService } from '../../UserService/user.service';
 import { UserProject } from '../../models/project.models';
+import { Language } from 'angular-l10n';
 
 @Component({
     selector: 'comments',
@@ -14,6 +15,7 @@ import { UserProject } from '../../models/project.models';
 })
 
 export class CommentComponent {
+    @Language() lang;
     comments: Comment[] = [];
     yourComment: Comment;
     content: string;

@@ -18,7 +18,7 @@
             <div class="stats">
                 <div class="stats-item">
                     <strong class="stats-item_strong">{{project.sponsors}}</strong>
-                    <div class="stats-item_caption">спонсора</div>
+                    <div class="stats-item_caption">{{'displayProject.sponsors' | translate:lang }}</div>
                 </div>
                 <div class="stats-item">
                     <span class="stats-item_sum">
@@ -26,22 +26,22 @@
                         <span class="stats-item_currency">BYN</span>
                         <sup class="stats-item_percentage">{{project.progress}} %</sup>
                     </span>
-                    <div class="stats-item_caption">Необходимо {{project.requiredSum}} BYN</div>
+                    <div class="stats-item_caption">{{'displayProject.required' | translate:lang }} {{project.requiredSum}} BYN</div>
                 </div>
                 <div class="stats-item">
                     <strong class="stats-item_strong">{{project.leftOver}}</strong>
-                    <div class="stats-item_caption">Осталось дней</div>
+                    <div class="stats-item_caption">{{'displayProject.leftover' | translate:lang }}</div>
                 </div>
                 <div class="stats-item">
                     <p class="stats-item_info">
-                        Цель проекта — минимум {{project.requiredSum}} BYN
+                        {{'displayProject.projectGoal' | translate:lang }} {{project.requiredSum}} BYN
                         <br>
-                        Срок — {{project.dateEnd}}
+                        {{'displayProject.time' | translate:lang }} — {{project.dateEnd}}
                     </p>
-                    <a *ngIf="!preview && !project.followed" (click)="followProject()" class="btn  btn_subscribe" [ngClass]="{'disabled' : guest}">Подписаться</a>
-                    <a *ngIf="!preview && project.followed" (click)="unFollowProject()" class="btn  btn_subscribe">Отписаться</a>
-                    <a *ngIf="preview && !project.followed" (click)="refactor()" class="btn  btn_subscribe">Редактировать</a>
-                    <a href="#" class="btn  btn_support" *ngIf="!preview" [ngClass]="{'disabled' : guest}" data-toggle="modal" data-target="#purchase" style="cursor: pointer">Поддержать</a>
+                    <a *ngIf="!preview && !project.followed" (click)="followProject()" class="btn  btn_subscribe" [ngClass]="{'disabled' : guest}">{{'displayProject.follow' | translate:lang }}</a>
+                    <a *ngIf="!preview && project.followed" (click)="unFollowProject()" class="btn  btn_subscribe">{{'displayProject.unfollow' | translate:lang }}</a>
+                    <a *ngIf="preview && !project.followed" (click)="refactor()" class="btn  btn_subscribe">{{'displayProject.edit' | translate:lang }}</a>
+                    <a href="#" class="btn  btn_support" *ngIf="!preview" [ngClass]="{'disabled' : guest}" data-toggle="modal" data-target="#purchase" style="cursor: pointer">{{'displayProject.subscribe' | translate:lang }}</a>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
     <div class="row" style="margin-top: -15px; margin-left: -20px">
         <div class="col-xs-8" *ngIf="!preview">
             <div class="line">
-                <h4 >Tags:</h4>
+                <h4 >{{'displayProject.tags' | translate:lang }}:</h4>
             </div>
             <div class="line" style="vertical-align: bottom">
                 <a *ngFor="let tag of project.tags" class="tag" routerLink="/projects/all/tag/{{tag}}">{{tag}}  </a>
@@ -57,7 +57,7 @@
         </div>
         <div class="col-xs-8" *ngIf="preview">
             <div class="line">
-                <h4>Tags:</h4>
+                <h4>{{'displayProject.tags' | translate:lang }}:</h4>
             </div>
             <div class="line" style="vertical-align: bottom">
                 <a *ngFor="let tag of project.tags" class="tag">{{tag}}  </a>
@@ -65,7 +65,7 @@
         </div>
         <div class="col-xs-4">
             <div *ngIf="!preview">
-                <h4 class="line text-center">Rating: {{project.rating}}</h4>
+                <h4 class="line text-center">{{'displayProject.rating' | translate:lang }}: {{project.rating}}</h4>
                 <div class="line">
                     <rating [(ngModel)]="rating" class="line"></rating>  
                 </div>
@@ -83,12 +83,12 @@
                 <ul class="nav nav-tabs ">
                     <li class="active">
                         <a href="#content" data-toggle="tab">
-                            О проекте
+                            {{'displayProject.about' | translate:lang }}
                         </a>
                     </li>
                     <li *ngIf="!preview">
                         <a href="#comments" data-toggle="tab">
-                            Комментарии
+                            {{'displayProject.comments' | translate:lang }}
                         </a>
                     </li>
                 </ul>
@@ -117,13 +117,13 @@
     </div>
     <div class="block" *ngIf="checkRole()">
         <form [formGroup]="finansalGoalForm">
-            <div class="create-header"><p>Финансовая цель</p></div>
+            <div class="create-header"><p>{{'displayProject.finansial' | translate:lang }}</p></div>
             <div class="row">
                 <div class="col-xs-6">
                     <input id="finansal-input-title"
                            class="finansal"
                            type="text"
-                           placeholder="Введите название цели"
+                           placeholder="{{'displayProject.enterGoalName' | translate:lang }}"
                            pInputText
                            maxlength="20"
                            formControlName="title">
@@ -132,7 +132,7 @@
                     <input id="finansal-input-cost"
                            class="finansal"
                            type="number"
-                           placeholder="Введите сумму цели"
+                           placeholder="{{'displayProject.enterGoalCost' | translate:lang }}"
                            pInputText
                            formControlName="cost">
                     <span class="currency">BYN</span>
@@ -141,12 +141,12 @@
             <div class="row">
                 <div class="col-xs-6">
                     <a class="btn  btn_subscribe btn_add"
-                       (click)="addGoal(finansalGoalForm)">Добавить</a>
+                       (click)="addGoal(finansalGoalForm)">{{'displayProject.add' | translate:lang }}</a>
                 </div>
             </div>
         </form>
         <hr>
-        <p class="create-desc">Вы можете создавать несколько целей. Общая сумма проекта будет состоять из суммы всех целей</p>
+        <p class="create-desc">{{'displayProject.youCanAdd' | translate:lang }}</p>
     </div>
 </div>
 
@@ -154,17 +154,17 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4>Purchase</h4>
+                <h4>{{'displayProject.purchase' | translate:lang }}</h4>
             </div>
             <div class="modal-body" style="background-color: #ffffff">
                 <input id="finansal-input-cost"
                        [(ngModel)]="inputSum"
                        class="finansal"
                        type="number"
-                       placeholder="Введите вашу сумму"
+                       placeholder="{{'displayProject.enterYourSum' | translate:lang }}"
                        pInputText>
                 <div class="modal-footer">
-                    <a class="btn  btn_support" data-dismiss="modal" (click)="addPurchase()" style="width: 150px; margin-top: 10px;">Поддержать</a>
+                    <a class="btn  btn_support" data-dismiss="modal" (click)="addPurchase()" style="width: 150px; margin-top: 10px;">{{'displayProject.subscribe' | translate:lang }}</a>
                 </div>
             </div>
         </div>

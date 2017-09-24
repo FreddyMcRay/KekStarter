@@ -4,7 +4,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <h3 class="text-center">Payment Details</h3>
+                            <h3 class="text-center">{{ 'paymentDetails' | translate:lang }}</h3>
                             <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
                         </div>
                     </div>
@@ -13,9 +13,9 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="form-group">
-                                        <label>CARD NUMBER</label>
+                                        <label>{{ 'cardNumber' | translate:lang }}</label>
                                         <div class="input-group">
-                                            <input type="tel" class="form-control" placeholder="Valid Card Number" maxlength="16" formControlName="cardNumber" name="card" />
+                                            <input type="tel" class="form-control" placeholder="{{'validCardNumber' | translate:lang}}" maxlength="16" formControlName="cardNumber" name="card" />
                                             <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
                                         </div>
                                     </div>
@@ -24,13 +24,13 @@
                             <div class="row">
                                 <div class="col-xs-7 col-md-7">
                                     <div class="form-group">
-                                        <label><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                        <label><span class="hidden-xs">{{'expirationDate' | translate:lang}}</label>
                                         <input type="tel" class="form-control" placeholder="MM / YY" maxlength="5" formControlName="expirationDate" name="date" />
                                     </div>
                                 </div>
                                 <div class="col-xs-5 col-md-5 pull-right">
                                     <div class="form-group">
-                                        <label>CV CODE</label>
+                                        <label>CV {{'code' | translate:lang}}</label>
                                         <input type="tel" class="form-control" placeholder="CVC" maxlength="3" formControlName="cvCode" name="code" />
                                     </div>
                                 </div>
@@ -38,8 +38,8 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="form-group">
-                                        <label>CARD OWNER</label>
-                                        <input type="text" class="form-control" placeholder="Card Owner Names" formControlName="owner" name="owner" />
+                                        <label>{{'owner' | translate:lang}}</label>
+                                        <input type="text" class="form-control" placeholder="{{'cardOwnerName' | translate:lang}}" formControlName="owner" name="owner" />
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col-xs-11">
-                                <button class="btn btn-save" (click)="checkCard()" [ngClass]="{'green': checking}">Chek card</button>   <span class="glyphicon glyphicon-ok" *ngIf="checking" style="color: #36a12b; font-size: 25px; vertical-align: middle"></span>
+                                <button class="btn btn-save" (click)="checkCard()" [ngClass]="{'green': checking}">{{'checkCard' | translate:lang}}</button>   <span class="glyphicon glyphicon-ok" *ngIf="checking" style="color: #36a12b; font-size: 25px; vertical-align: middle"></span>
                             </div>
                         </div>
                     </div>

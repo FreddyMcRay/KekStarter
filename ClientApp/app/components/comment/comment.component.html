@@ -1,7 +1,7 @@
 ﻿+<div class="content-item" id="comments">
     <div class="container">
         <div class="col-sm-8" id="MainComment">
-            <h3>{{comments.length}} Comments</h3>
+            <h3>{{comments.length}} {{ 'Comments.comments' | translate:lang }}</h3>
             <div *ngFor="let comment of comments; let i = index">
                 <div class="media">
                     <div class="pull-right" *ngIf="checkroleForDeleteComment(i)">
@@ -20,7 +20,7 @@
         </div>
         <div class="newComment">
             <div class="col-xs-12">
-                <h3 class="pull-left" style="margin-right: 20px;">New Comment</h3>
+                <h3 class="pull-left" style="margin-right: 20px;">{{'Comments.newComment' | translate:lang}}</h3>
                 <fieldset>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-12 col-lg-12">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <button type="submit" (click)="sendCommentOnServer()" class="btn btn-normal pull-right">Add</button>
+                <button type="submit" (click)="sendCommentOnServer()" class="btn btn-normal pull-right">{{ 'Comments.add' | translate:lang }}</button>
             </div>
         </div>
     </div>

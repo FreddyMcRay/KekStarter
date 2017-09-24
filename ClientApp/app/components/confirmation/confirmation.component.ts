@@ -5,6 +5,7 @@ import { RestService } from '../../RestService/rest.service';
 import { AuthUser } from '../../models/user.models';
 import { UserService } from '../../UserService/user.service';
 import { Router } from '@angular/router';
+import { Language } from 'angular-l10n';
 
 @Component({
     selector: 'confirmation',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 
 export class ConfirmationComponent {
-
+    @Language() lang;
     public scanImage: string;
     public successUpload: boolean = false;
     public user: AuthUser

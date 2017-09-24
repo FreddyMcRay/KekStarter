@@ -1,22 +1,22 @@
 ﻿<div class="container">
     <div class="row text-center">
-        <h2>Account confirmation</h2>
-        <p>You can't create a project now. You need to verify your person.</p>
-        <p>Please, upload your passport scan to verify your account.</p>
+        <h2>{{ 'Confirmation.accountConfirmation' | translate:lang }}</h2>
+        <p>{{ 'Confirmation.youCant' | translate:lang }}</p>
+        <p>{{'Confirmation.pleaseUpload' | translate:lang }}</p>
         <div class="profile-picture-section" *ngIf="!successUpload">
             <div ng2FileDrop [ng2FileDropSupportedFileTypes]="supportedFileTypes" (ng2FileDropFileAccepted)="dragFileAccepted($event)"
                  [uploader]="uploader" class="profile-picture-section-drop-zone">
                 <div class=profile-picture-section-request-image-group>
-                    <p class="profile-picture-section-request-image-instructions">Drop a picture here</p>
+                    <p class="profile-picture-section-request-image-instructions">{{ 'Confirmation.dropPictureHere' | translate:lang }}</p>
                 </div>
             </div>
-            <p class="profile-picture-section-limitations">Scan picture can be .png, .jpeg or .gif only</p>
+            <p class="profile-picture-section-limitations">{{ 'Confirmation.scanPictureCanBe' | translate:lang }}</p>
         </div>
         <div *ngIf="successUpload">
             <img src="{{scanImage}}" />
             <div class="controls">
-                <a class="btn btn_subscribe" (click)="declineSending()">Add new scan</a>
-                <a class="btn  btn_subscribe" (click)="sendToServer()">Send</a>
+                <a class="btn btn_subscribe" (click)="declineSending()">{{ 'Confirmation.addNewScan' | translate: lang }}</a>
+                <a class="btn  btn_subscribe" (click)="sendToServer()">{{ 'Confirmation.send' | translate:lang }}</a>
             </div>
         </div>
         

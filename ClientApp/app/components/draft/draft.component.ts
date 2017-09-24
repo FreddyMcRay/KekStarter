@@ -5,6 +5,7 @@ import { ProjectService } from '../../ProjectService/project.service';
 import { AuthUser } from '../../models/user.models';
 import { UserService } from '../../UserService/user.service';
 import { MessageService } from '../../MessageService/message.service';
+import { Language } from 'angular-l10n';
 import "rxjs/Rx";
 
 @Component({
@@ -13,6 +14,7 @@ import "rxjs/Rx";
     styleUrls: ['./draft.component.css'],
 })
 export class DraftComponent {
+    @Language() lang;
     @ViewChild('begin') begin: ElementRef;
     project: Project;
     invalid = false;
