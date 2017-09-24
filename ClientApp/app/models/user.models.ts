@@ -10,6 +10,16 @@ export class AuthUser {
     onCheck: boolean = false;
 }
 
+export class User {
+    id: number;
+    userName: string;
+    role: string;
+    image = 'http://res.cloudinary.com/profunding/image/upload/v1505580510/default-user-image.jpg';
+    onCheck: boolean;
+    isBlocked: boolean;
+    scanImage: string = "";
+}
+
 export class UserProfile {
     id: number;
     firstName: string;

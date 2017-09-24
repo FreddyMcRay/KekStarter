@@ -16,6 +16,7 @@ import { RatingModule } from "ng2-rating";
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { GrowlModule } from 'primeng/primeng';
 import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
+import { ConfirmationService, ConfirmDialogModule, DataTableModule, DialogModule, DropdownModule,SharedModule } from "primeng/primeng";
 
 import { DraftComponent } from './components/draft/draft.component';
 import { GeneralInfoComponent } from './components/draft/general-info-component/general-info.component';
@@ -33,12 +34,14 @@ import { DisplayProjectComponent } from './components/displayProject/displayProj
 import { CommentComponent } from './components/comment/comment.component';
 import { PayWayComponent } from './components/draft/payway/payway.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 import { RestService } from "./RestService/rest.service";
 import { RoleService } from "./RoleService/role.service";
 import { ProjectService } from "./ProjectService/project.service";
 import { UserService } from "./UserService/user.service";
 import { MessageService } from './MessageService/message.service';
+import { AdminService } from './AdminService/admin.service';
 
 import { UserGuard } from './guards/user.guard';
 import { AuthGuard } from './guards/auth.guard';
@@ -61,7 +64,8 @@ import { AdminGuard } from './guards/admin.guard';
         DisplayProjectComponent,
         CommentComponent,
         PayWayComponent,
-        ConfirmationComponent
+        ConfirmationComponent,
+        AdminComponent
     ],
     imports: [
         CommonModule,
@@ -79,9 +83,15 @@ import { AdminGuard } from './guards/admin.guard';
         TagInputModule,
         RatingModule,
         GrowlModule,
+        DataTableModule,
+        SharedModule,
+        DropdownModule,
+        ConfirmDialogModule,
+        DialogModule,
         Angular2FontawesomeModule,
         TranslationModule.forRoot(),
         RouterModule.forRoot([
+            { path: 'admin', component: AdminComponent },
             { path: 'project/:id', component: DisplayProjectComponent },
             { path: 'draft', component: DraftComponent, canActivate: [AuthGuard] },
             { path: 'projects', component: ProjectsBlockComponent },
@@ -96,7 +106,8 @@ import { AdminGuard } from './guards/admin.guard';
             { path: '**', redirectTo: 'home' }
         ])
     ],
-    providers: [RestService, RoleService, ProjectService, UserService, MessageService, AuthGuard, UserGuard, AdminGuard]
+    providers: [RestService, RoleService, ProjectService, UserService, MessageService,
+        AdminService, ConfirmationService, AuthGuard, UserGuard, AdminGuard]
 })
 export class AppModuleShared {
     constructor(public locale: LocaleService, public translation: TranslationService) {

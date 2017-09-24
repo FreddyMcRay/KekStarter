@@ -1,0 +1,33 @@
+﻿.user-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.main-table {
+}
+
+.image-col {
+    width: 100px;
+}
+
+.main-table .button-group {
+    text-align: right;
+    padding: 20px 20px 20px 0px;
+}
+
+    .main-table .button-group .ui-button {
+        height: 40px;
+    }
+
+.main-table i:hover {
+    cursor: pointer;
+}
+
+[hidden] {
+    display: none;
+}
+
+.visible {
+    visibility: hidden;
+}

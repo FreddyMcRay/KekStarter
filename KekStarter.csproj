@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\AdminService\admin.service.ts" />
     <None Remove="ClientApp\app\components\displayProject\displayProject.component.ts" />
     <None Remove="ClientApp\app\guards\auth.guard.ts" />
     <None Remove="ClientApp\app\MessageService\message.service.ts" />
@@ -41,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\AdminService\admin.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\displayProject\displayProject.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\guards\admin.guard.ts" />
     <TypeScriptCompile Include="ClientApp\app\guards\user.guard.ts" />
