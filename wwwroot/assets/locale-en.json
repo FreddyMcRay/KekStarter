@@ -69,6 +69,7 @@
   },
 
   "displayProject": {
+    "createdBy": "Created by",
     "sponsors": "sponsors",
     "required": "Required",
     "leftover": "Days left",

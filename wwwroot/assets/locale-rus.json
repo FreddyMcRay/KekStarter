@@ -45,6 +45,7 @@
   },
 
   "displayProject": {
+    "createdBy": "Создатель",
     "sponsors": "спонсоры",
     "required": "Необходимо",
     "leftover": "Осталось дней",
