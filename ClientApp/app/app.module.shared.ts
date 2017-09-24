@@ -15,6 +15,7 @@ import { TagInputModule } from 'ng2-tag-input';
 import { RatingModule } from "ng2-rating";
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { GrowlModule } from 'primeng/primeng';
+import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
 
 import { DraftComponent } from './components/draft/draft.component';
 import { GeneralInfoComponent } from './components/draft/general-info-component/general-info.component';
@@ -79,6 +80,7 @@ import { AdminGuard } from './guards/admin.guard';
         RatingModule,
         GrowlModule,
         Angular2FontawesomeModule,
+        TranslationModule.forRoot(),
         RouterModule.forRoot([
             { path: 'project/:id', component: DisplayProjectComponent },
             { path: 'draft', component: DraftComponent, canActivate: [AuthGuard] },
@@ -97,4 +99,15 @@ import { AdminGuard } from './guards/admin.guard';
     providers: [RestService, RoleService, ProjectService, UserService, MessageService, AuthGuard, UserGuard, AdminGuard]
 })
 export class AppModuleShared {
+    constructor(public locale: LocaleService, public translation: TranslationService) {
+        this.locale.addConfiguration()
+            .addLanguages(['en', 'rus'])
+            .setCookieExpiration(30)
+            .defineLanguage('en');
+
+        this.translation.addConfiguration()
+            .addProvider('./assets/locale-');
+
+        this.translation.init();
+    }
 }

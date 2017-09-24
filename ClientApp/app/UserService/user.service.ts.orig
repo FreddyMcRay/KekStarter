@@ -10,10 +10,15 @@ export class UserService {
     }
 
     getCurrentUser() {
+<<<<<<< HEAD
         if (!(typeof localStorage === 'undefined') && (localStorage.getItem('currentUser'))) {
-            return JSON.parse(localStorage.getItem('currentUser'));
+            return JSON.parse(localStorage.getItem('currentUser') || '');
         } else {
             return new AuthUser();
+=======
+        if (!(typeof localStorage === 'undefined') && localStorage.getItem('currentUser')) {
+            return JSON.parse(localStorage.getItem('currentUser'));
+>>>>>>> language
         }
         return new AuthUser();
     }

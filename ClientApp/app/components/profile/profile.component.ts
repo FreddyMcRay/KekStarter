@@ -7,7 +7,7 @@ import { RestService } from '../../RestService/rest.service';
 import { UserProject } from '../../models/project.models';
 import { UserProfile, UserAchivment, AuthUser } from '../../models/user.models';
 import { UserService } from '../../UserService/user.service';
-
+import { Language } from 'angular-l10n';
 
 @Component({
     selector: 'profile',
@@ -15,6 +15,7 @@ import { UserService } from '../../UserService/user.service';
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnDestroy {
+    @Language() lang;
     private id: number;
     public currentUser: AuthUser;
     public user: UserProfile = new UserProfile();
