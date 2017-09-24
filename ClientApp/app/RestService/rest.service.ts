@@ -12,11 +12,8 @@ export class RestService {
     public user: User = new User();
     public ruser: RUser = new RUser();
 
-    public login(username: string, password: string) {
-        this.user.login = username;
-        this.user.password = password;
-        console.log(this.user);
-        return this.http.post("api/Login", this.user)
+    public login(model: any) {
+        return this.http.post("api/Login", model)
             .map((response: Response) => {
                 let user = response.json();
                 console.log("rest " + user);

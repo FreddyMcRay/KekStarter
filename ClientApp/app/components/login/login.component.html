@@ -1,21 +1,28 @@
 ﻿<h2>Login</h2>
-<form name="form" (ngSubmit)="f.form.valid" #f="ngForm">
-    <div class="form-group" [ngClass]="{'has-error': f.submitted && !username.valid}">
+<form [formGroup]="loginForm">
+    <div class="form-group">
         <label for="username">{{'username' | translate:lang }}</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
-            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" placeholder="Username" required />
+            <input type="text" class="form-control"
+                   name="username"
+                   [ngClass]="{'error' : loginForm.controls['login'].hasError('required') && (loginForm.controls['login'].touched || invalid ) }"
+                   formControlName="login"
+                   placeholder="{{'username' | translate:lang }}"
+                   [(ngModel)]="model.login" />
         </div>
-        <div *ngIf="f.submitted && !username.valid" class="help-block">{{ 'usernameIsRequired' | translate:lang }}</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+    <div class="form-group">
         <label for="password">{{'password' | translate:lang }}</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password" required />
+            <input type="password" class="form-control"
+                   name="password"
+                   [ngClass]="{'error' : loginForm.controls['password'].hasError('required') && (loginForm.controls['password'].touched || invalid ) }"
+                   [(ngModel)]="model.password"
+                   formControlName="password"
+                   placeholder="{{'password' | translate:lang }}" />
         </div>
-
-        <div *ngIf="f.submitted && !password.valid" class="help-block">{{ 'passwordIsRequired' | translate:lang }}</div>
     </div>
     <div class="form-group">
         <button class="btn btn-primary" (click)="login()" data-dismiss="modal">{{'login' | translate:lang }}</button>
