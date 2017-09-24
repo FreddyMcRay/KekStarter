@@ -36,15 +36,17 @@ export class LoginComponent implements OnInit {
             this.restService.login(this.model)
                 .subscribe(
                 data => {
-                    console.log("Login back to front");
+                    console.log('Login back to front');
                     this.myEvent.emit(false);
-                    this.messageService.sendSuccessMessage("Login success");
+                    this.messageService.sendSuccessMessage('Login success');
                 },
                 error => {
                     this.myEvent.emit(true);
-                    this.messageService.sendErrorMessage("Login failed");
+                    this.messageService.sendErrorMessage('Login failed');
                 });
             this.loginForm.reset();
+        } else {
+            this.messageService.sendErrorMessage('Wrong parameters');
         }
     }
 }

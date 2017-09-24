@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserProject } from '../../models/project.models';
+import { Language } from 'angular-l10n';
 
 
 @Component({
@@ -8,6 +9,7 @@ import { UserProject } from '../../models/project.models';
     styleUrls: ['./preview.component.css']
 })
 export class PreviewComponent implements OnInit {
+    @Language() lang;
     @Input() project: UserProject;
     progress: number;
 

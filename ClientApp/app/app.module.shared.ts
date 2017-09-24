@@ -93,7 +93,7 @@ import { AdminGuard } from './guards/admin.guard';
         RouterModule.forRoot([
             { path: 'admin', component: AdminComponent },
             { path: 'project/:id', component: DisplayProjectComponent },
-            { path: 'draft', component: DraftComponent, canActivate: [AuthGuard] },
+            { path: 'draft', component: DraftComponent },
             { path: 'projects', component: ProjectsBlockComponent },
             { path: 'projects/:property/:type/:value', component: ProjectsBlockComponent },
             { path: 'projects/:type/:value', component: ProjectsBlockComponent },

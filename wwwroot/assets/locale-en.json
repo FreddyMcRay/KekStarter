@@ -31,8 +31,10 @@
   "owner": "Card owner",
   "cardOwnerName": "Card owner name",
   "checkCard": "Check card",
+  "profilePicture": "Profile picture can be .png, .jpeg or .gif only",
+
   "Home": {
-    "noSuccessProjects": "There are no successfull projects",
+    "noSuccessProjects": "There are no successful projects",
     "noNewProjects": "There are no new projects",
     "successfulProjects": "Successful projects",
     "newProjects": "New projects",
@@ -40,15 +42,14 @@
     "allSuccessful": "All successful projects",
     "allNew": "All new projects"
   },
-  
 
   "Profile": {
     "registration": "Registration",
     "lastLogIn": "Last logIn",
     "userProjects": "User projects",
     "followedProjects": "Followed projects",
-    "noProjects": "You have no projects",
-    "noFollowedProjects": "You have no followed projects"
+    "noProjects": "User have no projects",
+    "noFollowedProjects": "User have no followed projects"
   },
 
   "Comments": {
@@ -91,25 +92,39 @@
   },
 
   "generalInfo": {
-    "projectName": "",
-    "inputProjectName": "",
-    "projectNameDesc": "",
-    "shortDesc": "",
-    "inputShortDesc": "",
-    "shortDescDesc": "",
-    "projectLayout": "",
-    "changeLayout": "",
-    "dateEnd": "",
-    "finansialGoal": "",
-    "inputGoalName": "",
-    "inputGoalCost": "",
-    "goalsErrorMsg": "",
-    "add": "",
-    "finansialGoalsDesc": "",
-    "projectTags": "",
-    "projectTagsDesc": "",
-    "upload": "",
-    "chooseFile": ""
+    "projectName": "Project title",
+    "inputProjectName": "Enter project title",
+    "projectNameDesc": "The name should be concise, unique and memorable. Be sure that the name of the project reflects its essence.",
+    "shortDesc": "Short description of the project",
+    "inputShortDesc": "Tell about your project shortly",
+    "shortDescDesc": "Describe in one sentence the purpose of your project.",
+    "projectCover": "Project cover",
+    "changeCover": "Change cover",
+    "dateEnd": "Project's end date",
+    "finanсialGoal": "Financial goal",
+    "inputGoalName": "Enter a title of goal",
+    "inputGoalCost": "Enter a cost of goal",
+    "goalsErrorMsg": "The project must contain at least one financial goal",
+    "add": "Add",
+    "finansialGoalsDesc": "You can create multiple goals. The total amount of the project will consist of the sum of all the objectives",
+    "projectTags": "Tags",
+    "projectTagsDesc": "Thanks to these tags, users will find it easier to find your project. Tags should match the content of the project",
+    "upload": "Upload",
+    "selectFile": "Select a file",
+    "enterTags": "Enter tags"
+  },
+
+  "description": {
+    "projectDesc": "Project description",
+    "projectDescUsing": "Use the description of the project in order to tell in more detail about what and how you are going to do. Add pictures and photos to more clearly present the project."
+  },
+
+  "Preview": {
+    "projectName": "Project title",
+    "shortDesc": "Short description of the project",
+    "days": "Days",
+    "current": "Current",
+    "left": "Left"
   }
 
 

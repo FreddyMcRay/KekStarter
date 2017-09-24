@@ -17,6 +17,7 @@
   "emailIsRequired": "Требуется email",
   "confirmPassword": "Подтверждение пароля",
   "isNotConfirmed": "Пароль не подтверждён",
+  "profilePicture": "Изображение может иметь расширение только .png, .jpeg или .gif",
 
   "Profile": {
     "registration": "Регистрация",
@@ -92,25 +93,39 @@
   },
 
   "generalInfo": {
-    "projectName": "",
-    "inputProjectName": "",
-    "projectNameDesc": "",
-    "shortDesc": "",
-    "inputShortDesc": "",
-    "shortDescDesc": "",
-    "projectLayout": "",
-    "changeLayout": "",
-    "dateEnd": "",
-    "finansialGoal": "",
-    "inputGoalName": "",
-    "inputGoalCost": "",
-    "goalsErrorMsg": "",
-    "add": "",
-    "finansialGoalsDesc": "",
-    "projectTags": "",
-    "projectTagsDesc": "",
-    "upload": "",
-    "chooseFile": ""
+    "projectName": "Название проекта",
+    "inputProjectName": "Введите название проекта",
+    "projectNameDesc": "Название должно быть лаконичным, уникальным и запоминающимся. Будьте уверены в том, что название проекта отражает его суть.",
+    "shortDesc": "Краткое описание проекта",
+    "inputShortDesc": "Коротко расскажите о проекте",
+    "shortDescDesc": "Опишите в одном предложении цель вашего проекта.",
+    "projectCover": "Обложка проекта",
+    "changeCover": "Изменить обложку",
+    "dateEnd": "Дата окончания компании",
+    "finanсialGoal": "Финансовая цель",
+    "inputGoalName": "Введите название цели",
+    "inputGoalCost": "Введите сумму цели",
+    "goalsErrorMsg": "Проект должен содержать хотя бы одну финансовую цель",
+    "add": "Добавить",
+    "finansialGoalsDesc": "Вы можете создавать несколько целей. Общая сумма проекта будет состоять из суммы всех целей",
+    "projectTags": "Тэги проекта",
+    "projectTagsDesc": "Благодаря указанным тегам пользователям будет проще найти ваш проект. Тэги должны соответсвовать содержанию проекта",
+    "upload": "Загрузка",
+    "selectFile": "Выбрать файл",
+    "enterTags": "Введите тэги"
+  },
+
+  "description": {
+    "projectDesc": "Описание проекта",
+    "projectDescUsing": "Используйте описание проекта для того, чтобы подробнее рассказать о том, что и как вы собираетесь сделать. Добавьте картинки и фотографии,чтобы более наглядно представить проект."
+  },
+
+  "Preview": {
+    "projectName": "Название проекта",
+    "shortDesc": "Краткое описание проекта",
+    "days": "Дней",
+    "current": "Собрано",
+    "left": "Осталось"
   }
 
 

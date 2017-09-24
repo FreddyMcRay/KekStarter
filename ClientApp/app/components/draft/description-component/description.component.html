@@ -1,10 +1,8 @@
 ﻿<div class="block">
-    <div class="create-header">Описание проекта</div>
+    <div class="create-header">{{'description.projectDesc' | translate:lang}}</div>
     <p-editor [style]="{'height':'760px', 'width':'100%', 'border': 'none', 'border-bottom': '1px solid #9b9b9b'}"
               [(ngModel)]="project.content"></p-editor>
     <p class="create-desc">
-        Используйте описание проекта для того, чтобы подробнее рассказать о том,
-        что и как вы собираетесь сделать. Добавьте картинки и фотографии,
-        чтобы более наглядно представить проект.
+        {{'description.projectDescUsing' | translate:lang}}
     </p>
 </div>

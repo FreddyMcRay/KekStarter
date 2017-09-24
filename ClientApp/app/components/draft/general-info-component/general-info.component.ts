@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Project, FinansalGoal } from '../../../models/draft.models'; 
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+import { Language } from 'angular-l10n';
 
 @Component({
     selector: 'general-info',
@@ -9,6 +10,7 @@ import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
     styleUrls: ['./general-info.component.css']
 })
 export class GeneralInfoComponent implements OnInit {
+    @Language() lang;
     @Input() project: Project;
     @Input() invalid: boolean;
     @ViewChild('fileSelect') fileSelect: ElementRef;

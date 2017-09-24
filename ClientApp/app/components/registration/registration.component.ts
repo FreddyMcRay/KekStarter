@@ -43,6 +43,8 @@ export class RegistrationComponent implements OnInit {
                     this.messageService.sendErrorMessage('Registration failed');
                 });
             this.registrationForm.reset();
+        } else {
+            this.messageService.sendErrorMessage('Wrong parameters');
         }
     }
 }
