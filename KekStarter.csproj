@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\components\displayProject\displayProject.component.ts" />
+    <None Remove="ClientApp\app\guards\auth.guard.ts" />
     <None Remove="ClientApp\app\MessageService\message.service.ts" />
     <None Remove="ClientApp\app\models\draft.models.ts" />
     <None Remove="ClientApp\app\models\project.models.ts" />
@@ -41,6 +42,9 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\displayProject\displayProject.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\guards\admin.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\app\guards\user.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\app\guards\auth.guard.ts" />
     <TypeScriptCompile Include="ClientApp\app\MessageService\message.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\draft.models.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\project.models.ts" />

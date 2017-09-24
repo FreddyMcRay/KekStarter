@@ -39,6 +39,9 @@ import { ProjectService } from "./ProjectService/project.service";
 import { UserService } from "./UserService/user.service";
 import { MessageService } from './MessageService/message.service';
 
+import { UserGuard } from './guards/user.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 @NgModule({
     declarations: [
@@ -78,20 +81,20 @@ import { MessageService } from './MessageService/message.service';
         Angular2FontawesomeModule,
         RouterModule.forRoot([
             { path: 'project/:id', component: DisplayProjectComponent },
-            { path: 'draft', component: DraftComponent },
+            { path: 'draft', component: DraftComponent, canActivate: [AuthGuard] },
             { path: 'projects', component: ProjectsBlockComponent },
-            { path: 'projects/:property/:type/:value', component: ProjectsBlockComponent, data: { title: 'Projects' } },
+            { path: 'projects/:property/:type/:value', component: ProjectsBlockComponent },
             { path: 'projects/:type/:value', component: ProjectsBlockComponent },
-            { path: 'projects/:property', component: ProjectsBlockComponent, data: { title: 'Projects' } },
-            { path: 'projects/:property/:type', component: ProjectsBlockComponent, data: { title: 'Projects' } },
+            { path: 'projects/:property', component: ProjectsBlockComponent },
+            { path: 'projects/:property/:type', component: ProjectsBlockComponent },
             { path: 'profile/:id', component: ProfileComponent },
-            { path: 'confirm', component: ConfirmationComponent },
+            { path: 'confirm', component: ConfirmationComponent, canActivate: [UserGuard] },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent, data: { title: 'Home' } },
             { path: '**', redirectTo: 'home' }
         ])
     ],
-    providers: [RestService, RoleService, ProjectService, UserService, MessageService]
+    providers: [RestService, RoleService, ProjectService, UserService, MessageService, AuthGuard, UserGuard, AdminGuard]
 })
 export class AppModuleShared {
 }
