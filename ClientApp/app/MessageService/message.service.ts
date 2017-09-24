@@ -1,10 +1,11 @@
 ﻿import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
+import { Message } from 'primeng/components/common/api';
 
 @Injectable()
 export class MessageService {
-    private subject = new Subject<any>();
+    private subject = new Subject<Message>();
 
     sendSuccessMessage(message: string) {
         this.subject.next({ severity: 'info', summary: 'Success', detail: message });
@@ -18,7 +19,7 @@ export class MessageService {
         this.subject.next();
     }
 
-    getMessage(): Observable<any> {
+    getMessage(): Observable<Message> {
         return this.subject.asObservable();
     }
 }

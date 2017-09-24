@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProject, HomeParseObject } from '../../models/project.models';
 import { RestService } from '../../RestService/rest.service';
+import { Language } from 'angular-l10n'; 
 import 'rxjs/Rx';
 
 @Component({
@@ -9,9 +10,10 @@ import 'rxjs/Rx';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+    @Language() lang;
     public projects: HomeParseObject;
-    public success: UserProject[];
-    public newproj: UserProject[];
+    public success: UserProject[] = [];
+    public newproj: UserProject[] = [];
     public tags: string[];
 
     constructor(private service: RestService) {

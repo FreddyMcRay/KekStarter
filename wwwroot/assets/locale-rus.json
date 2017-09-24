@@ -79,7 +79,18 @@
   "code": "код",
   "owner": "Владелец карты",
   "cardOwnerName": "Имя владельца",
-  "checkCard": "Проверить карту"
+  "checkCard": "Проверить карту",
+
+  "Home": {
+    "noSuccessProjects": "Пока нет успешных проектов",
+    "noNewProjects": "Пока нет новых проектов",
+    "successfulProjects": "Успешные проекты",
+    "newProjects": "Новые проекты",
+    "tags": "Тэги",
+    "allSuccessful": "Все успешные проекты",
+    "allNew": "Все новые проекты"
+  }
+  
 
 
 }

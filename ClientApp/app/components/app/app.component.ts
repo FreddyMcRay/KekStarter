@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { RestService } from '../../RestService/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleService } from '../../RoleService/role.service';
 import { UserService } from '../../UserService/user.service';
 import { AuthUser } from '../../models/user.models';
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 import { MessageService } from '../../MessageService/message.service';
 import { LocaleService, Language } from 'angular-l10n';
 
@@ -15,8 +15,8 @@ import { LocaleService, Language } from 'angular-l10n';
     styleUrls: ['./app.component.css'],
     providers: [RoleService, RestService],
 })
-export class AppComponent {
-    @Language() lang: string;
+export class AppComponent implements OnDestroy {
+    @Language() lang;
     angularClientSideData = 'Angular';
     text: string;
     subscription: Subscription;
@@ -31,6 +31,7 @@ export class AppComponent {
         this.user = this.userService.getCurrentUser()
         if (this.user.role != 'Guest')
             this.guest = false;
+
         this.subscription = this.messageService.getMessage().subscribe(message => { this.message.push(message) });
         this.returnUrl = activeRoute.snapshot.queryParams['returnUrl'] || '/';
     }
@@ -41,6 +42,10 @@ export class AppComponent {
         if (this.user.role != 'Guest') {
             localStorage.setItem('currentUser', JSON.stringify(this.user));
         }
+    }
+
+    ngOnDestroy() {
+        this.logOut();
     }
 
     public logOut() {

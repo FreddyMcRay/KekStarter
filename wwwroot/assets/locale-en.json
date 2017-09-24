@@ -17,6 +17,30 @@
   "emailIsRequired": "Email is required",
   "confirmPassword": "Confirm Password",
   "isNotConfirmed": "Password is not confirmed",
+  "successfullyCreateProject": "You have successfully created the project, click the \"Send\" button to verify the entered data and publish your project",
+  "send": "Send",
+  "save": "Save",
+  "preview": "Preview",
+  "finansialGoals": "Finansial goals",
+  "deletedraft": "Delete draft",
+  "paymentDetails": "Payment details",
+  "cardNumber": "Card number",
+  "validCardNumber": "Valid card number",
+  "expirationDate": "Expiration date",
+  "code": "code",
+  "owner": "Card owner",
+  "cardOwnerName": "Card owner name",
+  "checkCard": "Check card",
+  "Home": {
+    "noSuccessProjects": "There are no successfull projects",
+    "noNewProjects": "There are no new projects",
+    "successfulProjects": "Successful projects",
+    "newProjects": "New projects",
+    "tags": "Tags",
+    "allSuccessful": "All successful projects",
+    "allNew": "All new projects"
+  },
+  
 
   "Profile": {
     "registration": "Registration",
@@ -64,21 +88,8 @@
     "youCanAdd": "You can create multiple goals. The total amount of the project will consist of the sum of all the objectives.",
     "purchase": "Purchase",
     "enterYourSum": "Enter your sum"
-  },
+  }
 
-  "successfullyCreateProject": "You have successfully created the project, click the \"Send\" button to verify the entered data and publish your project",
-  "send": "Send",
-  "save": "Save",
-  "preview": "Preview",
-  "finansialGoals": "Finansial goals",
-  "deletedraft": "Delete draft",
-  "paymentDetails": "Payment details",
-  "cardNumber": "Card number",
-  "validCardNumber": "Valid card number",
-  "expirationDate": "Expiration date",
-  "code": "code",
-  "owner": "Card owner",
-  "cardOwnerName": "Card owner name",
-  "checkCard": "Check card"
+
 
 }

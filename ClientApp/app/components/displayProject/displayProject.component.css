@@ -103,6 +103,7 @@ input::-webkit-inner-spin-button {
 
     .image img {
         width: 100%;
+        max-height: 425px;
     }
 
 .stats {

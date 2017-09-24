@@ -3,39 +3,45 @@
     <div class="container">
         <div class="section">
             <div class="section-inner">
-                <div class="header"><p>Успешные проекты</p></div>
+                <div class="header"><p>{{ 'Home.successfulProjects' | translate:lang }}</p></div>
                 <div class="content">
-                    <div class="row">
+                    <div class="row" *ngIf="success.length">
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let project of success">
                             <a routerLink="/project/{{project.id}}" class="projectLink"><preview [project]="project"></preview></a>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="promo_divider">
-                <hr />
-                <a routerLink="/projects/success" class="divider_btn">Все успешные проекты</a>
-            </div>
-        </div>
-        <div class="section">
-            <div class="section-inner">
-                <div class="header"><p>Новые проекты</p></div>
-                <div class="content">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let project of newproj">
-                            <a routerLink="/project/{{project.id}}" class="projectLink"><preview [project]="project"></preview></a>
-                        </div>
+                    <div class="row text-center" style="opacity: 0.9" *ngIf="!success.length">
+                        <h3>{{ 'Home.noSuccessProjects' | translate:lang }}</h3>
                     </div>
                 </div>
             </div>
             <div class="promo_divider">
                 <hr />
-                <a routerLink="/projects/new" class="divider_btn">Все новые проекты</a>
+                <a routerLink="/projects/success" class="divider_btn">{{ 'Home.allSuccessful' | translate:lang }}</a>
             </div>
         </div>
         <div class="section">
             <div class="section-inner">
-                <div class="header"><p>Тэги</p></div>
+                <div class="header"><p>{{ 'Home.newProjects' | translate:lang }}</p></div>
+                <div class="content">
+                    <div class="row" *ngIf="newproj.length">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let project of newproj">
+                            <a routerLink="/project/{{project.id}}" class="projectLink"><preview [project]="project"></preview></a>
+                        </div>
+                    </div>
+                    <div class="row text-center" style="opacity: 0.9" *ngIf="!newproj.length">
+                        <h3>{{ 'Home.noNewProjects' | translate:lang }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="promo_divider">
+                <hr />
+                <a routerLink="/projects/new" class="divider_btn">{{ 'Home.allNew' | translate:lang }}</a>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-inner">
+                <div class="header"><p>{{ 'Home.tags' | translate:lang }}</p></div>
                 <div class="content">
                     <a *ngFor="let tag of tags" class="tag" routerLink="/projects/all/tag/{{tag}}">#{{tag}}  </a>
                 </div>

@@ -2,6 +2,14 @@
     position: relative;
 }
 
+.tab-pane > .row {
+    min-height: 500px;
+}
+
+.projectLink {
+    text-decoration: none;
+}
+
 .row.backgroundPlate {
     box-sizing: border-box;
     height: 650px;
