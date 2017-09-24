@@ -6,10 +6,9 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
             <input type="text" class="form-control"
                    name="username"
-                   [ngClass]="{'error' : loginForm.controls['login'].hasError('required') && (loginForm.controls['login'].touched || invalid ) }"
+                   [ngClass]="{'has-error' : loginForm.controls['login'].hasError('required') && (loginForm.controls['login'].touched || invalid ) }"
                    formControlName="login"
-                   placeholder="{{'username' | translate:lang }}"
-                   [(ngModel)]="model.login" />
+                   placeholder="{{'username' | translate:lang }}" />
         </div>
     </div>
     <div class="form-group">
@@ -18,8 +17,7 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
             <input type="password" class="form-control"
                    name="password"
-                   [ngClass]="{'error' : loginForm.controls['password'].hasError('required') && (loginForm.controls['password'].touched || invalid ) }"
-                   [(ngModel)]="model.password"
+                   [ngClass]="{'has-error' : loginForm.controls['password'].hasError('required') && (loginForm.controls['password'].touched || invalid ) }"
                    formControlName="password"
                    placeholder="{{'password' | translate:lang }}" />
         </div>

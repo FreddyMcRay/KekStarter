@@ -88,6 +88,28 @@
     "youCanAdd": "You can create multiple goals. The total amount of the project will consist of the sum of all the objectives.",
     "purchase": "Purchase",
     "enterYourSum": "Enter your sum"
+  },
+
+  "generalInfo": {
+    "projectName": "",
+    "inputProjectName": "",
+    "projectNameDesc": "",
+    "shortDesc": "",
+    "inputShortDesc": "",
+    "shortDescDesc": "",
+    "projectLayout": "",
+    "changeLayout": "",
+    "dateEnd": "",
+    "finansialGoal": "",
+    "inputGoalName": "",
+    "inputGoalCost": "",
+    "goalsErrorMsg": "",
+    "add": "",
+    "finansialGoalsDesc": "",
+    "projectTags": "",
+    "projectTagsDesc": "",
+    "upload": "",
+    "chooseFile": ""
   }
 
 

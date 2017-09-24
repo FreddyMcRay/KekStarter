@@ -89,8 +89,30 @@
     "tags": "Тэги",
     "allSuccessful": "Все успешные проекты",
     "allNew": "Все новые проекты"
+  },
+
+  "generalInfo": {
+    "projectName": "",
+    "inputProjectName": "",
+    "projectNameDesc": "",
+    "shortDesc": "",
+    "inputShortDesc": "",
+    "shortDescDesc": "",
+    "projectLayout": "",
+    "changeLayout": "",
+    "dateEnd": "",
+    "finansialGoal": "",
+    "inputGoalName": "",
+    "inputGoalCost": "",
+    "goalsErrorMsg": "",
+    "add": "",
+    "finansialGoalsDesc": "",
+    "projectTags": "",
+    "projectTagsDesc": "",
+    "upload": "",
+    "chooseFile": ""
   }
-  
+
 
 
 }

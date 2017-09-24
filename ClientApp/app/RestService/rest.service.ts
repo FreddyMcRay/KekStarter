@@ -9,8 +9,6 @@ import "rxjs/Rx";
 export class RestService {
 
     constructor(private http: Http) { }
-    public user: User = new User();
-    public ruser: RUser = new RUser();
 
     public login(model: any) {
         return this.http.post("api/Login", model)
@@ -24,13 +22,8 @@ export class RestService {
             });
     }
 
-    public registration(username: string, email: string, name: string, password: string) {
-        this.ruser.login = name;
-        this.ruser.password = password;
-        this.ruser.email = email;
-        this.ruser.name = username;
-        console.log(this.ruser);
-        return this.http.post("api/Register", this.ruser);
+    public registration(model: any) {
+        return this.http.post("api/Register", model);
 
     }
 
@@ -101,16 +94,4 @@ export class RestService {
     public addPurchase(purchase: any) {
         return this.http.post('api/', purchase);
     }
-}
-
-export class User {
-    login: string;
-    password: string;
-}
-
-export class RUser {
-    name: string;
-    email: string;
-    login: string;
-    password: string;
 }

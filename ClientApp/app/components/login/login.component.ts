@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
                     this.myEvent.emit(true);
                     this.messageService.sendErrorMessage("Login failed");
                 });
-            this.model = new Login();
+            this.loginForm.reset();
         }
     }
 }
