@@ -22,7 +22,6 @@ export class LoginComponent {
     }
 
     login() {
-        console.log("aaaaa");
         this.restService.login(this.model.username, this.model.password)
             .subscribe(
             data => {

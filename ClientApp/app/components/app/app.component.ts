@@ -8,7 +8,6 @@ import { AuthUser } from '../../models/user.models';
 import { Message } from 'primeng/primeng';
 import { MessageService } from '../../MessageService/message.service';
 import { LocaleService, Language } from 'angular-l10n';
-import { UserService } from '../../UserService/user.service';
 
 @Component({
     selector: 'app',
@@ -27,15 +26,13 @@ export class AppComponent {
     message: Message[] = [];
     user: AuthUser;
     public constructor(private messageService: MessageService, private router: Router,
-       private service: RestService, private activeRoute: ActivatedRoute, private userService: UserService) {
+        private service: RestService, private activeRoute: ActivatedRoute, private userService: UserService, private locale: LocaleService) {
             
-this.user = this.userService.getCurrentUser();
+        this.user = this.userService.getCurrentUser()
         if (this.user.role != 'Guest')
             this.guest = false;
         this.subscription = this.messageService.getMessage().subscribe(message => { this.message.push(message) });
         this.returnUrl = activeRoute.snapshot.queryParams['returnUrl'] || '/';
-        }
-        this.returnUrl = activeRoute.snapshot.queryParams["returnUrl"] || "/";
     }
 
     selectLanguage(language: string) {
@@ -61,22 +58,15 @@ this.user = this.userService.getCurrentUser();
     handleEvent(value: boolean) {
         this.guest = value;
         this.loading = false;
-        if (value == true) {
-            this.message.push({ severity: 'error', summary: 'Error', detail: 'Login failed' });
+        if (value == false) {
+            this.user = this.userService.getCurrentUser();
+            console.log(this.user);
         } else {
-            if (value == false) {
-                this.message.push({ severity: 'info', summary: 'Success', detail: 'Login success' });
-                this.user = JSON.parse(localStorage.getItem('currentUser') || "");
-                console.log(this.user);
-            }
+            this.user = new AuthUser();
+            console.log(this.user);
         }
-        this.user = JSON.parse(localStorage.getItem('currentUser') || "");
-        console.log(this.user);
     }
 
-    registrationHandle(event: any) {
-        this.message.push({ severity: 'info', summary: 'Success', detail: 'Check your email to confirm account' });
-    }
 
     clear() {
         this.message = [];

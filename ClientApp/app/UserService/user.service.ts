@@ -12,8 +12,6 @@ export class UserService {
     getCurrentUser() {
         if (!(typeof localStorage === 'undefined') && (localStorage.getItem('currentUser'))) {
             return JSON.parse(localStorage.getItem('currentUser'));
-        } else {
-            return new AuthUser();
         }
         return new AuthUser();
     }

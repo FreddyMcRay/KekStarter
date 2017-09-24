@@ -15,7 +15,6 @@ export class RegistrationComponent {
     model: any = {};
     returnUrl: string;
     loading = false;
-    @Output() myEvent = new EventEmitter();
 
     constructor(private restService: RestService, private router: Router,
         private activatedRoute: ActivatedRoute, private messageService: MessageService) {
