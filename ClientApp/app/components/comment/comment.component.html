@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="newComment">
+        <div class="newComment" *ngIf="!guest">
             <div class="col-xs-12">
                 <h3 class="pull-left" style="margin-right: 20px;">{{'Comments.newComment' | translate:lang}}</h3>
                 <fieldset>

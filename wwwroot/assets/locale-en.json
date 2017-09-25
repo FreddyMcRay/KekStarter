@@ -59,6 +59,7 @@
   },
 
   "Confirmation": {
+    "yourAccount": "Your account is under review. Please wait for an administrator verdict.",
     "accountConfirmation": "Account confirmation",
     "youCant": "You can't create a project now. You need to verify your person.",
     "pleaseUpload": "Please, upload your passport scan to verify your account.",

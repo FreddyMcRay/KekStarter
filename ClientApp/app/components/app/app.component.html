@@ -27,7 +27,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.login}}  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a asp-area="" routerLink="profile/{{user.id.toString()}}">{{ 'profile' | translate:lang }}</a></li>
-                        <li><a asp-area="" routerLink="draft">{{ 'createProject' |  translate:lang}}</a></li>
+                        <li *ngIf="!checkUser()"><a asp-area="" routerLink="/draft">{{ 'createProject' |  translate:lang}}</a></li>
+                        <li *ngIf="checkUser()"><a asp-area="" routerLink="/confirm">{{ 'createProject' |  translate:lang}}</a></li>
                         <li *ngIf="checkAdmin()"><a asp-area="" routerLink="">{{ 'admin' |  translate:lang }}</a></li>
                         <li><hr style="margin-top: 3px; margin-bottom: 3px;" /></li>
                         <li style="padding-left: 3px;">

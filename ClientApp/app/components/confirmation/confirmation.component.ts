@@ -54,5 +54,5 @@ export class ConfirmationComponent {
         this.successUpload = false;
         this.scanImage = '';
     }
-   
+
 }

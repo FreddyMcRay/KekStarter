@@ -31,7 +31,7 @@ export class AppComponent implements OnDestroy {
         this.user = this.userService.getCurrentUser()
         if (this.user.role != 'Guest')
             this.guest = false;
-
+        this.selectLanguage(this.user.language);
         this.subscription = this.messageService.getMessage().subscribe(message => { this.message.push(message) });
         this.returnUrl = activeRoute.snapshot.queryParams['returnUrl'] || '/';
     }
@@ -58,6 +58,10 @@ export class AppComponent implements OnDestroy {
 
     public checkAdmin() {
         return (this.user.role == 'Admin') ? true : false;
+    }
+
+    public checkUser() {
+        return (this.user.role == 'User') ? true : false;
     }
 
     handleEvent(value: boolean) {

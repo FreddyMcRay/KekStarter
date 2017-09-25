@@ -21,6 +21,7 @@ export class CommentComponent {
     content: string;
     @Input() projectId: number;
     AuthUser: AuthUser;
+    guest: boolean = true;
 
     public checkroleForDeleteComment(i: number): boolean {
         return (this.AuthUser.role == 'Admin' || this.AuthUser.id == this.comments[i].userProfile.id) ? true : false;
@@ -29,6 +30,8 @@ export class CommentComponent {
     constructor(private service: RestService, private userService: UserService) {
       
         this.AuthUser = this.userService.getCurrentUser();
+        if (this.AuthUser.role != 'Guest')
+            this.guest = false;
     }
 
     ngOnInit() {
