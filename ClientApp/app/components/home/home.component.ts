@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
     public success: UserProject[] = [];
     public newproj: UserProject[] = [];
     public tags: string[];
+    public loading: boolean = false;
 
     constructor(private service: RestService) {
     }
@@ -26,6 +27,8 @@ export class HomeComponent implements OnInit {
             this.newproj = this.projects.newProjects;
             this.tags = this.projects.tags;
             console.log(this.tags);
+
         });
+        this.loading = true;
     }
 }

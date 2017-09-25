@@ -30,6 +30,7 @@ export class DisplayProjectComponent implements OnDestroy {
     guest: boolean = true;
     finansalGoalForm: FormGroup;
     preview: boolean = false;
+    loadProject: boolean = false;
 
     public checkRole() {
         return (this.user.role == 'Admin' || this.user.id == this.project.user.id) ? true : false;
@@ -65,6 +66,7 @@ export class DisplayProjectComponent implements OnDestroy {
             'title': ['', Validators.required],
             'cost': ['', Validators.required]
         });
+        this.loadProject = true;
     }
 
     public addGoal(form: FormGroup) {
