@@ -34,9 +34,9 @@ export class AdminComponent implements OnInit {
     }
 
     getAllUsers() {
-        //this.adminService.getAllUsers().subscribe(result => {
-        //    this.users = result.json();
-        //})
+        this.adminService.getAllUsers().subscribe(result => {
+            this.users = result.json();
+        })
     }
 
     deleteUsers() {
@@ -45,7 +45,12 @@ export class AdminComponent implements OnInit {
             header: 'Delete users',
             icon: 'fa fa-trash',
             accept: () => {
-                this.adminService.deleteUsers(this.selectedUsers)
+                this.adminService.deleteUsers(this.selectedUsers).subscribe(result => {
+                    this.selectedUsers.forEach(p => {
+                        let index = this.users.indexOf(p);
+                        this.users.slice(index, 1);
+                    })
+                });
             },
             reject: () => {
             }
@@ -53,16 +58,35 @@ export class AdminComponent implements OnInit {
     }
 
     blockUsers() {
-        this.adminService.blockUsers(this.selectedUsers)
+        this.adminService.blockUsers(this.selectedUsers).subscribe(result => {
+            this.selectedUsers.forEach(p => p.isBlocked = true);
+        });
     }
 
     unblockUsers() {
-        this.adminService.unblockUsers(this.selectedUsers)
+        this.adminService.unblockUsers(this.selectedUsers).subscribe(result => {
+            this.selectedUsers.forEach(p => p.isBlocked = false);
+        });
     }
 
     showConfirmWindow(user: User) {
         console.log(user);
         this.currentConfirmUser = user;
         this.display = true;
+    }
+
+    confirmUser() {
+        this.adminService.confirmUser(this.currentConfirmUser.id.toString()).subscribe(result => {
+            this.users.find(p => p.id == this.currentConfirmUser.id).role = 'AuthUser';
+            this.users.find(p => p.id == this.currentConfirmUser.id).onCheck = false;
+            this.display = false;
+        })
+    }
+
+    unConfirmUser() {
+        this.adminService.unConfirmUser(this.currentConfirmUser.id.toString()).subscribe(result => {
+            this.users.find(p => p.id == this.currentConfirmUser.id).onCheck = false;
+            this.display = false;
+        })
     }
 }

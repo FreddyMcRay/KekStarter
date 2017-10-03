@@ -9,19 +9,27 @@ export class AdminService {
     }
 
     deleteUsers(users: User[]) {
-
+        return this.http.post('api/RemoveUser', users);
     }
 
     blockUsers(users: User[]) {
-
+        return this.http.post('api/LockUserAccount', users);
     }
 
     unblockUsers(users: User[]) {
-
+        return this.http.post('api/UnlockUserAccount', users);
     }
 
     getAllUsers() {
-        return this.http.get('api/');
+        return this.http.get('api/GetAllUsers');
+    }
+
+    confirmUser(id: string) {
+        return this.http.get('api/ConfirmUser/' + id);
+    }
+
+    unConfirmUser(id: string) {
+        return this.http.get('api/UnConfirmUser/' + id);
     }
 
 }

@@ -68,7 +68,7 @@ namespace KekStarter.Controllers
                 {
                     var bufTag = new Tag();
                     bufTag.Name = project.tags[i];
-                    if(_db.Tag.ToList().Count != 0)
+                    if (_db.Tag.ToList().Count != 0)
                     {
                         helpIdTag = _db.Tag.ToList().Last().Id + j;
                     }
@@ -94,7 +94,7 @@ namespace KekStarter.Controllers
                 {
                     idProj = 0;
                 }
-                    var bufProjectTag = new ProjectTag
+                var bufProjectTag = new ProjectTag
                 {
                     Tag = tag,
                     ProjectId = idProj,
@@ -103,9 +103,25 @@ namespace KekStarter.Controllers
                 proj.Tags.Add(bufProjectTag);
                 _db.InstructionTag.Add(bufProjectTag);
             }
-            
-            //
-            foreach(var goals in project.finansalGoals)
+
+            AddTargets(project, proj);
+
+            proj.currentSum = 0;
+            proj.progress = 0;
+
+            int id = 1;
+            if (_db.Project.ToList().Count != 0)
+            {
+                id = _db.Project.ToList().Last().Id + 1;
+            }
+
+            AddVisa(project, id);
+            return proj;
+        }
+
+        public void AddTargets(CreateProjectInfo project, Project proj)
+        {
+            foreach (var goals in project.finansalGoals)
             {
                 var target = new Target();
                 if (_db.Project.ToList().Count != 0)
@@ -117,20 +133,48 @@ namespace KekStarter.Controllers
                 target.IsCompleted = false;
                 proj.Targets.Add(target);
                 proj.requiredSum += target.cost;
-                _db.Step.Add(target);
+                _db.Step.Update(target);
+            }
+            _db.Project.Update(proj);
+            _db.SaveChanges();
+        }
 
+        [HttpPost("[action]")]
+        [AllowAnonymous]
+        public void UpdateGoals([FromBody] UpdateGoals model)
+        {
+            var proj = _db.Project.FirstOrDefault(p => p.Id == model.projectId);
+            proj.requiredSum = 0;
+            var buf = new CreateProjectInfo
+            {
+                finansalGoals = model.goals
+            };
+            var steps = _db.Step.ToList().FindAll(p => p.projectId == model.projectId);
+            foreach (var step in steps)
+            {
+                _db.Step.Remove(step);
             }
+            _db.SaveChanges();
+            AddTargets(buf, proj);
+        }
 
-            if (proj.currentSum != 0)
+        public void AddVisa(CreateProjectInfo project, int id)
+        {
+            _db.Visa.Add(FactoryVisa(project, id));
+        }
+
+        public Visa FactoryVisa(CreateProjectInfo project, int id)
+        {
+            var visa = new Visa
             {
-                proj.progress = (proj.currentSum / proj.requiredSum) * 100;
-            }
-            else
-            {
-                proj.currentSum = 0;
-                proj.progress = 0;
-            }
-            return proj;
+                Date = project.payment.expirationDate,
+                NumberCard = project.payment.cardNumber,
+                OwnerName = project.payment.owner,
+                Pin = project.payment.cvCode,
+                ProjectId = id,
+                UserId = project.userId
+            };
+            return visa;
         }
 
         public void RefreshDate()
@@ -261,22 +305,11 @@ namespace KekStarter.Controllers
             var project = _db.Project.FirstOrDefault(p => p.Id == id);
             var user = _db.UserProfile.FirstOrDefault(p => (p.Id == project.CreateUserId));
             var checkStatus = _db.FollowsUser.ToList().FirstOrDefault(p => (p.UserId == userId) && (p.ProjectId == id));
-            if (checkStatus != null)
-            {
-                project.followed = true;
-            }
-            else
-            {
-                project.followed = false;
-            }
-            if (rating == null)
-            {
-                project.UserRating = 0;
-            }
-            else
-            {
-                project.UserRating = rating.Value;
-            }
+
+            CheckStatusProject(checkStatus, project);
+
+            Checkrating(rating, project);
+
             var tags = _db.InstructionTag.ToList();
             var tagsString = new List<string>();
             tags = tags.FindAll(p => p.ProjectId == id);
@@ -291,17 +324,7 @@ namespace KekStarter.Controllers
                 {
                     tagsString.Add("");
                 }
-                
-            }
 
-            var goals = new List<FinansalGoal>();
-            foreach (var tar in _db.Step.ToList().FindAll(p => p.projectId == id))
-            {
-                var finansalGoal = new FinansalGoal();
-                finansalGoal.cost = tar.cost;
-                finansalGoal.isCompleted = tar.IsCompleted;
-                finansalGoal.title = tar.title;
-                goals.Add(finansalGoal);
             }
 
             profile.id = user.Id;
@@ -311,11 +334,91 @@ namespace KekStarter.Controllers
 
             display.project = project;
             display.tags = tagsString;
-            display.finansalGoal = goals;
+            display.finansalGoal = GetGoals(id);
             display.creater = profile;
+
+
             return new ObjectResult(display);
         }
-        
+
+        public List<FinansalGoal> GetGoals(int id)
+        {
+            var goals = new List<FinansalGoal>();
+            foreach (var tar in _db.Step.ToList().FindAll(p => p.projectId == id))
+            {
+                goals.Add(FactoryGoals(tar));
+            }
+            return goals;
+        }
+
+        public FinansalGoal FactoryGoals(Target tar)
+        {
+            var finansalGoal = new FinansalGoal
+            {
+                cost = tar.cost,
+                isCompleted = tar.IsCompleted,
+                title = tar.title,
+            };
+            return finansalGoal;
+        }
+
+        public void CheckStatusProject(FollowsUser checkStatus, Project project)
+        {
+            if (checkStatus != null)
+            {
+                project.followed = true;
+            }
+            else
+            {
+                project.followed = false;
+            }
+        }
+
+        public void Checkrating(Models.Rating rating, Project project)
+        {
+            if (rating == null)
+            {
+                project.UserRating = 0;
+            }
+            else
+            {
+                project.UserRating = rating.Value;
+            }
+        }
+
+        //[HttpPost("[action]")]
+        //[AllowAnonymous]
+        //public IActionResult AddRating([FromBody] ViewModels.Rating model)
+        //{
+        //    var project = _db.Project.FirstOrDefault(p => p.Id == model.ProjectId);
+        //    if (model.Value > 5 && model.Value < 0)
+        //    {
+        //        return BadRequest("Pashel nahuy pidor, naebat on reshil");
+        //    }
+        //    var rating = _db.Rating.FirstOrDefault(p => (p.ProjectId == model.ProjectId) && (p.UserId == model.UserPofileId));
+        //    if (rating == null)
+        //    {
+        //        rating = new Models.Rating
+        //        {
+        //            ProjectId = model.ProjectId,
+        //            UserId = model.UserPofileId,
+        //            Value = model.Value
+        //        };
+        //        project.Rating += model.Value;
+        //        _db.Rating.Add(rating);
+        //    }
+        //    else
+        //    {
+        //        project.Rating -= rating.Value;
+        //        project.Rating += model.Value;
+        //        rating.Value = model.Value;
+        //        _db.Rating.Update(rating);
+        //    }
+        //    _db.Project.Update(project);
+        //    _db.SaveChanges();
+        //    return Ok("Ok");
+        //}
+
         [HttpPost("[action]")]
         [AllowAnonymous]
         public IActionResult AddRating([FromBody] ViewModels.Rating model)
@@ -325,28 +428,18 @@ namespace KekStarter.Controllers
             {
                 return BadRequest("Pashel nahuy pidor, naebat on reshil");
             }
-            var rating = _db.Rating.FirstOrDefault(p => (p.ProjectId == model.ProjectId) && (p.UserId == model.UserPofileId));
-            if (rating == null)
+            var rating = new Models.Rating
             {
-                rating = new Models.Rating
-                {
-                    ProjectId = model.ProjectId,
-                    UserId = model.UserPofileId,
-                    Value = model.Value
-                };
-                project.Rating += model.Value;
-                _db.Rating.Add(rating);
-            }
-            else
-            {
-                project.Rating -= rating.Value;
-                project.Rating += model.Value;
-                rating.Value = model.Value;
-                _db.Rating.Update(rating);
-            }
+                ProjectId = model.ProjectId,
+                UserId = model.UserPofileId,
+                Value = model.Value
+            };
+            var usersCount = _db.Rating.ToList().FindAll(p => p.ProjectId == model.ProjectId).Count + 1;
+            project.Rating = (int)(((float)project.Rating + (float)model.Value) / (float)usersCount);
+            _db.Rating.Add(rating);
             _db.Project.Update(project);
             _db.SaveChanges();
-            return Ok("Ok");
+            return new ObjectResult(project.Rating);
         }
 
         [HttpPost("[action]")]
@@ -358,7 +451,7 @@ namespace KekStarter.Controllers
 
             commentary.Content = model.content;
             commentary.DateCreated = date.ToString();
-            
+
             commentary.Project = project;
             commentary.IdProject = project.Id;
             commentary.UserProfile = _db.UserProfile.FirstOrDefault(p => p.Id == model.userid);
@@ -388,7 +481,7 @@ namespace KekStarter.Controllers
 
             return new ObjectResult(displayView);
         }
-                
+
         public void UpdateProjectDB(Project project)
         {
             _db.Project.Update(project);
@@ -411,7 +504,7 @@ namespace KekStarter.Controllers
                 comment.userid = com.IdUserProfile;
 
                 var userProf = _db.UserProfile.FirstOrDefault(p => p.Id == com.IdUserProfile);
-               
+
                 var mini = new UserProfileMini
                 {
                     firstName = userProf.FirstName,
@@ -440,7 +533,7 @@ namespace KekStarter.Controllers
             }
             return Ok();
         }
-  
+
         [HttpGet("getProjects/{take}/{skip}/{property}/{type}/{value}")]
         public List<Models.Project> GetInstructionDefaulttype(int take, int skip, string property, string type, string value)
         {
@@ -469,5 +562,50 @@ namespace KekStarter.Controllers
             }
             return projects;
         }
+
+        
+        [HttpPost("[action]")]
+        public IActionResult donateInProject([FromBody] Donate model)
+        {
+            var project = _db.Project.FirstOrDefault(p => p.Id == model.projectId);
+            AddDonate(model, project);
+            _db.SaveChanges();
+            return Ok();
+        }
+
+        public void AddDonate(Donate model, Project project)
+        {
+            project.currentSum += model.purchase;
+            project.progress = (int)(((float)project.currentSum / (float)project.requiredSum) * 100);
+            var sponsor = FactorySponsor(model);
+            project.Sponsors = CheckSponsor(model, project, sponsor);
+            _db.Project.Update(project);
+        }
+
+        public int CheckSponsor(Donate model, Project project, Sponsors sponsor)
+        {
+            if (_db.Sponsors.FirstOrDefault(p => (p.UserId == model.userId) && (p.ProjectId == model.projectId)) == null)
+            {
+                project.Sponsors++;
+                _db.Sponsors.Add(sponsor);
+            }
+            else
+            {
+                _db.Sponsors.Update(sponsor);
+            }
+            return project.Sponsors;
+        }
+
+        public Sponsors FactorySponsor(Donate model)
+        {
+            var sponsor = new Sponsors
+            {
+                Money = model.purchase,
+                ProjectId = model.projectId,
+                UserId = model.userId
+            };
+            return sponsor;
+        }
+
     }
 }

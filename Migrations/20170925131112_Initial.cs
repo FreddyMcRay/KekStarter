@@ -64,6 +64,65 @@ namespace KekStarter.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Confirmation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Scan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Confirmation", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FollowsUser",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FollowsUser", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Rating",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Value = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rating", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sponsors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Money = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sponsors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tag",
                 columns: table => new
                 {
@@ -74,6 +133,24 @@ namespace KekStarter.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tag", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Visa",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumberCard = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Pin = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Visa", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -248,10 +325,12 @@ namespace KekStarter.Migrations
                     Rating = table.Column<int>(type: "int", nullable: false),
                     Sponsors = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    TagId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserProfileId = table.Column<int>(type: "int", nullable: true),
+                    UserRating = table.Column<int>(type: "int", nullable: false),
+                    content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     currentSum = table.Column<int>(type: "int", nullable: false),
+                    followed = table.Column<bool>(type: "bit", nullable: false),
                     image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     leftOver = table.Column<int>(type: "int", nullable: false),
                     progress = table.Column<int>(type: "int", nullable: false),
@@ -260,12 +339,6 @@ namespace KekStarter.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Project", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Project_Tag_TagId",
-                        column: x => x.TagId,
-                        principalTable: "Tag",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Project_UserProfile_UserProfileId",
                         column: x => x.UserProfileId,
@@ -282,6 +355,8 @@ namespace KekStarter.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdProject = table.Column<int>(type: "int", nullable: false),
+                    IdUserProfile = table.Column<int>(type: "int", nullable: false),
                     ProjectId = table.Column<int>(type: "int", nullable: true),
                     UserProfileId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -308,6 +383,7 @@ namespace KekStarter.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IdTags = table.Column<int>(type: "int", nullable: false),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
                     TagId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -357,17 +433,17 @@ namespace KekStarter.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsCompleted = table.Column<bool>(type: "bit", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Position = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                    cost = table.Column<int>(type: "int", nullable: false),
+                    projectId = table.Column<int>(type: "int", nullable: false),
+                    title = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Step", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Step_Project_ProjectId",
-                        column: x => x.ProjectId,
+                        name: "FK_Step_Project_projectId",
+                        column: x => x.projectId,
                         principalTable: "Project",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -469,11 +545,6 @@ namespace KekStarter.Migrations
                 column: "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Project_TagId",
-                table: "Project",
-                column: "TagId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Project_UserProfileId",
                 table: "Project",
                 column: "UserProfileId");
@@ -484,9 +555,9 @@ namespace KekStarter.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Step_ProjectId",
+                name: "IX_Step_projectId",
                 table: "Step",
-                column: "ProjectId");
+                column: "projectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfile_UserId",
@@ -521,10 +592,25 @@ namespace KekStarter.Migrations
                 name: "Commentary");
 
             migrationBuilder.DropTable(
+                name: "Confirmation");
+
+            migrationBuilder.DropTable(
+                name: "FollowsUser");
+
+            migrationBuilder.DropTable(
                 name: "InstructionTag");
 
             migrationBuilder.DropTable(
                 name: "ProjectNew");
+
+            migrationBuilder.DropTable(
+                name: "Rating");
+
+            migrationBuilder.DropTable(
+                name: "Sponsors");
+
+            migrationBuilder.DropTable(
+                name: "Visa");
 
             migrationBuilder.DropTable(
                 name: "Achivment");
@@ -536,10 +622,10 @@ namespace KekStarter.Migrations
                 name: "Step");
 
             migrationBuilder.DropTable(
-                name: "Project");
+                name: "Tag");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                name: "Project");
 
             migrationBuilder.DropTable(
                 name: "UserProfile");

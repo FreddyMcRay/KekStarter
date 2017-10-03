@@ -30,7 +30,7 @@ export class DisplayProjectComponent implements OnDestroy {
     guest: boolean = true;
     finansalGoalForm: FormGroup;
     preview: boolean = false;
-    loadProject: boolean = false;
+    ratingLock: boolean = true;
 
     public checkRole() {
         return (this.user.role == 'Admin' || this.user.id == this.project.user.id) ? true : false;
@@ -58,15 +58,25 @@ export class DisplayProjectComponent implements OnDestroy {
                 this.project = this.parse.project;
                 this.project.tags = this.parse.tags;
                 this.project.goals = this.parse.finansalGoal;
+                this.project.goals = this.project.goals.sort((a, b): number => { return (a.cost > b.cost) ? 1 : -1; });
+                console.log(this.project.goals);
                 this.project.user = this.parse.creater;
                 this.rating = this.project.userRating;
+                if (this.rating != 0)
+                    this.ratingLock = false;
             })
         }
         this.finansalGoalForm = this.fb.group({
             'title': ['', Validators.required],
             'cost': ['', Validators.required]
         });
-        this.loadProject = true;
+    }
+
+    deleteGoal(goal: FinansalGoal) {
+        for (let i = 0; i < this.project.goals.length; i++) {
+            if (this.project.goals[i].title === goal.title && this.project.goals[i].cost === goal.cost)
+                this.project.goals.splice(i, 1);
+        }
     }
 
     public addGoal(form: FormGroup) {
@@ -105,12 +115,24 @@ export class DisplayProjectComponent implements OnDestroy {
         this.router.navigate(['/draft']);
     }
 
-    ngOnDestroy() {
-        if (!(this.id == 0)) {
-            this.service.addRatingToProject({ ProjectId: this.project.id.toString(), UserPofileId: this.user.id.toString(), Value: this.rating.toString() });
+    addRatingToProject() {
+        console.log('addRatingToProject');
+        if (!(this.id == 0) && this.ratingLock) {
+            this.service.addRatingToProject({ ProjectId: this.project.id.toString(), UserPofileId: this.user.id.toString(), Value: this.rating.toString() })
+                .subscribe(result => {
+                    this.project.rating = result.json();
+                    console.log(this.project.rating);
+                    this.ratingLock = false;
+                })
         }
-        if (this.checkRole()) {
+    }
 
+    ngOnDestroy() {
+        if (this.checkRole()) {
+            this.service.updateGoalsInProject({ projectId: this.project.id, goals: this.project.goals }).subscribe(result => {
+                console.log(result.json());
+                console.log('nice update goals');
+            })
         }
     }
 

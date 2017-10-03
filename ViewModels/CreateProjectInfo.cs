@@ -26,6 +26,28 @@ namespace KekStarter.ViewModels
         public List<string> tags { get; set; }
 
         public int userId { get; set; }
+
+        public Payment payment { get; set; }
+    }
+
+    public class UpdateGoals
+    {
+        public int projectId { get; set; }
+
+        public List<FinansalGoal> goals { get; set; }
+    }
+
+    //Payment
+
+    public class Payment
+    {
+        public string cardNumber { get; set; }
+
+        public string expirationDate { get; set; }
+
+        public string cvCode { get; set; }
+
+        public string owner { get; set; }
     }
 
     public class FinansalGoal

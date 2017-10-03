@@ -20,7 +20,9 @@ namespace KekStarter.Models
         public DbSet<Achivment> Achivment { get; set; }
         public DbSet<AchivmentUser> AchivmentUser { get; set; }
         public DbSet<Tag> Tag { get; set; }
+        public DbSet<Confirmation> Confirmation { get; set; }
         public DbSet<Visa> Visa { get; set; }
+        public DbSet<Sponsors> Sponsors { get; set; }
         public DbSet<FollowsUser> FollowsUser { get; set; }
         public DbSet<ProjectNew> ProjectNew { get; set; }
 

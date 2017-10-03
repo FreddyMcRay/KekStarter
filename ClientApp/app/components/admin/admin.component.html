@@ -2,25 +2,24 @@
     <p-confirmDialog></p-confirmDialog>
     <div class="button-group" [ngClass]="{'visible' : !selectedUsers.length }">
         <button type="button" (click)="deleteUsers()" pButton icon="fa-trash" label="Delete"></button>
-        <button type="button" pButton icon="fa fa-lock" label="Block"></button>
-        <button type="button" pButton icon="fa fa-unlock-alt" label="Unlock"></button>
+        <button type="button" (click)="blockUsers()" pButton icon="fa fa-lock" label="Block"></button>
+        <button type="button" (click)="unblockUsers()" pButton icon="fa fa-unlock-alt" label="Unlock"></button>
     </div>
     <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" placeholder="Search" style="height: 30px;">
     </div>
-    <!--<div class="header-message"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>-->
     <p-dataTable #dt
                  [value]="users"
                  [(selection)]="selectedUsers"
-                 dataKey="username"
+                 dataKey="userName"
                  [globalFilter]="gb">
         <p-header>Users</p-header>
         <p-column [style]="{'width':'38px', 'border': 'none'}" selectionMode="multiple"></p-column>
         <p-column field="image"
                   [style]="{'width':'100px', 'border': 'none'}">
             <ng-template let-user="rowData" pTemplate="body">
-                <img class="user-image" src={{user.image}} />
+                <a routerLink="/profile/{{user.id.toString()}}"><img class="user-image" src={{user.image}} /></a>
             </ng-template>
         </p-column>
         <p-column field="userName"
@@ -70,8 +69,8 @@
     <p-dialog header="Confirm User" [(visible)]="display" modal="modal" width="700" [responsive]="true">
         <img style="width: 100%" src={{currentConfirmUser.scanImage}}>
         <p-footer>
-            <button type="button" pButton icon="fa-check" (click)="display=false" label="Yes"></button>
-            <button type="button" pButton icon="fa-close" (click)="display=false" label="No"></button>
+            <button type="button" pButton icon="fa-check" (click)="confirmUser()" label="Yes"></button>
+            <button type="button" pButton icon="fa-close" (click)="unConfirmUser()" label="No"></button>
         </p-footer>
     </p-dialog>
 

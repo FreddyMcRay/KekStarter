@@ -11,8 +11,8 @@ using System;
 namespace KekStarter.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20170922193920_FollowsUser")]
-    partial class FollowsUser
+    [Migration("20170925131112_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,6 +82,10 @@ namespace KekStarter.Migrations
 
                     b.Property<string>("DateCreated");
 
+                    b.Property<int>("IdProject");
+
+                    b.Property<int>("IdUserProfile");
+
                     b.Property<int?>("ProjectId");
 
                     b.Property<int?>("UserProfileId");
@@ -93,6 +97,22 @@ namespace KekStarter.Migrations
                     b.HasIndex("UserProfileId");
 
                     b.ToTable("Commentary");
+                });
+
+            modelBuilder.Entity("KekStarter.Models.Confirmation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Scan");
+
+                    b.Property<bool>("Status");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Confirmation");
                 });
 
             modelBuilder.Entity("KekStarter.Models.FollowsUser", b =>
@@ -207,6 +227,22 @@ namespace KekStarter.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rating");
+                });
+
+            modelBuilder.Entity("KekStarter.Models.Sponsors", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Money");
+
+                    b.Property<int>("ProjectId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sponsors");
                 });
 
             modelBuilder.Entity("KekStarter.Models.Tag", b =>
@@ -333,11 +369,11 @@ namespace KekStarter.Migrations
 
                     b.Property<string>("Date");
 
-                    b.Property<int>("NumberCard");
+                    b.Property<string>("NumberCard");
 
                     b.Property<string>("OwnerName");
 
-                    b.Property<int>("Pin");
+                    b.Property<string>("Pin");
 
                     b.Property<int>("ProjectId");
 

@@ -51,7 +51,7 @@ export class RestService {
         return this.http.get('/api/getProjectById/' + id + '/' + userId);
     }
 
-    public getCommentsByProject( projectId: string) {
+    public getCommentsByProject(projectId: string) {
         return this.http.get('api/getCommentsByProjects' + '/' + projectId);
     }
 
@@ -64,9 +64,7 @@ export class RestService {
     }
 
     public addRatingToProject(rating: any) {
-        this.http.post('/api/AddRating/', rating).subscribe(result => {
-            console.log('nice rating');
-        })
+        return this.http.post('/api/AddRating/', rating);
     }
     public sendCommentsOnServer(commentary: any) {
         return this.http.post('api/addCommentInProject/', commentary);
@@ -84,7 +82,11 @@ export class RestService {
     }
 
     public sendConfirmInfoToServer(info: any) {
-        return this.http.post('api/', info);
+        return this.http.post('api/sendConfirm', info);
+    }
+
+    public updateGoalsInProject(obj: any) {
+        return this.http.post('api/UpdateGoals', obj);
     }
 
     public getNewsByProject(projectId: string) {
@@ -92,6 +94,6 @@ export class RestService {
     }
 
     public addPurchase(purchase: any) {
-        return this.http.post('api/', purchase);
+        return this.http.post('api/donateInProject', purchase);
     }
 }

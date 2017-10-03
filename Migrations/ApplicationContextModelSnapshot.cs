@@ -98,6 +98,22 @@ namespace KekStarter.Migrations
                     b.ToTable("Commentary");
                 });
 
+            modelBuilder.Entity("KekStarter.Models.Confirmation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Scan");
+
+                    b.Property<bool>("Status");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Confirmation");
+                });
+
             modelBuilder.Entity("KekStarter.Models.FollowsUser", b =>
                 {
                     b.Property<int>("Id")
@@ -210,6 +226,22 @@ namespace KekStarter.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rating");
+                });
+
+            modelBuilder.Entity("KekStarter.Models.Sponsors", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Money");
+
+                    b.Property<int>("ProjectId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sponsors");
                 });
 
             modelBuilder.Entity("KekStarter.Models.Tag", b =>
@@ -336,11 +368,11 @@ namespace KekStarter.Migrations
 
                     b.Property<string>("Date");
 
-                    b.Property<int>("NumberCard");
+                    b.Property<string>("NumberCard");
 
                     b.Property<string>("OwnerName");
 
-                    b.Property<int>("Pin");
+                    b.Property<string>("Pin");
 
                     b.Property<int>("ProjectId");
 

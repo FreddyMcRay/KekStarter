@@ -104,10 +104,21 @@ namespace KekStarter.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int Pin { get; set; }
-        public int NumberCard { get; set; }
+        public string Pin { get; set; }
+        public string NumberCard { get; set; }
         public string Date { get; set; }
         public string OwnerName { get; set; }
+        public int UserId { get; set; }
+        public int ProjectId { get; set; }
+
+    }
+
+    public class Sponsors
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public int Money { get; set; }
         public int UserId { get; set; }
         public int ProjectId { get; set; }
 
@@ -120,6 +131,16 @@ namespace KekStarter.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ProjectId { get; set; }
+    }
+
+    public class Confirmation
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string Scan { get; set; }
+        public bool Status { get; set; }
     }
 
 
@@ -149,7 +170,7 @@ namespace KekStarter.Models
         public int Id { get; set; }
 
         public Tag Tag { get; set; }
-        
+
         public int ProjectId { get; set; }
 
         public int IdTags { get; set; }

@@ -91,9 +91,9 @@ import { AdminGuard } from './guards/admin.guard';
         Angular2FontawesomeModule,
         TranslationModule.forRoot(),
         RouterModule.forRoot([
-            { path: 'admin', component: AdminComponent },
+            { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
             { path: 'project/:id', component: DisplayProjectComponent },
-            { path: 'draft', component: DraftComponent },
+            { path: 'draft', component: DraftComponent, canActivate: [AuthGuard] },
             { path: 'projects', component: ProjectsBlockComponent },
             { path: 'projects/:property/:type/:value', component: ProjectsBlockComponent },
             { path: 'projects/:type/:value', component: ProjectsBlockComponent },

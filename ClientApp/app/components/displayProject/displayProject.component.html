@@ -1,4 +1,4 @@
-﻿<div class="container" *ngIf="loadProject">
+﻿<div class="container">
     <div class="row title">
         <div class="col-xs-8 project_head">
             <div class="project_heading">{{project.title}}</div>
@@ -49,7 +49,7 @@
     <div class="row" style="margin-top: -15px; margin-left: -20px">
         <div class="col-xs-8" *ngIf="!preview">
             <div class="line">
-                <h4 >{{'displayProject.tags' | translate:lang }}:</h4>
+                <h4>{{'displayProject.tags' | translate:lang }}:</h4>
             </div>
             <div class="line" style="vertical-align: bottom">
                 <a *ngFor="let tag of project.tags" class="tag" routerLink="/projects/all/tag/{{tag}}">{{tag}}  </a>
@@ -67,7 +67,7 @@
             <div *ngIf="!preview">
                 <h4 class="line text-center">{{'displayProject.rating' | translate:lang }}: {{project.rating}}</h4>
                 <div class="line">
-                    <rating [(ngModel)]="rating" class="line"></rating>  
+                    <rating [(ngModel)]="rating" (click)="addRatingToProject()" [readonly]="!ratingLock" class="line"></rating>
                 </div>
             </div>
         </div>
@@ -106,13 +106,13 @@
     <div class="row" *ngIf="checkRole()">
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"
              *ngFor="let goal of project.goals">
-            <finansal-goal [finansalGoal]="goal"  [editable]="true"></finansal-goal>
+            <finansal-goal [finansalGoal]="goal" (removeFinansalGoal)="deleteGoal($event)" [editable]="true"></finansal-goal>
         </div>
     </div>
     <div class="row" *ngIf="!checkRole()">
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"
              *ngFor="let goal of project.goals">
-            <finansal-goal [finansalGoal]="goal"  [editable]="false"></finansal-goal>
+            <finansal-goal [finansalGoal]="goal" [editable]="false"></finansal-goal>
         </div>
     </div>
     <div class="block" *ngIf="checkRole()">
